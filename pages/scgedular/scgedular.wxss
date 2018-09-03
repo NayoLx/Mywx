@@ -1,0 +1,79 @@
+/* pages/scgedular/scgedular.wxss */
+
+.table {
+  width: 100%;
+  font-size: 31rpx;
+}
+
+.tr {
+  display: flex;
+}
+
+.th {
+  padding: 5px;
+  border-bottom: 1px solid #dadada;
+  border-right: 1px solid lightblue;
+  text-align: center;
+  width: 100%;
+}
+
+.td {
+  border-bottom: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+  text-align: center;
+  width: 100%;
+}
+
+.tdt {
+  border-bottom: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+  text-align: center;
+  background-color: rgb(171, 219, 247);
+  border-radius: 5%;
+  width: 15%;
+  height: auto;
+  min-height: 180rpx;
+  font-size: 29rpx;
+  padding: 10rpx;
+  overflow: hidden;
+}
+
+.th {
+  font-weight: 400;
+  background-color: lightblue;
+}
+
+.td {
+  width: 15%;
+  height: auto;
+  min-height: 180rpx;
+  font-size: 29rpx;
+  padding: 10rpx;
+  overflow: hidden;
+}
+
+.head {
+  display: flex;
+  flex-direction: row;
+  height: 180rpx;
+  background-color: lightblue;
+}
+
+.head image {
+  width: 55rpx;
+  height: 55rpx;
+  position: relative;
+  left: 350rpx;
+  top: 60rpx;
+}
+
+.btn_down {
+  width: 160rpx;
+  height: 65rpx;
+  position: fixed;
+  bottom: 20rpx;
+  right: 50rpx;
+  font-size: 26rpx;
+  background-color: lightblue;
+  color: white;
+}

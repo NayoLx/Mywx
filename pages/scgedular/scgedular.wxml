@@ -1,0 +1,36 @@
+<!--pages/scgedular/scgedular.wxml-->
+
+<view class='head'>
+  <picker mode="multiSelector" bindcolumnchange="bindMultiPickerColumnChange" bindchange="bindCasPickerChangeAll" value="{{Index}}" range="{{scge.stugrade}}">
+    <!-- <view class="weui-input">学年：{{scge.stugrade[0][Index[0]]}}   学期：{{scge.stugrade[1][Index[1]]}}</view> -->
+    <image src='/img/icon/wx_app_compass.png'></image>
+    
+  </picker>
+</view>
+
+<view wx:if="{{!table}}" class='table'>
+  <view class='tr'>
+    <view class="th" style='width:2%'>课</view>
+    <view class="th">一</view>
+    <view class="th">二</view>
+    <view class="th">三</view>
+    <view class="th">四</view>
+    <view class="th">五</view>
+    <view class="th">六</view>
+    <view class="th">日</view>
+  </view>
+  <block wx:for="{{scge.time}}">
+    <view class='tr'>
+      <view class='td' style='width:8%'>{{index+1}}</view>
+      <block wx:for="{{item}}">
+        <view wx:if="{{item.classname != null}}" class='tdt'>{{item.classname}}{{item.classroom}}</view>
+        <view wx:else class='td'>{{item.classname}}{{item.classroom}}</view>
+      </block>
+    </view>
+  </block>
+</view>
+
+<view>
+    <button wx:if="{{login}}" class='btn_down' bindtap='login'>登录</button>
+    <button wx:if="{{!login}}" class='btn_down' bindtap='outLogin'>退出登录</button>
+</view>

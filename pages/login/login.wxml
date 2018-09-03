@@ -1,0 +1,28 @@
+<!--pages/login/login.wxml-->
+<!-- <view>
+  <swiper indicator-dots='true' autoplay='true' interval='5000'>
+    <swiper-item>
+      <image src="/img/001.jpg"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="/img/002.jpg"></image>
+    </swiper-item>
+    <swiper-item>
+      <image src="/img/003.jpg"></image>
+    </swiper-item>
+  </swiper>
+</view> -->
+
+<view class='container'>
+    <view class='itemView'>
+     <text class='text'>学号</text>
+    <input type='text' id='username' class='input' placeholder='请输入学号' bindinput='userNameInput'></input>
+    </view>
+    <view class='itemView'>
+     <text class='text'>密码</text>
+    <input type='password' id='password' class='input'placeholder='请输入密码'  bindinput='passWdInput'></input>
+    </view>
+  <view style="margin: 0 auto">
+    <button class="submit"  bindtap='onTap'>查询</button>
+  </view>
+</view>
