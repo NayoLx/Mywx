@@ -1,5 +1,6 @@
 // pages/scgedular/scgedular.js
 var Public = require("../../utils/pubic.js");
+var Da = require("../../utils/fun.js");
 
 Page({
   /**
@@ -87,7 +88,7 @@ Page({
     var that = this
     wx.request({
       // url: 'http://localhost:8080/login2.3/newphp/new.php',
-      url: 'http://192.168.0.116:8080/basic/web/index.php?r=my/acgedular',
+      url: Da.dataUrl + '?r=my/acgedular',
       data: {
         schoolyear: this.data.year,
         semester: this.data.semester
@@ -151,7 +152,7 @@ Page({
       var that = this
       wx.request({
         // url: 'http://localhost:8080/login2.3/newphp/new.php',
-        url: 'http://192.168.0.116:8080/basic/web/index.php?r=my/acgedular',
+        url: Da.dataUrl +'?r=my/acgedular',
         data: {
           schoolyear: 2018,
           semester: 1

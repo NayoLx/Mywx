@@ -23,8 +23,10 @@
     <view class='tr'>
       <view class='td' style='width:8%'>{{index+1}}</view>
       <block wx:for="{{item}}">
-        <view wx:if="{{item.classname != null}}" class='tdt'>{{item.classname}}{{item.classroom}}</view>
-        <view wx:else class='td'>{{item.classname}}{{item.classroom}}</view>
+        <view wx:if = "{{item.classname != null && (item.day == 'row1' || item.day =='row5')}}" class='tdt'>{{item.classname}}{{item.classroom}}</view>
+        <view wx:elif = "{{item.classname != null && (item.day == 'row2' || item.day =='row4')}}" class='tdt2'>{{item.classname}}{{item.classroom}}</view>
+        <view wx:elif = "{{item.classname != null && item.day == 'row3'}}" class='tdt3'>{{item.classname}}{{item.classroom}}</view>
+        <view wx:else class = 'td'>{{item.classname}}{{item.classroom}}</view>
       </block>
     </view>
   </block>

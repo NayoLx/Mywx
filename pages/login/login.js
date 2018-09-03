@@ -1,5 +1,7 @@
 // pages/login/login.js
 var Public = require("../../utils/pubic.js");
+var Da = require("../../utils/fun.js");
+
 Page({
   /**
    * 页面的初始数据
@@ -60,7 +62,7 @@ Page({
     var that = this;
     wx.request({
       // url: 'http://localhost:8080/login2.3/newphp/login.php',
-      url: 'http://192.168.0.116:8080/basic/web/index.php?r=my/loginpost',
+      url: Da.dataUrl + '?r=my/loginpost',
       data: {
         username: this.data.userName,
         password: this.data.Password

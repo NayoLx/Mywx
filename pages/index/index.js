@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 var Public = require("../../utils/pubic.js");
+var Da = require("../../utils/fun.js");
 
 Page({
   data: {
@@ -103,7 +104,7 @@ Page({
       var that = this
       wx.request({
         // url: 'http://localhost:8080/login2.3/newphp/new.php',
-        url: 'http://192.168.0.116:8080/basic/web/index.php?r=my/personal',
+        url: Da.dataUrl + '?r=my/personal',
         header: {
           "Content-Type": "application/x-www-form-urlencoded"
           // 'Content-Type': 'application/json'
@@ -121,7 +122,7 @@ Page({
         complete: function (res) { },
       }),
         wx.request({
-          url: 'http://192.168.0.116:8080/basic/web/index.php?r=my/obligatory',
+        url: Da.dataUrl + '?r=my/obligatory',
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
             // 'Content-Type': 'application/json'

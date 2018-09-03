@@ -15,41 +15,29 @@
   border-right: 1px solid lightblue;
   text-align: center;
   width: 100%;
-}
-
-.td {
-  border-bottom: 1px solid #dadada;
-  border-right: 1px solid #dadada;
-  text-align: center;
-  width: 100%;
-}
-
-.tdt {
-  border-bottom: 1px solid #dadada;
-  border-right: 1px solid #dadada;
-  text-align: center;
-  background-color: rgb(171, 219, 247);
-  border-radius: 5%;
-  width: 15%;
-  height: auto;
-  min-height: 180rpx;
-  font-size: 29rpx;
-  padding: 10rpx;
-  overflow: hidden;
-}
-
-.th {
   font-weight: 400;
   background-color: lightblue;
 }
 
-.td {
-  width: 15%;
-  height: auto;
+.td, .tdt, .tdt2, .tdt3 {
+  border-bottom: 1px solid #dadada;
+  border-right: 1px solid #dadada;
+  text-align: center;
+   width: 15%;
   min-height: 180rpx;
   font-size: 29rpx;
   padding: 10rpx;
   overflow: hidden;
+}
+
+.tdt {
+  background-color: rgb(245, 222, 248);
+}
+.tdt2{
+  background-color: rgb(222, 243, 248);
+}
+.tdt3{
+  background-color: rgb(224, 248, 222);
 }
 
 .head {
