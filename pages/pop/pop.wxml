@@ -1,0 +1,10 @@
+<!--pages/pop/pop.wxml-->
+<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modalDlg" wx:if="{{showModal}}">
+    <view class='shutalert' bindtap="go">
+    <image src='http://pbqyqto63.bkt.clouddn.com/%E9%94%99%E5%8F%B7.png'></image>
+  </view>
+  <view class='useralert_quanyi'>享受以下会员权益</view>
+  <view class='fenggexian'></view>
+  <view class='vipinfo'> 11111</view>
+</view>

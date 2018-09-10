@@ -5,6 +5,7 @@
     "pages/login/login",
     "pages/index/index",
     "pages/map/map",
+    "pages/pop/pop",
     "pages/time/time",
     "pages/logs/logs"
   ],
