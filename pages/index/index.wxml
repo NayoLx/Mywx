@@ -9,6 +9,11 @@
   </view>
 </view>
 
+<!--报错页面-->
+<view class='worryimg' wx:if="{{!worryimg}}">
+  <image src='../../img/404.png'></image>
+</view>
+
 <!--index.wxml-->
 <view wx:if="{{!swiper}}">
 <view class="swiper-tab" >

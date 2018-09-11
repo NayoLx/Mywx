@@ -38,18 +38,16 @@ Page({
    */
   showSwiper() {
     this.setData({
-      swiper: true
-    })   
-    this.setData({
-      login: true
-    })   
+      swiper: true,
+      login: true,
+      worryimg: false
+    })    
   },
   hideSwiper() {
     this.setData({
-      swiper: false
-    })
-    this.setData({
-      login: false
+      swiper: false,
+      login: false,
+      worryimg: true
     })   
   },
 

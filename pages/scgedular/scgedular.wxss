@@ -8,7 +8,12 @@
 .tr {
   display: flex;
 }
-
+.worryimg{
+  width: 85%;
+  padding-top: 20%;
+  margin: 0 auto;
+  display: block;
+}
 .th {
   padding: 5px;
   border-bottom: 1px solid #dadada;

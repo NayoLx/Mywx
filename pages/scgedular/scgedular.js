@@ -18,18 +18,17 @@ Page({
    */
   showLogin() {
     this.setData({
-      login: true
+      login: true,
+      table: true,
+      worryimg: false
     })
-    this.setData({
-      table: true
-    })
+    
   },
   hideLogin() {
     this.setData({
-      login: false
-    })
-    this.setData({
-      table: false
+      login: false,
+      table: false,
+      worryimg: true
     })
   },
 

@@ -5,6 +5,13 @@
   height: 200rpx;
 }
 
+.worryimg{
+  width: 85%;
+  padding-top: 20%;
+  margin: 0 auto;
+  display: block;
+}
+
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -141,5 +148,5 @@ height: auto;
   font-size: 26rpx;
   background-color: lightblue;
   color: white;
-
+  margin-bottom: 20%;
 }
