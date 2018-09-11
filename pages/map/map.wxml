@@ -1,15 +1,18 @@
 <!--pages/map/map.wxml-->
-<view style='z-index:-999'>
-  <map id="map" longitude="113.49355" latitude="23.4505" scale="19" markers="{{markers}}" bindmarkertap="markertap" show-location style="width: 100%; height: 500px"></map>
+<view style='z-index:-999' >
+  <map id="map" longitude="113.49355" latitude="23.4505" scale="19" markers="{{markers}}" bindmarkertap="markertap" show-location style="width: 100%; height: 500px" ></map>
 </view>
 
 <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modalDlg" wx:if="{{showModal}}">
-  
+
   <view class='useralert_quanyi'>今日份任务</view>
   <view class='fenggexian'></view>
   <block wx:for="{{arrlocal}}">
-    <text class='vipinfo'>{{item.classname}}{{item.classroom}}\n{{item.class}}{{item.teacher}}</text>
+    <scroll-view class='vipinfo'>
+    <text style='float:left;width:20%'>第{{item.time+1}}节</text>
+      <text style='float:right;width:80%'>{{item.classname}}\t{{item.classroom}}\n{{item.class}}\t{{item.teacher}}</text>
+    </scroll-view>
   </block>
   <view class='shutalert' bindtap="go">
     <image src='../../img/worry.png'></image>

@@ -9,14 +9,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showModal: false ,
+    showModal: false,
     date: '',
+    todayClassb: [],
     arrlocal: '',
     todayClass: [],
-    local1:{},
+    local1: {},
     local2: {},
     local3: {},
-    animationData:{},
+    local4:{},
+    animationData: {},
     markers: []
   },
   /**
@@ -28,69 +30,102 @@ Page({
     for (var id = 0; id < that.data.todayClass.length; id++) {
       var classroom = that.data.todayClass[id].classroom
       console.log(classroom)
-      if (classroom.length == 4) {
-        var strclass = classroom.substring(0, 1)
-        if (strclass == 'T' || strclass == 'S' || strclass == 'U') {
+      if (classroom == null) {
+
+      } else {
+        if (classroom.length == 4) {
+          var strclass = classroom.substring(0, 1)
+          if (strclass == 'T' || strclass == 'S' || strclass == 'U') {
+            /**
+             * STU教学楼
+             */
+            that.data.local1 = {
+              iconPath: "../../img/renwu.png",
+              id: id,
+              classname: that.data.todayClass[id].classname,
+              classroom: that.data.todayClass[id].classroom,
+              class: that.data.todayClass[id].class,
+              teacher: that.data.todayClass[id].teacher,
+              // time:'',
+              latitude: 23.4520,
+              longitude: 113.49359,
+              width: 25,
+              height: 45,
+            }
+            arrdata.push(that.data.local1)
+          }
           /**
-           * STU教学楼
-           */
-          that.data.local1 = {
-            iconPath: "../../img/renwu.png",
-            id: id,
-            classname: that.data.todayClass[id].classname,
-            classroom: that.data.todayClass[id].classroom,
-            class: that.data.todayClass[id].class,
-            teacher: that.data.todayClass[id].teacher,
-            latitude: 23.4520,
-            longitude: 113.49359,
-            width: 25,
-            height: 45,
-          } 
-          arrdata.push(that.data.local1)
-        }
-        /**
            * E型教学楼
            */
-        else if (strclass == 'A' || strclass == 'B' || strclass == 'C' || strclass == 'D' || strclass == 'E') {
-          that.data.local2 = {
-            iconPath: "../../img/renwu.png",
-            id: id,
-            classname: that.data.todayClass[id].classname,
-            classroom: that.data.todayClass[id].classroom,
-            class: that.data.todayClass[id].class,
-            teacher: that.data.todayClass[id].teacher,
-            latitude: 23.4504,
-            longitude: 113.49302,
-            width: 25,
-            height: 45,
-          } 
-          arrdata.push(that.data.local2)
-        }
-      }
-      else if (classroom.length == 5) {
-        var strclass = classroom.substring(0, 2)
-        /**
-         * S2教学楼
-         */
-        if (strclass == 'S2') {
-          that.data.local3 = {
-            iconPath: "../../img/renwu.png",
-            id: id,
-            classname: that.data.todayClass[id].classname,
-            classroom: that.data.todayClass[id].classroom,
-            class: that.data.todayClass[id].class,
-            teacher: that.data.todayClass[id].teacher,
-            latitude: 23.45028,
-            longitude: 113.49338,
-            width: 25,
-            height: 45,
+          else if (strclass == 'A' || strclass == 'B' || strclass == 'C' || strclass == 'D' || strclass == 'E') {
+            that.data.local2 = {
+              iconPath: "../../img/renwu.png",
+              id: id,
+              classname: that.data.todayClass[id].classname,
+              classroom: that.data.todayClass[id].classroom,
+              class: that.data.todayClass[id].class,
+              teacher: that.data.todayClass[id].teacher,
+              latitude: 23.4504,
+              longitude: 113.49302,
+              width: 25,
+              height: 45,
+            }
+            arrdata.push(that.data.local2)
+          } else if (strclass == 'L') {
+            that.data.local2 = {
+              iconPath: "../../img/renwu.png",
+              id: id,
+              classname: that.data.todayClass[id].classname,
+              classroom: that.data.todayClass[id].classroom,
+              class: that.data.todayClass[id].class,
+              teacher: that.data.todayClass[id].teacher,
+              latitude: 23.4508,
+              longitude: 113.49389,
+              width: 25,
+              height: 45,
+            }
+            arrdata.push(that.data.local2)
           }
-          arrdata.push(that.data.local3)
+        } else if (classroom.length == 5) {
+          var strclass = classroom.substring(0, 2)
+          /**
+           * S2教学楼
+           */
+          if (strclass == 'S2') {
+            that.data.local3 = {
+              iconPath: "../../img/renwu.png",
+              id: id,
+              classname: that.data.todayClass[id].classname,
+              classroom: that.data.todayClass[id].classroom,
+              class: that.data.todayClass[id].class,
+              teacher: that.data.todayClass[id].teacher,
+              latitude: 23.45028,
+              longitude: 113.49338,
+              width: 25,
+              height: 45,
+            }
+            arrdata.push(that.data.local3)
+          } else if (strclass == 'TY') {
+            that.data.local3 = {
+              iconPath: "../../img/renwu.png",
+              id: id,
+              classname: that.data.todayClass[id].classname,
+              classroom: that.data.todayClass[id].classroom,
+              class: that.data.todayClass[id].class,
+              teacher: that.data.todayClass[id].teacher,
+              latitude: 23.4515,
+              longitude: 113.49258,
+              width: 25,
+              height: 45,
+            }
+            arrdata.push(that.data.local3)
+          }
         }
       }
     }
+
     that.setData({
-      markers:arrdata
+      markers: arrdata
     })
     console.log(this.data.markers)
   },
@@ -100,15 +135,16 @@ Page({
   markertap(e) {
     var that = this
     var arrlocal = []
-    var latitude =  this.data.markers[e.markerId].latitude
+    var latitude = this.data.markers[e.markerId].latitude
     var longitude = this.data.markers[e.markerId].longitude
-    for (var i = 0; i < this.data.markers.length; i++){
-      if (latitude == this.data.markers[i].latitude && longitude == this.data.markers[i].longitude){
+    for (var i = 0; i < this.data.markers.length; i++) {
+      if (latitude == this.data.markers[i].latitude && longitude == this.data.markers[i].longitude) {
         var loaclclass = {
           classname: that.data.todayClass[i].classname,
           classroom: that.data.todayClass[i].classroom,
           class: that.data.todayClass[i].class,
           teacher: that.data.todayClass[i].teacher,
+          time: that.data.todayClass[i].time,
         }
         arrlocal.push(loaclclass)
       }
@@ -119,7 +155,7 @@ Page({
     })
     console.log(this.data.arrlocal)
   },
-  go: function () {
+  go: function() {
     this.setData({
       showModal: false
     })
@@ -179,8 +215,8 @@ Page({
         // url: 'http://localhost:8080/login2.3/newphp/new.php',
         url: Da.dataUrl + '?r=my/acgedular',
         data: {
-          schoolyear: 2016,
-          semester: 2
+          schoolyear: 2018,
+          semester: 1
         },
         header: {
           "Content-Type": "application/x-www-form-urlencoded"
@@ -188,20 +224,45 @@ Page({
         },
         method: 'POST',
         success: function(res) {
-         
           that.setData({
             scge: res.data,
           })
+          /**
+           * 先获取一天所有的课，这样就能获得上课时间
+           */
           var a = []
+          var c = []
           for (var i = 0; i < res.data.time.length; i++) {
             for (var y = 0; y < res.data.time[i].length; y++) {
-              if (res.data.time[i][y].day == that.data.date && res.data.time[i][y].class != null) {
+              if (res.data.time[i][y].day == that.data.date) {
                 a.push(res.data.time[i][y])
+                // && res.data.time[i][y].class != null
               }
             }
           }
           that.setData({
-            todayClass: a
+            todayClassb: a
+          })
+          console.log(that.data.todayClassb)
+          /**
+           * 筛选无课
+           */
+          var ardata = []
+          for (var x = 0; x < that.data.todayClassb.length; x++) {
+            
+            if (that.data.todayClassb[x].class != null) {
+              that.data.local4 = {
+                classname: that.data.todayClassb[x].classname,
+                classroom: that.data.todayClassb[x].classroom,
+                class: that.data.todayClassb[x].class,
+                teacher: that.data.todayClassb[x].teacher,
+                time: x,
+              }
+              ardata.push(that.data.local4)
+            }
+          }
+          that.setData({
+            todayClass: ardata
           })
           console.log(that.data.todayClass)
         },
@@ -215,8 +276,5 @@ Page({
       this.modalTap()
     }
   },
-  rotateThenScale: function () {
-    // 先旋转后放大
-    
-  }
+ 
 })
