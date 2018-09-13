@@ -19,7 +19,7 @@
   position: fixed;
   left: 28%;
   bottom: 18%;
-  line-height: 55px;
+  line-height: 100rpx;
 }
 
 .btn text text {
@@ -47,6 +47,7 @@ button::after {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 999;
 }
 
 .mask {
@@ -86,7 +87,7 @@ button::after {
   margin-bottom: 30rpx;
 }
 
-.img_wrap image {
+.img_wrap cover-image {
   width: 100rpx;
   height: 100rpx;
   padding-top: 15rpx;
@@ -103,7 +104,7 @@ button::after {
 .fenggexian {
   width: 100%;
   margin-top: 50rpx;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 2rpx solid #e8e8e8;
 }
 
 .vipinfo {
@@ -111,7 +112,7 @@ button::after {
   text-align: center;
   margin-top: 30rpx;
   font-size: 13px;
-  border-bottom: 1px solid #8c8c8c;
+  border-bottom: 2rpx solid #8c8c8c;
   padding-bottom: 10rpx;
 }
 

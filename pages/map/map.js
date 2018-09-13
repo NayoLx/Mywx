@@ -11,6 +11,8 @@ Page({
   data: {
     showModal: false,
     date: '',
+    winWidth: '',
+    winHeight: '',
     todayClassb: [],
     arrlocal: '',
     todayClass: [],
@@ -99,8 +101,8 @@ Page({
               classroom: that.data.todayClass[id].classroom,
               class: that.data.todayClass[id].class,
               teacher: that.data.todayClass[id].teacher,
-              latitude: 23.45028,
-              longitude: 113.49338,
+              latitude: 23.45018,
+              longitude: 113.49368,
               width: 25,
               height: 45,
             }
@@ -208,6 +210,18 @@ Page({
   },
 
   onShow: function() {
+    var that = this
+    
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          systemInfo: res,
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight
+        })
+      }
+    })
+
     var a = wx.getStorageSync('id')
     if (a != '') {
       var that = this

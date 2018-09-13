@@ -8,7 +8,7 @@
   </picker>
 </view>
 <view class='worryimg' wx:if="{{!worryimg}}">
-  <image src='../../img/404.png'></image>
+  <image src='../../img/405.png'></image>
 </view>
 <view wx:if="{{!table}}" class='table'>
   <view class='tr'>

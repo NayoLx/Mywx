@@ -15,7 +15,7 @@
   display: block;
 }
 .th {
-  padding: 5px;
+  padding: 10rpx;
   border-bottom: 1px solid #dadada;
   border-right: 1px solid lightblue;
   text-align: center;

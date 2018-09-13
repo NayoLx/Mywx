@@ -11,7 +11,7 @@
 
 <!--报错页面-->
 <view class='worryimg' wx:if="{{!worryimg}}">
-  <image src='../../img/404.png'></image>
+  <image src='../../img/405.png'></image>
 </view>
 
 <!--index.wxml-->
