@@ -1,32 +1,28 @@
 <!--pages/map/map.wxml-->
 <view style='z-index:-999'>
-  <map id="map" longitude="113.49355" latitude="23.4505" scale="19" markers="{{markers}}" bindmarkertap="markertap" show-location style="width: 100%; height: {{winHeight-125}}px">
-<!--   
-    <cover-view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></cover-view>
+  <map id="map" longitude="113.49355" latitude="23.4505" scale="19" markers="{{markers}}" bindmarkertap="markertap" show-location style="width: 100%; height: {{winHeight-70}}px">
+  
+    <cover-view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" bindtap="go"></cover-view>
     <cover-view class="modalDlg" wx:if="{{showModal}}">
-
-      <cover-view class='useralert_quanyi'>今日份任务</cover-view>
-      <cover-view class='fenggexian'></cover-view>
-      <block wx:for="{{arrlocal}}">
-        <scroll-view class='vipinfo'>
-          <text style='float:left;width:20%'>第{{item.time+1}}节</text>
-          <text style='float:right;width:80%'>{{item.classname}}\t{{item.classroom}}\n{{item.class}}\t{{item.teacher}}</text>
-        </scroll-view>
-      </block>
+      <cover-view class='useralert_quanyi' >今日份任务</cover-view>
+      <cover-view wx:for="{{arrlocal}}" style='overflow: scroll'>
+        <cover-view class='vipinfo' style='border-bottom:2rpx solid #e8e8e8;'>
+          <cover-view style='float:left;width:20%'>第{{item.time+1}}节</cover-view>
+          <cover-view style='float:right;width:80%'>{{item.classname}}\t{{item.classroom}}</cover-view>
+          <cover-view style='float:right;width:80%'>{{item.class}}\t{{item.teacher}}</cover-view>
+        </cover-view>
+      </cover-view>
       <cover-view class='shutalert' bindtap="go">
         <cover-image src='../../img/worry.png'></cover-image>
       </cover-view>
     </cover-view>
 
-    <cover-view class='down'>
-      <cover-view class='btn'>
-        <button bindtap='checkclass' animation="{{animationData}}">课程</button>
-      </cover-view>
-    </cover-view> -->
+    <cover-image src='../../img/ic_map2@2x.png' style='width:100%; height: 150rpx; position: fixed;bottom: 70px;left: 0;'></cover-image>
+    <cover-view class='coverview'><cover-view>今天\t{{date}}\t有</cover-view><cover-view class='coveView'>{{todayClass.length }}</cover-view><cover-view>\t节课程</cover-view></cover-view>
   </map>
 </view>
 
-<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<!-- <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modalDlg" wx:if="{{showModal}}">
 
   <view class='useralert_quanyi'>今日份任务</view>
@@ -40,11 +36,10 @@
   <view class='shutalert' bindtap="go">
     <image src='../../img/worry.png'></image>
   </view>
-</view>
-
-<view class='down'>
-  <view class='btn'>
-    <text>今天\t{{date}}\t有\t<text>{{todayClass.length }}</text>\t节课程</text>
+</view> -->
+  <view wx:if="{{showModal}}" class='mask' bindtap="go">
+    
+  </view>
+  <view class='btn' >
     <button bindtap='checkclass' animation="{{animationData}}">课程</button>
   </view>
-</view>

@@ -168,6 +168,7 @@ Page({
   onLoad: function(options) {
     this.setData({
       date: week.getDates(1)[0].week
+      // data: ''
     })
     this.checkweek()
 
@@ -229,7 +230,7 @@ Page({
         // url: 'http://localhost:8080/login2.3/newphp/new.php',
         url: Da.dataUrl + '?r=my/acgedular',
         data: {
-          schoolyear: 2018,
+          schoolyear: 2016,
           semester: 1
         },
         header: {
@@ -248,7 +249,7 @@ Page({
           var c = []
           for (var i = 0; i < res.data.time.length; i++) {
             for (var y = 0; y < res.data.time[i].length; y++) {
-              if (res.data.time[i][y].day == that.data.date) {
+              if (res.data.time[i][y].day == 'row2') {
                 a.push(res.data.time[i][y])
                 // && res.data.time[i][y].class != null
               }
