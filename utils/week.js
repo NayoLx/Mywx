@@ -6,13 +6,10 @@ function getDates(days) {
     var dateObj = dateLater(todate, i);
     dateArry.push(dateObj)
   }
+  console.log(todate)
   return dateArry;
 }
 
-/**
- * 传入时间后几天
-  * param：传入时间：dates: "2018-04-02", later:往后多少天
- */
 function dateLater(dates, later) {
   let dateObj = {};
   let show_day = new Array('周日', '周一', '周二', '周三', '周四', '周五', '周六');
@@ -29,7 +26,7 @@ function dateLater(dates, later) {
 // 获取当前时间
 function getCurrentMonthFirst() {
   var date = new Date();
-  var todate = date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? ("0" + (date.getMonth() + 1)) : date.getMonth()) + "-" + (date.getDate() < 10 ? ("0" + date.getDate()) : date.getDate());
+  var todate = date.getFullYear() + "-" + ((date.getMonth() + 1) < 10 ? ("0" + (date.getMonth() + 1)) : date.getMonth() + 1) + "-" + (date.getDate() < 10 ? ("0" + date.getDate()) : date.getDate());
   return todate;
 }
 

@@ -70,3 +70,10 @@
   background-color: lightblue;
   color: white;
 }
+.img_down{
+  position: fixed;
+  right: 95rpx;
+  bottom: 100rpx;
+  width: 65rpx;
+  height: 60rpx;
+}

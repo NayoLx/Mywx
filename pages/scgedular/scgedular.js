@@ -1,6 +1,7 @@
 // pages/scgedular/scgedular.js
 var Public = require("../../utils/pubic.js");
 var Da = require("../../utils/fun.js");
+var toast = require("../../utils/util.js");
 
 Page({
   /**
@@ -11,7 +12,8 @@ Page({
     semester: '',
     IndexYear: 0,
     IndexSemester: 0,
-    Index: [0, 0]
+    Index: [0, 0],
+    loadingHide: false,
   },
   /**
    * 显示按钮
@@ -41,6 +43,12 @@ Page({
     })
   },
 
+  toMap: function() {
+    wx.navigateTo({
+      url: '../map/map',
+    })
+  },
+  
   /**
    * 清除缓存
    */
@@ -84,6 +92,9 @@ Page({
    * 获取课表
    */
   getscgedular: function() {
+    // 显示正在加载...
+    toast.showLoading()
+
     var that = this
     wx.request({
       // url: 'http://localhost:8080/login2.3/newphp/new.php',
@@ -98,8 +109,13 @@ Page({
       },
       method: 'POST',
       success: function(res) {
+
+        // 隐藏加载提示
+        toast.hideLoading()
+        
         that.setData({
           scge: res.data,
+          loadingHide: true
         })
         console.log(res.data)
       },
@@ -126,6 +142,10 @@ Page({
    * 首页判断
    */
   modalTap: function(e) {
+
+    // 隐藏加载提示
+    toast.hideLoading()
+    
     wx.showModal({
       title: "提示",
       content: "您需要登陆后才能看到课表",
@@ -147,6 +167,10 @@ Page({
    */
   onLoad: function(options) {
     var a = wx.getStorageSync('id')
+
+    // 显示正在加载...
+    toast.showLoading()
+
     if (a != '') {
       var that = this
       wx.request({
@@ -162,8 +186,13 @@ Page({
         },
         method: 'POST',
         success: function(res) {
+
+          // 隐藏加载提示
+          toast.hideLoading()
+
           that.setData({
             scge: res.data,
+            loadingHide: true
           })
           console.log(res.data)
         },

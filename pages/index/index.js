@@ -1,199 +1,70 @@
-//index.js
-//获取应用实例
-const app = getApp()
-var Public = require("../../utils/pubic.js");
-var Da = require("../../utils/fun.js");
-
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    winWidth: 0,
-    winHeight: 0,
-    currentTab: 0
+    home: [],
+    hasAuthUserInfo: false, // 是否授权用户信息权限
   },
-
   /**
-   * 清除缓存
+   * 检查是否已获得用户授权
    */
-  outLogin: function () {
-    var that = this
-    wx.showModal({
-      title: "提示",
-      content: "是否退出账号",
-      success: function (res) {
-        if (res.confirm) {
-          Public.remove('id')
-          that.showSwiper()
-        }
-        else {
-          console.log('弹框后点取消')
-        }
-      }
-    })
-  },
-  /**
-   * 显示按钮
-   */
-  showSwiper() {
-    this.setData({
-      swiper: true,
-      login: true,
-      worryimg: false
-    })    
-  },
-  hideSwiper() {
-    this.setData({
-      swiper: false,
-      login: false,
-      worryimg: true
-    })   
-  },
-
-  bindChange: function (e) {
-    var that = this;
-    that.setData({ currentTab: e.detail.current });
-  },
-  /**
-   * 点击tab切换
-   */
-  swichNav: function (e) {
-    var that = this;
-    if (this.data.currentTab === e.target.dataset.current) {
-      return false;
-    } else {
-      that.setData({
-        currentTab: e.target.dataset.current
-      })
-    }
-  },
-  /**
-   * 跳转登陆
-   */
-  login: function () {
-    wx.navigateTo({
-      url: '../login/login',
-    })
-  },
-  /**
- * 登陆判断
- */
-  modalTap: function (e) {
-    wx.showModal({
-      title: "提示",
-      content: "您需要登陆后才能看到课表",
-      success: function (res) {
-        if (res.confirm) {
-          wx.navigateTo({
-            url: '../login/login',
-          })
-        } else {
-          console.log('弹框后点取消')
-        }
-      }
-    })
-  },
-
-  onShow: function () {
-    var a = wx.getStorageSync('id')
-    if (a != '') {
-      this.hideSwiper()
-      var that = this
-      wx.request({
-        // url: 'http://localhost:8080/login2.3/newphp/new.php',
-        url: Da.dataUrl + '?r=my/personal',
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-          // 'Content-Type': 'application/json'
-        },
-        method: 'POST',
+  checkAuthUserInfo: function () {
+    var me = this;
+    if (wx.getSetting) {
+      wx.getSetting({
         success: function (res) {
-          that.setData({
-            person: res.data,
-          })
-          console.log(res.data)
-        },
-        fail: function (res) {
-          console.log(res.data)
-        },
-        complete: function (res) { },
-      }),
-        wx.request({
-        url: Da.dataUrl + '?r=my/obligatory',
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded"
-            // 'Content-Type': 'application/json'
-          },
-          method: 'POST',
-          success: function (ob) {
-            that.setData({
-              obligatory: ob.data,
-            })
-            console.log(ob.data)
-          },
-          fail: function (ob) {
-            console.log(ob.data)
-          },
-          complete: function (ob) { },
-        })
-    }
-    else {
-      this.modalTap()
-      this.showSwiper()
-    }
-  },
+          var hasAuthUserInfo = false;
+          if (res.authSetting['scope.userInfo']) {
+            console.log(res)
+            hasAuthUserInfo = true;
+            me.onGotUserInfo(res)
+          }
 
-  onLoad:function(e){
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
+          me.setData({
+            hasAuthUserInfo: hasAuthUserInfo
           })
         }
       })
     }
-    var that = this;
-    /**
-     * 获取系统信息
-     */
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          winWidth: res.windowWidth,
-          winHeight: res.windowHeight
-        });
-      }
-    });
+  },
+
+  ondetail: function() {
+    wx.navigateTo({
+      url: 'mydetail/index',
+    })
+  },
+
+  onGotUserInfo: function (res) {
+    if (res.detail.errMsg == "getUserInfo:ok") {
+      this.setData({
+        home: e.detail.userInfo
+      })
+    }
+    
+    console.log(this.data.home)
   },
 
   /**
-   * 获取本机微信id
+   * 生命周期函数--监听页面加载
    */
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  }
+  onLoad: function (options) {
+    this.checkAuthUserInfo()
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+  },
+
+  
 })
