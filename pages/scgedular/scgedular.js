@@ -13,7 +13,7 @@ Page({
     IndexYear: 0,
     IndexSemester: 0,
     Index: [0, 0],
-    loadingHide: false,
+    loadingHide: true,
   },
   /**
    * 显示按钮
@@ -205,4 +205,12 @@ Page({
       this.modalTap()
     }
   },
+
+  onGotUserInfo: function (res) {
+    if (res.detail.errMsg == "getUserInfo:ok") {
+      this.setData({
+        home: res.detail.userInfo
+      })
+    }
+  }
 })

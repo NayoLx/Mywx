@@ -1,6 +1,30 @@
-<view>
-   <image src='{{home.avatarUrl}}' class='item-icon'></image>
-   <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">更新信息</button>
-   <button bindtap='ondetail'></button>
+<view class='item-con'>
+  <image src='{{home.avatarUrl}}' class='item-icon'></image>
+  <text class='item-name'>{{home.nickName}}</text>
+  <button open-type="getUserInfo" bindgetuserinfo="onGotUserInfo" class='item-btn'>更新信息</button>
 </view>
 
+<view class='item-modal'>
+  <view class='item-modal-btn' bindtap='modalChoose'>绑定学号</view>
+  <view class='item-modal-btn'>实名验证</view>
+  <view class='item-modal-btn' bindtap='ondetail'>个人信息</view>
+  <view class='item-modal-btn'>我的订单</view>
+  <view class='item-modal-btn'>联系客服</view>
+</view>
+
+<modal title="绑定信息" confirm-text="确定" hidden="{{modalChooseStuNumHidden}}" bindconfirm="bingStuDetail" bindcancel="actionCancel" >
+    <view class='modalInput'>
+      <input placeholder='学号' type='number' bindinput='userNameInput' style='border-bottom: 1rpx solid #cacbcd;' value='{{nullInput}}'></input>
+    </view>
+    <view class='modalInput' style='height: 50rpx'>
+      <input placeholder='密码' type='password' bindinput='passwordInput' style='border-bottom: 1rpx solid #cacbcd; width: 60%; float: left;' value='{{nullInput}}'></input>
+      <button bindtap='oncheck'>测试账密</button>
+    </view>
+    <view class='modalInput'>
+      <input placeholder='绑定手机号' id="phone" bindinput='phoneInput' style='border-bottom: 1rpx solid #cacbcd;' value='{{nullInput}}'></input>
+    </view>
+    <view class='modalInput' style='height: 80rpx;'>
+      <input placeholder='输入验证码' bindinput='codeInput' id="code" style='border-bottom: 1rpx solid #cacbcd; width: 60%; float: left;' value='{{nullInput}}'></input>
+      <button bindtap='creatnum'>{{codenum}}</button>
+    </view>
+  </modal>

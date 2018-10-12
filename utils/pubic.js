@@ -6,6 +6,14 @@ function show(text) {
   })
 }
 
+function timeShow(text, time) {
+  wx.showToast({
+    title: text,
+    icon: 'none',
+    duration: time
+  })
+}
+
 var dtime = '_deadtime';
 function put(k, v, t) {
   wx.setStorageSync(k, v)
@@ -50,4 +58,5 @@ module.exports = {
   remove: remove,
   clear: clear,
   show: show,
+  timeShow: timeShow,
 }

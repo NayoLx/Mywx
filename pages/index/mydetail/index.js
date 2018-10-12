@@ -88,7 +88,7 @@ Page({
 
     wx.showModal({
       title: "提示",
-      content: "您需要登陆后才能看到课表",
+      content: "您需要登陆后才能看到个人信息",
       success: function (res) {
         if (res.confirm) {
           wx.navigateTo({
