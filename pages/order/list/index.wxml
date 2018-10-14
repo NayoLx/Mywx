@@ -1,2 +1,28 @@
 <!--pages/order/list/index.wxml-->
-<text>pages/order/list/index.wxml</text>
+<view wx:if="{{!swiper}}">
+  <view class="swiper-tab">
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">附近快递</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">附近外卖</view>
+  </view>
+
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{winHeight - 40}}px' bindchange='bindChange'>
+    
+    <swiper-item>
+      <scroll-view scroll-y="true" class='scroll-views'>
+
+      </scroll-view>
+    </swiper-item>
+
+    <!-- 已完成 -->
+    <swiper-item>
+      <scroll-view scroll-y="true" class='scroll-views'>
+        
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+
+</view>
+
+
+
+

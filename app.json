@@ -2,10 +2,14 @@
   "pages":[
     "pages/scgedular/scgedular",
     "pages/login/login",
+    "pages/index/checkname/index",
     "pages/index/index",
     "pages/index/mydetail/index",
     "pages/order/my/index",
+    "pages/order/my/push/index",
+    "pages/order/my/mydetail/index",
     "pages/order/list/index",
+    "pages/order/list/listdetail/index",
     "pages/map/map"
   ],
   "window":{

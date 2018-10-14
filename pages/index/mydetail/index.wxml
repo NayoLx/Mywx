@@ -32,10 +32,6 @@
             <view class='td'>{{person[1][5]}}</view>
           </view>
           <view class='tr'>
-            <view class='th'>身份证</view>
-            <view class='td'>{{person[1][6]}}</view>
-          </view>
-          <view class='tr'>
             <view class='th'>邮箱</view>
             <view class='td'>{{person[1][7]}}</view>
           </view>
