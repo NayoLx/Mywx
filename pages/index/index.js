@@ -138,7 +138,7 @@ Page({
     else {
 
       wx.request({
-        url: 'http://192.168.0.145:8080/basic/web/index.php?r=my/savebinddetail',
+        url: 'http://loaclhost:8080/basic/web/index.php?r=my/savebinddetail',
         data: {
           openid: this.data.home.openid,
           usernumber: this.data.usernumber,

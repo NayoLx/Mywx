@@ -125,12 +125,12 @@ Page({
         }
       }
     }
-
     that.setData({
       markers: arrdata
     })
     console.log(this.data.markers)
   },
+
   /**
    * markerId点击事件
    */
@@ -224,12 +224,17 @@ Page({
     })
 
     var a = wx.getStorageSync('id')
+    var stunum = a[0]
+    var pass = a[1]
+
     if (a != '') {
       var that = this
       wx.request({
         // url: 'http://localhost:8080/login2.3/newphp/new.php',
-        url: Da.dataUrl + '?r=my/acgedular',
+        url: Da.dataUrl + '?r=my/mapacgedular',
         data: {
+          stunumber: stunum,
+          password: pass,
           schoolyear: 2018,
           semester: 1
         },

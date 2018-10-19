@@ -13,6 +13,7 @@ Page({
     IndexYear: 0,
     IndexSemester: 0,
     Index: [0, 0],
+    grade: {},
     loadingHide: true,
   },
   /**
@@ -72,6 +73,15 @@ Page({
   /**
    * 获取学期学年
    */
+  bindCasPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      Index: e.detail.value
+    })
+    console.log(this.data.Index[0])
+    this.clearList2();
+  },
+
   bindCasPickerChangeAll: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
@@ -80,6 +90,16 @@ Page({
     console.log(this.data.Index[0])
     this.clearList();
   },
+
+  clearList2() {
+    this.setData({
+      year: this.data.grade[0][this.data.Index[0]],
+      semester: this.data.grade[1][this.data.Index[1]],
+    })
+    console.log("学年:" + this.data.year + " 学期:" + this.data.semester);
+    this.getscgedular();
+  },
+
   clearList() {
     this.setData({
       year: this.data.scge.stugrade[0][this.data.Index[0]],
@@ -88,6 +108,7 @@ Page({
     console.log("学年:" + this.data.year + " 学期:" + this.data.semester);
     this.getscgedular();
   },
+
   /**
    * 获取课表
    */
@@ -96,10 +117,14 @@ Page({
     toast.showLoading()
 
     var that = this
+    var stunum = wx.getStorageSync('id')[0]
+    console.log(stunum)
+
     wx.request({
       // url: 'http://localhost:8080/login2.3/newphp/new.php',
       url: Da.dataUrl + '?r=my/acgedular',
       data: {
+        stunumber: stunum,
         schoolyear: this.data.year,
         semester: this.data.semester
       },
@@ -117,6 +142,7 @@ Page({
           scge: res.data,
           loadingHide: true
         })
+        
         console.log(res.data)
       },
       fail: function(res) {
@@ -124,6 +150,7 @@ Page({
       },
       complete: function(res) {},
     })
+
   },
 
   /**
@@ -167,6 +194,7 @@ Page({
    */
   onLoad: function(options) {
     var a = wx.getStorageSync('id')
+    var stunum = a[0]
 
     // 显示正在加载...
     toast.showLoading()
@@ -177,6 +205,7 @@ Page({
         // url: 'http://localhost:8080/login2.3/newphp/new.php',
         url: Da.dataUrl +'?r=my/acgedular',
         data: {
+          stunumber: stunum,
           schoolyear: 2018,
           semester: 1
         },
@@ -201,6 +230,9 @@ Page({
         },
         complete: function(res) {},
       })
+
+      that.getGrade()
+
     } else {
       this.modalTap()
     }
@@ -212,5 +244,43 @@ Page({
         home: res.detail.userInfo
       })
     }
+  },
+
+  /**
+   * 获取学年学期
+   */
+  getGrade: function (res) {
+    var a = wx.getStorageSync('id')
+    var stunum = a[0]
+    var that = this
+
+    wx.request({
+      // url: 'http://localhost:8080/login2.3/newphp/new.php',
+      url: Da.dataUrl + '?r=my/getgrade',
+      data: {
+        stunumber: stunum,
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+        // 'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      success: function (res) {
+        that.setData({
+          grade: res.data
+        })
+        console.log(res.data)
+      },
+      fail: function (res) {
+        console.log(res.data)
+      },
+      complete: function (res) { },
+    })
+  },
+
+  utf8_strrev: function (str) {
+    preg_match_all('/./us', $str, $ar);
+    return join('', array_reverse($ar[0]));
   }
+
 })

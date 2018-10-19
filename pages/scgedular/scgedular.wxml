@@ -1,16 +1,23 @@
 <!--pages/scgedular/scgedular.wxml-->
 <view wx:if="{{loadingHide}}">
-  <view class='head'>
+  <view wx:if='{{grade}}' class='head'>
+    <picker mode="multiSelector" bindcolumnchange="bindMultiPickerColumnChange" bindchange="bindCasPickerChange" value="{{Index}}" range="{{grade}}">
+      <!-- <view class="weui-input">学年：{{scge.stugrade[0][Index[0]]}}   学期：{{scge.stugrade[1][Index[1]]}}</view> -->
+      <image src='/img/icon/wx_app_compass.png'></image>
+    </picker>
+  </view>
+  <view wx:else class='head'>
     <picker mode="multiSelector" bindcolumnchange="bindMultiPickerColumnChange" bindchange="bindCasPickerChangeAll" value="{{Index}}" range="{{scge.stugrade}}">
       <!-- <view class="weui-input">学年：{{scge.stugrade[0][Index[0]]}}   学期：{{scge.stugrade[1][Index[1]]}}</view> -->
       <image src='/img/icon/wx_app_compass.png'></image>
     </picker>
   </view>
 
+
   <view class='worryimg' wx:if="{{!worryimg}}">
     <image src='../../img/405.png'></image>
   </view>
-  
+
   <view wx:if="{{!table}}" class='table'>
     <view class='tr'>
       <view class="th" style='width:2%'>课</view>
@@ -22,7 +29,7 @@
       <view class="th">六</view>
       <view class="th">日</view>
     </view>
-    <block wx:for="{{scge.time}}">
+    <!-- <block wx:for="{{scge.time}}">
       <view class='tr'>
         <view class='td' style='width:8%'>{{index+1}}</view>
         <block wx:for="{{item}}">
@@ -31,6 +38,19 @@
           <view wx:elif="{{item.classname != null && item.day == 'row3'}}" class='tdt3'>{{item.classname}}{{item.classroom}}</view>
           <view wx:else class='td'>{{item.classname}}{{item.classroom}}</view>
         </block>
+      </view>
+    </block> -->
+
+    <block wx:for='{{scge}}'>
+      <view class='tr'>
+        <view class='td' style='width:8%'>{{item.time}}</view>
+        <view class='td'>{{item.monday != "&nbsp;" ? item.monday : ''}}</view>
+        <view class='td'>{{item.tuesday != "&nbsp;" ? item.tuesday : ''}}</view>
+        <view class='td'>{{item.wednesday != "&nbsp;" ? item.wednesday : ''}}</view>
+        <view class='td'>{{item.thursday != '&nbsp;' ? item.thursday : ''}}</view>
+        <view class='td'>{{item.friday != '&nbsp;' ? item.friday : ''}}</view>
+        <view class='td'>{{item.saturday != '&nbsp;' ? item.saturday : ''}}</view>
+        <view class='td'>{{item.sunday != '&nbsp;' ? item.sunday : ''}}</view>
       </view>
     </block>
   </view>
