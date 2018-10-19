@@ -19,12 +19,12 @@ Page({
   /**
    * 清除缓存
    */
-  outLogin: function () {
+  outLogin: function() {
     var that = this
     wx.showModal({
       title: "提示",
       content: "是否退出账号",
-      success: function (res) {
+      success: function(res) {
         if (res.confirm) {
           Public.remove('id')
           that.showSwiper()
@@ -52,7 +52,7 @@ Page({
     })
   },
 
-  bindChange: function (e) {
+  bindChange: function(e) {
     var that = this;
     that.setData({
       currentTab: e.detail.current
@@ -61,7 +61,7 @@ Page({
   /**
    * 点击tab切换
    */
-  swichNav: function (e) {
+  swichNav: function(e) {
     var that = this;
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
@@ -74,7 +74,7 @@ Page({
   /**
    * 跳转登陆
    */
-  login: function () {
+  login: function() {
     wx.navigateTo({
       url: '../login/login',
     })
@@ -82,14 +82,14 @@ Page({
   /**
    * 登陆判断
    */
-  modalTap: function (e) {
+  modalTap: function(e) {
     // 隐藏加载提示
     toast.hideLoading()
 
     wx.showModal({
       title: "提示",
       content: "您需要登陆后才能看到个人信息",
-      success: function (res) {
+      success: function(res) {
         if (res.confirm) {
           wx.navigateTo({
             url: '../login/login',
@@ -101,7 +101,11 @@ Page({
     })
   },
 
-  onLoad: function (e) {
+  onShow: function(e) {
+    
+  },
+
+  onLoad: function(e) {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -133,27 +137,31 @@ Page({
      * 获取系统信息
      */
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         that.setData({
           winWidth: res.windowWidth,
           winHeight: res.windowHeight,
         });
       }
     });
-
     // 显示正在加载...
     toast.showLoading()
 
     var a = wx.getStorageSync('id')
+    var openid = wx.getStorageSync('openid')
+
     if (a != '') {
       this.hideSwiper()
       var that = this
       wx.request({
         // url: 'http://localhost:8080/login2.3/newphp/new.php',
-        url: Da.dataUrl + '?r=my/personal',
+        url: Da.dataUrl + '?r=my/bindpersonal',
         header: {
           "Content-Type": "application/x-www-form-urlencoded"
           // 'Content-Type': 'application/json'
+        },
+        data: {
+          openid: openid
         },
         method: 'POST',
         success: function (res) {
@@ -173,10 +181,13 @@ Page({
         complete: function (res) { },
       }),
         wx.request({
-          url: Da.dataUrl + '?r=my/obligatory',
+          url: Da.dataUrl + '?r=my/bindobligatory',
           header: {
             "Content-Type": "application/x-www-form-urlencoded"
             // 'Content-Type': 'application/json'
+          },
+          data: {
+            openid: openid
           },
           method: 'POST',
           success: function (ob) {
@@ -196,7 +207,4 @@ Page({
       this.showSwiper()
     }
   },
-
-  
-
 })

@@ -97,7 +97,7 @@ Page({
    */
   onLoad: function(options) {
     var res = wx.getStorageSync('home')
-
+    wx.setStorageSync('openid', res.openid)
     this.setData({
       home: res
     })
@@ -113,14 +113,13 @@ Page({
       modalChooseStuNumHidden: false
     })
   },
+
   onCheckName: function() {
-    // wx.navigateTo({
-    //   url: 'checkname/index',
-    // })
     this.setData({
       modalChooseIdcardHidden: false
     })
   },
+
   actionCancel: function() {
     this.setData({
       modalChooseStuNumHidden: true,
@@ -157,7 +156,6 @@ Page({
       Public.show('请输入正确的手机号码')
     }
     else {
-
       wx.request({
         url: 'http://localhost:8080/basic/web/index.php?r=my/savebinddetail',
         data: {
