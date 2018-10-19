@@ -11,6 +11,7 @@ Page({
     home: [],
     hasAuthUserInfo: false, // 是否授权用户信息权限
     modalChooseStuNumHidden: true,
+    modalChooseIdcardHidden: true,
     is_bind: '',
     checkText: '',
     codenum: '获取验证码',
@@ -18,7 +19,9 @@ Page({
     password: '',
     nullInput: '',
     code: '',
-    phone: ''
+    phone: '',
+    idcard: '',
+    name: ''
   },
   /***
    * 获取输入框的值
@@ -41,6 +44,16 @@ Page({
   codeInput: function(e) {
     this.setData({
       code: e.detail.value
+    })
+  },
+  idCardInput: function(e) {
+    this.setData({
+      idcard: e.detail.value
+    })
+  },
+  nameInput: function(e) {
+    this.setData({
+      name: e.detail.value
     })
   },
   /**
@@ -100,10 +113,18 @@ Page({
       modalChooseStuNumHidden: false
     })
   },
-
+  onCheckName: function() {
+    // wx.navigateTo({
+    //   url: 'checkname/index',
+    // })
+    this.setData({
+      modalChooseIdcardHidden: false
+    })
+  },
   actionCancel: function() {
     this.setData({
       modalChooseStuNumHidden: true,
+      modalChooseIdcardHidden: true,
       usernumber: '',
       password: '',
       nullInput: '',
@@ -138,7 +159,7 @@ Page({
     else {
 
       wx.request({
-        url: 'http://loaclhost:8080/basic/web/index.php?r=my/savebinddetail',
+        url: 'http://localhost:8080/basic/web/index.php?r=my/savebinddetail',
         data: {
           openid: this.data.home.openid,
           usernumber: this.data.usernumber,
@@ -194,7 +215,7 @@ Page({
     var that = this;
     wx.request({
       // url: 'http://localhost:8080/login2.3/newphp/login.php',
-      url: 'http://192.168.0.145:8080/basic/web/index.php?r=my/loginpost',
+      url: 'http://localhost:8080/basic/web/index.php?r=my/loginpost',
       data: {
         username: this.data.usernumber,
         password: this.data.password
@@ -224,4 +245,6 @@ Page({
       complete: function(res) {},
     })
   },
+
+
 })

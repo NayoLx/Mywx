@@ -61,7 +61,7 @@ App({
   oncheck: function(res, openId) {
     var that = this;
     console.log(res)
-    var dataUrl = "http://192.168.0.145:8080/basic/web/index.php";
+    var dataUrl = "http://localhost:8080/basic/web/index.php";
     wx.request({
       // url: 'http://localhost:8080/login2.3/newphp/login.php',
       url: dataUrl + '?r=my/savedetail',
