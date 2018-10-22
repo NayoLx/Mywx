@@ -109,9 +109,33 @@ Page({
 
   // 绑定学号modal
   modalChoose: function() {
-    this.setData({
-      modalChooseStuNumHidden: false
+    var that = this
+    wx.request({
+      url: 'http://localhost:8080/basic/web/index.php?r=my/checkstuname',
+      data: {
+        openid: this.data.home.openid,
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+        // 'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      success: function(res) {
+        console.log(res)
+        if (res.data.state == true) {
+          Public.show('此账号已绑定')
+        } else {
+          that.setData({
+            modalChooseStuNumHidden: false
+          })
+        }
+      },
+      fail: function(res) {
+        console.log('error')
+      },
+      complete: function(res) {},
     })
+
   },
 
   onCheckName: function() {
@@ -145,17 +169,13 @@ Page({
       // 隐藏正在加载...
       toast.hideLoading()
       Public.show('账号密码输入错误')
-    } 
-    else if (utils.isEmpty(this.data.phone)) {
+    } else if (utils.isEmpty(this.data.phone)) {
       Public.show('请输入号码')
-    } 
-    else if (this.data.code != this.data.codenum) {
+    } else if (this.data.code != this.data.codenum) {
       Public.show('请输入正确的验证码')
-    }
-    else if (!utils.isMobile(this.data.phone)) {
+    } else if (!utils.isMobile(this.data.phone)) {
       Public.show('请输入正确的手机号码')
-    }
-    else {
+    } else {
       wx.request({
         url: 'http://localhost:8080/basic/web/index.php?r=my/savebinddetail',
         data: {

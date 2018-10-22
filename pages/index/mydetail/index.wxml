@@ -14,54 +14,55 @@
     <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{winHeight - 60}}px' bindchange="bindChange">
       <!-- pensonal -->
       <swiper-item>
+      <block wx:for='{{person}}'>
         <view class='table' style='height:{{winHeight - 90}}px'>
           <view class='tr'>
             <view class='th'>学号</view>
-            <view class='td'>{{person[1][2]}}</view>
+            <view class='td'>{{item.stunumber}}</view>
           </view>
           <view class='tr'>
             <view class='th'>姓名</view>
-            <view class='td'>{{person[1][3]}}</view>
+            <view class='td'>{{item.stuname}}</view>
           </view>
           <view class='tr'>
             <view class='th'>年级</view>
-            <view class='td'>{{person[1][4]}}</view>
+            <view class='td'>{{item.year}}</view>
           </view>
           <view class='tr'>
             <view class='th'>专业</view>
-            <view class='td'>{{person[1][5]}}</view>
+            <view class='td'>{{item.major}}</view>
           </view>
           <view class='tr'>
             <view class='th'>邮箱</view>
-            <view class='td'>{{person[1][7]}}</view>
+            <view class='td'>{{item.schoolemail}}</view>
           </view>
           <view class='tr'>
             <view class='th'>班主任</view>
-            <view class='td'>{{person[1][8]}}</view>
+            <view class='td'>{{item.headmaster}}</view>
           </view>
           <view class='tr'>
             <view class='th'>辅导员</view>
-            <view class='td'>{{person[1][9]}}</view>
+            <view class='td'>{{item.Instructor}}</view>
           </view>
           <view class='tr'>
             <view class='th'>必修的总学分</view>
-            <view class='td'>{{person[1][10]}}</view>
+            <view class='td'>{{item.necessAllGrade}}分</view>
           </view>
           <view class='tr'>
             <view class='th'>必修已获得学分</view>
-            <view class='td'>{{person[1][11]}}</view>
+            <view class='td'>{{item.alreadyGrade}}分</view>
           </view>
           <view class='tr'>
             <view class='th'>选修已修学分</view>
-            <view class='td'>{{person[1][13]}}</view>
+            <view class='td'>{{item.unreadyGrade}}分</view>
           </view>
           <view class='tr'>
             <view class='th'>需要修满的学分</view>
-            <view class='td'>{{person[1][21]}}</view>
+            <view class='td'>{{item.grade}}分</view>
           </view>
-
-
+         
         </view>
+        </block>
       </swiper-item>
       <!-- course -->
       <swiper-item>

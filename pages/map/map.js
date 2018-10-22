@@ -171,7 +171,6 @@ Page({
       date: week.getDates(1)[0].week
     })
     this.checkweek()
-
   },
 
   checkweek: function() {
@@ -226,7 +225,7 @@ Page({
     var a = wx.getStorageSync('id')
     var stunum = a[0]
     var pass = a[1]
-
+    
     if (a != '') {
       var that = this
       wx.request({
@@ -247,6 +246,7 @@ Page({
           that.setData({
             scge: res.data,
           })
+          console.log(res.data)
           /**
            * 先获取一天所有的课，这样就能获得上课时间
            */

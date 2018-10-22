@@ -173,7 +173,6 @@ Page({
             person: res.data,
             loadingHide: true,
           })
-          console.log(res.data)
         },
         fail: function (res) {
           console.log(res.data)
@@ -195,7 +194,6 @@ Page({
               obligatory: ob.data,
               loadingHide: true,
             })
-            console.log(ob.data)
           },
           fail: function (ob) {
             console.log(ob.data)
