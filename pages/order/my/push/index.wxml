@@ -1,0 +1,43 @@
+<!--pages/order/my/push/index.wxml-->
+<view class="page">
+  <scroll-view scroll-y="true" class="scroll-main" style='height: {{winHeight - 40}}px'>
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" class='item-picker'>
+      <view class="picker">
+        选择类型：{{array[index]}}
+      </view>
+    </picker>
+
+    <view class='item-sex'>
+      <button class='tag-item'>男</button>
+      <button class='tag-item'>女</button>
+      <input class='item_sex_input' placeholder='详细地址（不填只送到楼下）' placeholder-style='font-size: 25rpx;'></input>
+    </view>
+
+    <view class='item-detail'>
+      <textarea placeholder='简要要求' class='item_sex_input' placeholder-style='font-size: 30rpx;'></textarea>
+    </view>
+
+    <view class='uploadImage'>
+      <text>上传图片<text class='tet'>(限4张)</text></text>
+      <block wx:if='{{src}}'>
+        <block wx:for='{{src}}' wx:for-index="idx">
+          <view>
+            <image src='{{item}}' class="imag" mode="aspectFill"></image>
+            <image src='/img/close@2x.png' class='close' bindtap='closeImg' id="{{idx}}" data-index="{{index}}"></image>
+          </view>
+        </block>
+      </block>
+      <image wx:if='{{src == null || src.length<4}}' src="/img/addpic@2x.png" bindtap='upLoadImg' class="imag"></image>
+      <image wx:else src="/img/addpic@2x.png" bindtap='upLoadImg' style='display:none' class="imag"></image>
+    </view>
+
+    <view class="submit-btn-section">
+      <block wx:if="{{isSubmitBtnEnable === false}}">
+        <view class="submit-btn-disable">提交</view>
+      </block>
+      <block wx:else>
+        <view class="submit-btn">提交</view>
+      </block>
+    </view>
+  </scroll-view>
+</view>
