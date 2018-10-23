@@ -150,7 +150,7 @@ Page({
     var a = wx.getStorageSync('id')
     var openid = wx.getStorageSync('openid')
 
-    if (a != '') {
+    if (openid != '') {
       this.hideSwiper()
       var that = this
       wx.request({
@@ -190,6 +190,7 @@ Page({
           },
           method: 'POST',
           success: function (ob) {
+            console.log(ob.data)
             that.setData({
               obligatory: ob.data,
               loadingHide: true,

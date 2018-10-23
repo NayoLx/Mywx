@@ -34,7 +34,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -58,6 +58,12 @@
 					"id": 3,
 					"name": "附近",
 					"pathName": "pages/order/list/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "实名验证",
+					"pathName": "pages/order/my/push/index",
 					"query": ""
 				}
 			]

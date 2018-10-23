@@ -33,7 +33,7 @@
   
 <modal title="绑定身份证" confirm-text="确定" hidden="{{modalChooseIdcardHidden}}" bindconfirm="onCheckCard" bindcancel="actionCancel" >
     <view class='modalInput'>
-      <input placeholder='输入身份号码' id="phone" bindinput='idCardInput' style='border-bottom: 1rpx solid #cacbcd;' value='{{nullInput}}'></input>
+      <input placeholder='输入身份号码' id="idcard" bindinput='idCardInput' style='border-bottom: 1rpx solid #cacbcd;' value='{{nullInput}}'></input>
     </view>
     <view class='modalInput' style='height: 80rpx;'>
       <input placeholder='输入姓名' bindinput='nameInput' id="code" style='border-bottom: 1rpx solid #cacbcd;' value='{{nullInput}}'></input>

@@ -31,5 +31,5 @@
   </swiper>
 </view>
 <view class='btn'>
-  <button>发起订单</button>
+  <button bindtap='onJumpOrder'>发起订单</button>
 </view>

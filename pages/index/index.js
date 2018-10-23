@@ -90,6 +90,7 @@ Page({
       })
       Public.timeShow('已更新', 1000)
     }
+    
   },
 
   /**
@@ -97,7 +98,11 @@ Page({
    */
   onLoad: function(options) {
     var res = wx.getStorageSync('home')
-    wx.setStorageSync('openid', res.openid)
+
+    if (wx.getStorageSync('openid') == '') {
+      wx.setStorageSync('openid', res.openid)
+    }
+    
     this.setData({
       home: res
     })
@@ -121,7 +126,6 @@ Page({
       },
       method: 'POST',
       success: function(res) {
-        console.log(res)
         if (res.data.state == true) {
           Public.show('此账号已绑定')
         } else {
@@ -138,9 +142,66 @@ Page({
 
   },
 
+  /**
+   * 实名判断 
+   */
   onCheckName: function() {
-    this.setData({
-      modalChooseIdcardHidden: false
+    var that = this
+    wx.request({
+      url: 'http://localhost:8080/basic/web/index.php?r=my/checkidcard',
+      data: {
+        openid: this.data.home.openid,
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+        // 'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.data.state == true) {
+          Public.show('此账号已验证')
+        } else {
+          that.setData({
+            modalChooseIdcardHidden: false
+          })
+        }
+      },
+      fail: function (res) {
+        console.log('error')
+      },
+      complete: function (res) { },
+    })
+  },
+
+  onCheckCard:function() {
+    var that = this
+    wx.request({
+      url: 'http://localhost:8080/basic/web/index.php?r=my/isidcard',
+      data: {
+        openid: this.data.home.openid,
+        idcard: this.data.idcard,
+        name: this.data.name
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+        // 'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res.statusCode)
+        if (res.data == true)
+        {
+          Public.show('绑定成功')
+          that.actionCancel()
+        }
+        else {
+          Public.show('绑定失败，请检查身份证')
+        }
+      },
+      fail: function (res) {
+        console.log('error')
+      },
+      complete: function (res) { },
     })
   },
 
@@ -152,7 +213,9 @@ Page({
       password: '',
       nullInput: '',
       code: '',
-      phone: ''
+      phone: '',
+      idcard: '',
+      name: '',
     })
     wx.removeStorageSync('check')
   },

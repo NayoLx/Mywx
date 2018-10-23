@@ -1,8 +1,8 @@
 <!--pages/order/list/index.wxml-->
 <view wx:if="{{!swiper}}">
   <view class="swiper-tab">
-    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">附近快递</view>
-    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">附近外卖</view>
+    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">附近</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">附近</view>
   </view>
 
   <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{winHeight - 40}}px' bindchange='bindChange'>

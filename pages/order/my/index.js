@@ -50,4 +50,9 @@ Page({
     });
   },
 
+  onJumpOrder: function() {
+    wx.navigateTo({
+      url: 'push/index',
+    })
+  }
 })

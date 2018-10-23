@@ -22,6 +22,7 @@ App({
             success: function(openIdRes) {
               console.info("获取用户openId成功");
               console.info(openIdRes.data.openid);
+              wx.setStorageSync('openid', openIdRes.data.openid)
               // 获取用户信息
               wx.getSetting({
                 success: res => {
