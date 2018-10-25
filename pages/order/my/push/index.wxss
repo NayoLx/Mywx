@@ -2,11 +2,6 @@
 
 /*滚动容器*/
 
-page {
-  line-height: 1.6;
-  font-family: -apple-system-font, "Helvetica Neue", sans-serif;
-}
-
 .scroll-main {
   height: 100%;
   display: flex;
@@ -15,7 +10,7 @@ page {
 
 .item-picker {
   width: 100%;
-  margin: 20rpx 40rpx 15rpx 30rpx;
+  margin: 0rpx 40rpx 15rpx 30rpx;
   font-size: 32rpx;
 }
 
@@ -32,7 +27,7 @@ button {
 .item-sex {
   width: 100%;
   margin: 20rpx 10rpx;
-  height: 180rpx;
+  height: 100rpx;
 }
 
 .item-detail {
@@ -64,15 +59,15 @@ button {
 
 .tag-item-highlight {
   width: 120rpx;
-  height: 40rpx;
-  line-height: 40rpx;
+  height: 60rpx;
+  line-height: 15rpx;
   text-align: center;
   font-size: 26rpx;
   background: lightblue;
   border: 2rpx solid lightblue;
   border-radius: 30rpx;
   margin: 20rpx 15rpx 0rpx 15rpx;
-  padding: 10rpx;
+  padding: 20rpx;
   display: inline-block;
 }
 
@@ -82,7 +77,6 @@ button {
   position: fixed;
   right: 0;
   bottom: 0;
-  display: flex;
   align-items: center;
   width: 100%;
   height: 160rpx;
@@ -99,7 +93,7 @@ button {
   color: #333;
   font-size: 32rpx;
   border-radius: 80rpx;
-  margin: 20rpx 30rpx;
+  margin: 20rpx 20rpx;
   margin-left: 20%;
 }
 
@@ -116,7 +110,7 @@ button {
 
 .uploadImage {
   width: 100%;
-  margin: 20rpx 30rpx;
+  margin: 10rpx 30rpx 20rpx 30rpx;
   height: 200rpx;
 }
 
@@ -151,4 +145,36 @@ button {
   position: relative;
   right: 35rpx;
   top: 15rpx;
+}
+
+.item-time {
+  width: 100%;
+  height: 100rpx;
+  margin: 20rpx;
+}
+
+.item-time-tet {
+  margin: 20rpx 10rpx;
+  float: left;
+  font-size: 32rpx;
+}
+
+.confirm-modal-text-line {
+  display: flex;
+  flex-direction: row;
+}
+.confirm-modal-text-head {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bold;
+  width: 28%;
+}
+.confirm-modal-text-content {
+  font-size: 30rpx;
+  color: #333;
+  width: 72%;
+}
+.confirm-modal-text {
+  font-size: 30rpx;
+  color: #333;
 }

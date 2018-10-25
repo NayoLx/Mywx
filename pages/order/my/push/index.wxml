@@ -1,22 +1,45 @@
 <!--pages/order/my/push/index.wxml-->
 <view class="page">
-  <scroll-view scroll-y="true" class="scroll-main" style='height: {{winHeight - 40}}px'>
-    <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" class='item-picker'>
-      <view class="picker">
-        选择类型：{{array[index]}}
-      </view>
-    </picker>
+  <scroll-view scroll-y="true" class="scroll-main" style='height: {{winHeight}}px'>
 
+    <!-- 类型 -->
+    <view style='padding: 20rpx 0 0 0;'>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" class='item-picker'>
+        <view class="picker">
+          选择类型：{{array[index]}}
+        </view>
+      </picker>
+    </view>
+
+    <!-- 性别地址 -->
     <view class='item-sex'>
-      <button class='tag-item'>男</button>
-      <button class='tag-item'>女</button>
-      <input class='item_sex_input' placeholder='详细地址（不填只送到楼下）' placeholder-style='font-size: 25rpx;'></input>
+      <button class="{{is_button_male ? 'tag-item-highlight' : 'tag-item'}}" bindtap='onChecksex' data-id='1' style=' float:left'>男</button>
+      <button class="{{is_button_female ? 'tag-item-highlight' : 'tag-item'}}" bindtap='onChecksex' data-id='2' style=' float:left'>女</button>
+      <input class='item_sex_input' placeholder='详细地址' placeholder-style='font-size: 25rpx;' style=' width: 50%; float:left' bindinput='onCheckadress'></input>
     </view>
 
+    <!-- 简要要求 -->
     <view class='item-detail'>
-      <textarea placeholder='简要要求' class='item_sex_input' placeholder-style='font-size: 30rpx;'></textarea>
+      <textarea placeholder='简要语言' class='item_sex_input' placeholder-style='font-size: 30rpx;' bindinput='onCheckdetail'></textarea>
     </view>
 
+    <!-- 时间 -->
+    <view class='item-time'>
+      <text class='item-time-tet'>所需时间段:</text>
+      <picker mode='time' value='{{time_start}}' start='8:00' end='20:00' class='item-picker' style='width:15%; float: left; margin-top:20rpx' bindchange="bindPickerTimeStart">
+        <view class='picker' style='text-align: center; border-bottom: 1rpx solid #b5b5b5'>
+          {{time_start}}
+        </view>
+      </picker>
+      <view style='float: left; margin: 10rpx;'>-</view>
+      <picker mode='time' value='{{time_end}}' start='8:00' end='20:00' class='item-picker' style='width:15%;float: left;margin-top:20rpx' bindchange="bindPickerTimeEnd">
+        <view class='picker' style='text-align: center;border-bottom: 1rpx solid #b5b5b5'>
+          {{time_end}}
+        </view>
+      </picker>
+    </view>
+
+    <!-- 上传地址 -->
     <view class='uploadImage'>
       <text>上传图片<text class='tet'>(限4张)</text></text>
       <block wx:if='{{src}}'>
@@ -32,12 +55,33 @@
     </view>
 
     <view class="submit-btn-section">
-      <block wx:if="{{isSubmitBtnEnable === false}}">
-        <view class="submit-btn-disable">提交</view>
-      </block>
-      <block wx:else>
-        <view class="submit-btn">提交</view>
-      </block>
+        <view class="submit-btn" bindtap='onSumbitOrder'>提交</view>
     </view>
   </scroll-view>
 </view>
+
+<modal title="确认信息" confirm-text="确定" hidden="{{modalSubmitOrderHidden}}" bindconfirm="actionSubmit" bindcancel="actionCloseModal">
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-text-head">{{head1}}</text>
+    <text class="confirm-modal-text-content">{{contact_type}}</text>
+  </view>
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-text-head">{{head2}}</text>
+    <text class="confirm-modal-text-content">{{contact_sex}}</text>
+  </view>
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-text-head">{{head3}}</text>
+    <text class="confirm-modal-text-content">{{contact_detail}}</text>
+  </view>
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-text-head">{{head5}}</text>
+    <text class="confirm-modal-text-content">{{contact_timestart}} - {{contact_timeend}}</text>
+  </view>
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-text-head">{{head4}}</text>
+    <text class="confirm-modal-text-content">{{contact_address}}</text>
+  </view>
+  <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text">{{contact_text}}</text>
+    </view>
+</modal>

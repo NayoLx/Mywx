@@ -1,4 +1,6 @@
 // pages/order/my/push/index.js
+var Public = require('../../../../utils/pubic.js')
+
 Page({
 
   /**
@@ -9,7 +11,15 @@ Page({
     index: 0,
     winWidth: 0,
     winHeight: 0,
-    array: ['代拿', '其他']
+    array: ['帮忙代拿', '需求代拿', '帮忙其他', '需求其他'],
+    is_button_male: false,
+    is_button_female: false,
+    time_start: '8:00',
+    time_end: '20:00',
+    modalSubmitOrderHidden: true,
+    is_sex: '',
+    address: '',
+    detail: ''
   },
 
   bindPickerChange: function (e) {
@@ -33,7 +43,6 @@ Page({
     })
     console.log(this.data.winHeight)
   },
-
 
   /**
     * 删除图片
@@ -100,5 +109,79 @@ Page({
 
   },
 
-  
+  onChecksex: function (e) {
+    var clicktagId = e.target.dataset.id;
+    if (clicktagId == 1) {
+      this.setData({
+        is_button_male: true,
+        is_button_female: false,
+        is_sex: '男'
+      })
+    }
+    else {
+      this.setData({
+        is_button_male: false,
+        is_button_female: true,
+        is_sex: '女'
+      })
+    }
+  },
+
+  onCheckadress: function (e) {
+    this.setData({
+      address: e.detail.value
+    })
+  },
+  onCheckdetail: function (e) {
+    this.setData({
+      detail: e.detail.value
+    })
+  },
+
+  bindPickerTimeStart: function(e) {
+    this.setData({
+      time_start: e.detail.value
+    })
+  },
+  bindPickerTimeEnd: function (e) {
+    this.setData({
+      time_end: e.detail.value
+    })
+  },
+
+  onSumbitOrder: function () {
+    var that = this
+    if (that.data.detail == '') {
+ 
+    } else if (that.data.is_sex == '') {
+
+    } else {
+      that.setData({
+        modalSubmitOrderHidden: false,
+        head1: '发布类型： ',
+        contact_type: that.data.array[that.data.index],
+        head2: '需求性别： ',
+        contact_sex: that.data.is_sex,
+        head3: '想说的话： ',
+        contact_detail: that.data.detail,
+        head4: '具体地址： ',
+        contact_address: that.data.address + '\n\n',
+        head5: '时间段： ',
+        contact_timestart: that.data.time_start,
+        contact_timeend: that.data.time_end ,
+        contact_text: '如果不填详细地址的话，表示只送楼下哦!',
+      })
+    }
+  },
+
+  actionSubmit: function () {
+    
+  },
+
+  actionCloseModal: function () {
+     this.setData({
+       modalSubmitOrderHidden: true,
+     })
+  }
+
 })

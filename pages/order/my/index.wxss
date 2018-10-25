@@ -121,4 +121,7 @@ button::after {
   box-shadow: 0px 14rpx 42rpx 0px rgba(165, 165, 165, 0.39);
   font-family: MicrosoftYaHei;
   font-weight: 400;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 33rpx;
 }
