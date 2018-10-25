@@ -8,8 +8,24 @@
   <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{winHeight - 40}}px' bindchange='bindChange'>
     
     <swiper-item>
-      <scroll-view scroll-y="true" class='scroll-views'>
-
+      <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight - 40}}px'>
+         <view class="item-wrapper">
+          <view class="item-list" wx:for="{{itemData}}" wx:for-item="item" wx:for-index="index" wx:key="that">
+            <view class="item-info" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchMove" bindtouchend="touchEnd" style="left:{{item.left + 'rpx'}}">
+              <image class="info-img" src="{{item.img}}"></image>
+              <view class="info-wrapper">
+                <view class="info-desc">
+                  <view class="name">{{item.name}}</view>
+                  <view class="time">{{item.time}}</view>
+                </view>
+                <view class="info-content">{{item.info}}</view>
+              </view>
+            </view>
+            <view class="item-oper">
+              <view class="oper-delete" bindtap="itemDelete" data-index="{{index}}">删除</view>
+            </view>
+          </view>
+        </view>
       </scroll-view>
     </swiper-item>
 
