@@ -147,5 +147,5 @@ button::after {
 .info-content {
   font-size: 28rpx;
   color: #999;
-  margin-top: 4rpx;
+  margin-top: 10rpx;
 }

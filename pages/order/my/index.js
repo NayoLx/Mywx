@@ -1,5 +1,6 @@
 // pages/order/my/index.js
-var Public = require('../../../utils/util.js')
+var toast = require('../../../utils/util.js');
+var Da = require("../../../utils/fun.js");
 
 Page({
 
@@ -7,75 +8,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-    loadingHide: '',
+    loadingHide: false,
     currentTab: 0,
     winWidth: 0,
     winHeight: 0,
-    itemData: [
-      {
-        no: '001',
-        img: '/img/ic_need.png',
-        name: '宋双庙',
-        info: '我：二狗，你妈喊你回家吃饭',
-        time: '上午12:00',
-      },
-      {
-        no: '001',
-        img: '/images/mp3.png',
-        name: '订阅号',
-        info: '拜拜吧比较爱白芭比白阿比',
-        time: '昨天',
-      },
-      {
-        no: '001',
-        img: '/images/pdf.png',
-        name: '微信团队',
-        info: '登录操作通知',
-        time: '上午 9:00',
-      },
-      {
-        no: '001',
-        img: '/images/txt.png',
-        name: '锤子科技',
-        info: '罗永浩 x 罗振宇访谈节目 《长谈》',
-        time: '星期二',
-      },
-      {
-        no: '001',
-        img: '/images/word.png',
-        name: '微信公众平台安全助手',
-        info: '小程序登录提醒',
-        time: '上午10:00',
-      },
-      {
-        no: '001',
-        img: '/images/excel.png',
-        name: '微信支付',
-        info: '支付成功',
-        time: '上午12:00',
-      }
-      ,
-      {
-        no: '001',
-        img: '/images/excel.png',
-        name: '微信支付',
-        info: '支付成功',
-        time: '上午12:00',
-      },
-      {
-        no: '001',
-        img: '/images/excel.png',
-        name: '微信支付',
-        info: '支付成功',
-        time: '上午12:00',
-      }
-    ]
+    itemData: [{
+      no: '001',
+      img: '/img/ic_need.png',
+      name: '宋双庙',
+      info: '我：二狗，你妈喊你回家吃饭',
+      time: '上午12:00',
+    }],
+    order: []
   },
-  stopTouchMove: function () {
+
+  stopTouchMove: function() {
     return false;
   },
 
-  bindChange: function (e) {
+  bindChange: function(e) {
     var that = this;
     that.setData({
       currentTab: e.detail.current
@@ -85,32 +36,45 @@ Page({
   /**
    * 点击tab切换
    */
-  swichNav: function (e) {
+  swichNav: function(e) {
+    // 显示正在加载...
+    toast.showLoading()
+
     var that = this;
+    that.setData({
+      loadingHide: false,
+    })
+    
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
       that.setData({
         currentTab: e.target.dataset.current
       })
+      that.getItemData(e.target.dataset.current)
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+    // 显示正在加载...
+    toast.showLoading()
+
     var that = this;
     /**
      * 获取系统信息
      */
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         that.setData({
           winWidth: res.windowWidth,
           winHeight: res.windowHeight
         });
       }
     });
+
+    that.getItemData(0)
   },
 
   onJumpOrder: function() {
@@ -119,24 +83,79 @@ Page({
     })
   },
 
-  touchS: function (e) {  // touchstart
-    let startX = Public.getClientX(e)
-    startX && this.setData({ startX })
-  },
-  touchMove: function (e) {  // touchmove
-    let itemData = Public.touchMove(e, this.data.itemData, this.data.startX)
-    itemData && this.setData({ itemData })
-
-  },
-  touchEnd: function (e) {  // touchend
-    const width = 150  // 定义操作列表宽度
-    let itemData = Public.touchEnd(e, this.data.itemData, this.data.startX, width)
-    itemData && this.setData({ itemData })
-  },
-  itemDelete: function (e) {  // itemDelete
-    let itemData = Public.deleteItem(e, this.data.itemData)
-    itemData && this.setData({ itemData })
+  touchS: function(e) { // touchstart
+    let startX = toast.getClientX(e)
+    startX && this.setData({
+      startX
+    })
   },
   
+  touchMove: function(e) { // touchmove
+    let order = toast.touchMove(e, this.data.order, this.data.startX)
+    order && this.setData({
+      order
+    })
+  },
 
+  touchEnd: function(e) { // touchend
+    const width = 150 // 定义操作列表宽度
+    let order = toast.touchEnd(e, this.data.order, this.data.startX, width)
+    order && this.setData({
+      order
+    })
+  },
+
+  itemDelete: function(e) { // itemDelete
+    var that = this
+    wx.showModal({
+      title: '确认删除？',
+      content: '是否删除该订单，会自动取消订单',
+      success(res) {
+        if (res.confirm) {
+          let order = toast.deleteItem(e, that.data.order)  
+
+          // 显示正在加载...
+          toast.showLoading() 
+
+          order && that.setData({
+            order
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+    that.onShow()
+  },
+
+  getItemData: function(id) {
+    var openid = wx.getStorageSync('openid')
+    var that = this 
+    wx.request({
+      url: Da.dataUrl + '?r=order/getallorder',
+      data: {
+        openid: openid,
+        status: id,
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+        // 'Content-Type': 'application/json'
+      },
+      success: function(res) {
+        // 隐藏加载提示
+        toast.hideLoading()
+
+        that.setData({
+          order: res.data,
+          loadingHide: true,
+        })
+        console.log(that.data.order)
+      }
+    })
+  },
+
+  onShow: function(options) {
+    this.getItemData(this.data.currentTab)
+  }
 })

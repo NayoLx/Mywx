@@ -34,7 +34,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -63,6 +63,12 @@
 				{
 					"id": -1,
 					"name": "实名验证",
+					"pathName": "pages/order/my/push/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "填写",
 					"pathName": "pages/order/my/push/index",
 					"query": ""
 				}

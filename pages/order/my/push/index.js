@@ -1,5 +1,6 @@
 // pages/order/my/push/index.js
-var Public = require('../../../../utils/pubic.js')
+var toast = require('../../../../utils/pubic.js');
+var Da = require("../../../../utils/fun.js");
 
 Page({
 
@@ -11,7 +12,7 @@ Page({
     index: 0,
     winWidth: 0,
     winHeight: 0,
-    array: ['帮忙代拿', '需求代拿', '帮忙其他', '需求其他'],
+    array: ['帮忙代拿', '需要代拿', '帮忙其他', '其他'],
     is_button_male: false,
     is_button_female: false,
     time_start: '8:00',
@@ -165,17 +166,49 @@ Page({
         head3: '想说的话： ',
         contact_detail: that.data.detail,
         head4: '具体地址： ',
-        contact_address: that.data.address + '\n\n',
+        contact_address: that.data.address,
         head5: '时间段： ',
         contact_timestart: that.data.time_start,
         contact_timeend: that.data.time_end ,
-        contact_text: '如果不填详细地址的话，表示只送楼下哦!',
+        contact_text: '\n\n如果不填详细地址的话，表示只送楼下哦!',
       })
     }
   },
 
   actionSubmit: function () {
-    
+    var openid = wx.getStorageSync('openid')
+    var that = this
+    wx.request({
+      url: Da.dataUrl + '?r=order/saveorderdetail',
+      data:{
+        openid: openid,
+        order_type: this.data.contact_type,
+        sex: this.data.is_sex,
+        detail_text: this.data.contact_detail,
+        address: this.data.contact_address,
+        start_time: this.data.contact_timestart,
+        end_time: this.data.contact_timeend,
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+        // 'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      success: function(res) {
+        console.log(res.data)
+        if (res.data == true) {
+          wx.switchTab({
+            url: '../index',
+          })
+        }
+        else {
+          toast.show('您还有未处理的订单，请先处理该订单')
+          wx.switchTab({
+            url: '../index',
+          })
+        }
+      }
+    })
   },
 
   actionCloseModal: function () {
