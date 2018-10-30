@@ -79,6 +79,7 @@ page {
 }
 
 .item-oper {
+  
   display: flex;
   justify-content: flex-end;
 }

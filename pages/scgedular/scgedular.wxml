@@ -41,9 +41,9 @@
       </view>
     </block> -->
 
-    <block wx:for='{{scge}}'>
+    <block wx:for='{{scge.classes}}'>
       <view class='tr'>
-        <view class='td' style='width:8%'>{{item.time}}</view>
+        <view class='td' style='width:8%'>{{index + 1}}</view>
         <view class='td'>{{item.monday != "&nbsp;" ? item.monday : ''}}</view>
         <view class='td'>{{item.tuesday != "&nbsp;" ? item.tuesday : ''}}</view>
         <view class='td'>{{item.wednesday != "&nbsp;" ? item.wednesday : ''}}</view>

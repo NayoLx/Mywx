@@ -5,32 +5,32 @@
     <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">附近</view>
   </view>
 
-  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{winHeight - 40}}px' bindchange='bindChange'>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{winHeight - 40}}px'>
     
-    <swiper-item>
-      <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight - 40}}px'>
-         <view class="item-wrapper">
-          <view class="item-list" wx:for="{{itemData}}" wx:for-item="item" wx:for-index="index" wx:key="that">
-            <view class="item-info" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchMove" bindtouchend="touchEnd" style="left:{{item.left + 'rpx'}}">
+    <swiper-item catchtouchmove="stopTouchMove">
+     <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight - 105}}px'>
+        <view class="item-wrapper">
+          <view class="item-list" wx:for="{{order}}" wx:for-item="item" wx:for-index="index" wx:key="that" >
+            <view class="item-info" data-index="{{index}}" style="left:{{item.left + 'rpx'}}"   bindtap='getDetail'>
               <image class="info-img" src="{{item.img}}"></image>
               <view class="info-wrapper">
                 <view class="info-desc">
-                  <view class="name">{{item.name}}</view>
-                  <view class="time">{{item.time}}</view>
+                  <view class="name" wx:if="{{item.type == 'T'}}">接代拿</view>
+                  <view class="name" wx:elif="{{item.type == 'O'}}">接其他</view>
+                  <view class="name" wx:else="{{item.type == 'N'}}">需代拿</view>
+                  <view class="time">{{item.status_labal}}</view>
                 </view>
-                <view class="info-content">{{item.info}}</view>
+                <view class="info-content">需要：{{item.sex}}生 {{item.contact_building}}</view>
               </view>
             </view>
-            <view class="item-oper">
-              <view class="oper-delete" bindtap="itemDelete" data-index="{{index}}">删除</view>
-            </view>
+            
           </view>
         </view>
       </scroll-view>
     </swiper-item>
 
     <!-- 已完成 -->
-    <swiper-item>
+    <swiper-item atchtouchmove="stopTouchMove">
       <scroll-view scroll-y="true" class='scroll-views'>
         
       </scroll-view>
@@ -38,6 +38,35 @@
   </swiper>
 
 </view>
+
+<!--确认提示框-->
+<modal title="确认报修" confirm-text="确定" hidden="{{modalSubmitOrderHidden}}" bindconfirm="actionSubmit" bindcancel="actionCloseModal">
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-text-head"></text>
+    <text class="confirm-modal-text-content">{{order.user_stunum}}</text>
+  </view>
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-text-head">{{}}</text>
+    <text class="confirm-modal-text-content">{{order.express_detail_starttime}}-{{order.express_detail_endtime}}</text>
+  </view>
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-text-head">{{}}</text>
+    <text class="confirm-modal-text-content">{{order.sex}}</text>
+    <text class="confirm-modal-text-content">{{order.contact_building}}</text>
+  </view>
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-bold-text">{{}}</text>
+  </view>
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-bold-text">{{}}</text>
+  </view>
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-text">{{}}</text>
+  </view>
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-text">{{}}</text>
+  </view>
+</modal>
 
 
 

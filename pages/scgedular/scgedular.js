@@ -221,9 +221,10 @@ Page({
 
           that.setData({
             scge: res.data,
-            loadingHide: true
+            loadingHide: true,
+            str: res.data.classes
           })
-          console.log(res.data)
+          console.log(that.data.str)
         },
         fail: function(res) {
           console.log(res.data)
@@ -281,6 +282,7 @@ Page({
   utf8_strrev: function (str) {
     preg_match_all('/./us', $str, $ar);
     return join('', array_reverse($ar[0]));
-  }
+  },
+
 
 })

@@ -1,4 +1,7 @@
 // pages/order/list/index.js
+var toast = require('../../../utils/util.js');
+var Da = require("../../../utils/fun.js");
+
 Page({
 
   /**
@@ -9,65 +12,9 @@ Page({
     currentTab: 0,
     winWidth: 0,
     winHeight: 0,
-    itemData: [
-      {
-        no: '001',
-        img: '/img/ic_need.png',
-        name: '宋双庙',
-        info: '我：二狗，你妈喊你回家吃饭',
-        time: '上午12:00',
-      },
-      {
-        no: '001',
-        img: '/images/mp3.png',
-        name: '订阅号',
-        info: '拜拜吧比较爱白芭比白阿比',
-        time: '昨天',
-      },
-      {
-        no: '001',
-        img: '/images/pdf.png',
-        name: '微信团队',
-        info: '登录操作通知',
-        time: '上午 9:00',
-      },
-      {
-        no: '001',
-        img: '/images/txt.png',
-        name: '锤子科技',
-        info: '罗永浩 x 罗振宇访谈节目 《长谈》',
-        time: '星期二',
-      },
-      {
-        no: '001',
-        img: '/images/word.png',
-        name: '微信公众平台安全助手',
-        info: '小程序登录提醒',
-        time: '上午10:00',
-      },
-      {
-        no: '001',
-        img: '/images/excel.png',
-        name: '微信支付',
-        info: '支付成功',
-        time: '上午12:00',
-      }
-      ,
-      {
-        no: '001',
-        img: '/images/excel.png',
-        name: '微信支付',
-        info: '支付成功',
-        time: '上午12:00',
-      },
-      {
-        no: '001',
-        img: '/images/excel.png',
-        name: '微信支付',
-        info: '支付成功',
-        time: '上午12:00',
-      }
-    ]
+    itemData: [],
+    order: [],
+    modalSubmitOrderHidden: true,
   },
 
   bindChange: function (e) {
@@ -95,6 +42,10 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+
+    // 显示正在加载...
+    toast.showLoading() 
+
     /**
      * 获取系统信息
      */
@@ -106,25 +57,46 @@ Page({
         });
       }
     });
+    that.getOrder()
   },
 
-  touchS: function (e) {  // touchstart
-    let startX = Public.getClientX(e)
-    startX && this.setData({ startX })
-  },
-  touchMove: function (e) {  // touchmove
-    let itemData = Public.touchMove(e, this.data.itemData, this.data.startX)
-    itemData && this.setData({ itemData })
+  getOrder: function () {
+    var openid = wx.getStorageSync('openid')
+    var that = this
+    wx.request({
+      url: Da.dataUrl + '?r=order/getallorder',
+      data: {
+        openid: openid,
+        status: 10,
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+        // 'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        // 隐藏加载提示
+        toast.hideLoading()
 
-  },
-  touchEnd: function (e) {  // touchend
-    const width = 150  // 定义操作列表宽度
-    let itemData = Public.touchEnd(e, this.data.itemData, this.data.startX, width)
-    itemData && this.setData({ itemData })
-  },
-  itemDelete: function (e) {  // itemDelete
-    let itemData = Public.deleteItem(e, this.data.itemData)
-    itemData && this.setData({ itemData })
+        that.setData({
+          order: res.data,
+          loadingHide: true,
+        })
+        console.log(that.data.order)
+      }
+    })
   },
 
+  getDetail: function (e) {
+    this.setData({
+      modalSubmitOrderHidden: false
+    })
+    console.log(this.data.order[e.currentTarget.dataset.index])
+  },
+
+  actionCloseModal: function (e) {
+    this.setData({
+      modalSubmitOrderHidden: true
+    })
+  }
 })

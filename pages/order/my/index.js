@@ -12,13 +12,7 @@ Page({
     currentTab: 0,
     winWidth: 0,
     winHeight: 0,
-    itemData: [{
-      no: '001',
-      img: '/img/ic_need.png',
-      name: '宋双庙',
-      info: '我：二狗，你妈喊你回家吃饭',
-      time: '上午12:00',
-    }],
+    itemData: [],
     order: []
   },
 
