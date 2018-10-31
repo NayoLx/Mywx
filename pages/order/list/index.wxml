@@ -6,12 +6,12 @@
   </view>
 
   <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{winHeight - 40}}px'>
-    
+
     <swiper-item catchtouchmove="stopTouchMove">
-     <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight - 105}}px'>
+      <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight - 105}}px'>
         <view class="item-wrapper">
-          <view class="item-list" wx:for="{{order}}" wx:for-item="item" wx:for-index="index" wx:key="that" >
-            <view class="item-info" data-index="{{index}}" style="left:{{item.left + 'rpx'}}"   bindtap='getDetail'>
+          <view class="item-list" wx:for="{{order}}" wx:for-item="item" wx:for-index="index" wx:key="that">
+            <view class="item-info" data-index="{{index}}" style="left:{{item.left + 'rpx'}}" bindtap='getDetail'>
               <image class="info-img" src="{{item.img}}"></image>
               <view class="info-wrapper">
                 <view class="info-desc">
@@ -23,7 +23,7 @@
                 <view class="info-content">需要：{{item.sex}}生 {{item.contact_building}}</view>
               </view>
             </view>
-            
+
           </view>
         </view>
       </scroll-view>
@@ -32,7 +32,7 @@
     <!-- 已完成 -->
     <swiper-item atchtouchmove="stopTouchMove">
       <scroll-view scroll-y="true" class='scroll-views'>
-        
+
       </scroll-view>
     </swiper-item>
   </swiper>
@@ -40,34 +40,41 @@
 </view>
 
 <!--确认提示框-->
-<modal title="确认报修" confirm-text="确定" hidden="{{modalSubmitOrderHidden}}" bindconfirm="actionSubmit" bindcancel="actionCloseModal">
-  <view class="confirm-modal-text-line">
-    <text class="confirm-modal-text-head"></text>
-    <text class="confirm-modal-text-content">{{order.user_stunum}}</text>
+<modal title="确认" confirm-text="接受" hidden="{{modalSubmitOrderHidden1}}" bindcancel="actionCloseModal" bindconfirm='actionSubmit' >
+<view class="confirm-modal-text-line">
+    <text class="confirm-modal-text-head">类型：</text>
+    <text class="confirm-modal-text-content">{{checkOrder.order_type}}</text>
   </view>
   <view class="confirm-modal-text-line">
-    <text class="confirm-modal-text-head">{{}}</text>
-    <text class="confirm-modal-text-content">{{order.express_detail_starttime}}-{{order.express_detail_endtime}}</text>
+    <text class="confirm-modal-text-head">发起人：</text>
+    <text class="confirm-modal-text-content">{{checkOrder.user_name}}</text>
   </view>
   <view class="confirm-modal-text-line">
-    <text class="confirm-modal-text-head">{{}}</text>
-    <text class="confirm-modal-text-content">{{order.sex}}</text>
-    <text class="confirm-modal-text-content">{{order.contact_building}}</text>
+    <text class="confirm-modal-text-head">需要性别：</text>
+    <text class="confirm-modal-text-content">{{checkOrder.sex}}    <text class="confirm-modal-text-content" wx:if='{{checkOrder.contact_building}}'>宿舍：{{checkOrder.contact_building}}</text></text>
   </view>
   <view class="confirm-modal-text-line">
-    <text class="confirm-modal-bold-text">{{}}</text>
+    <text class="confirm-modal-text-head">需求时间：</text>
+    <text class="confirm-modal-text-content">{{checkOrder.express_detail_starttime}}-{{checkOrder.express_detail_endtime}}</text>
   </view>
   <view class="confirm-modal-text-line">
-    <text class="confirm-modal-bold-text">{{}}</text>
+    <text class="confirm-modal-text-head">简要：</text>
+    <text class="confirm-modal-text-content">{{checkOrder.express_detail_text}}</text>
   </view>
   <view class="confirm-modal-text-line">
-    <text class="confirm-modal-text">{{}}</text>
+    <text class="confirm-modal-text-head">发起时间：</text>
+    <text class="confirm-modal-text-content">{{checkOrder.status_wait_time}}</text>
   </view>
   <view class="confirm-modal-text-line">
-    <text class="confirm-modal-text">{{}}</text>
+    <text class="close">{{express_detail_photo}}</text>
+  </view>
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-text">1. 没有显示具体楼层，表示接受送到楼下</text>
+  </view>
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-text">2. 接单后，将会出现发起人的联系方式</text>
+  </view>
+  <view class="confirm-modal-text-line">
+    <text class="confirm-modal-text">3. 还有啥要点，之后再想</text>
   </view>
 </modal>
-
-
-
-

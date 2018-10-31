@@ -203,9 +203,6 @@ Page({
         }
         else {
           toast.show('您还有未处理的订单，请先处理该订单')
-          wx.switchTab({
-            url: '../index',
-          })
         }
       }
     })

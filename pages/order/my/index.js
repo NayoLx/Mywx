@@ -13,7 +13,8 @@ Page({
     winWidth: 0,
     winHeight: 0,
     itemData: [],
-    order: []
+    order: [],
+    modalSubmitOrderHidden: true,
   },
 
   stopTouchMove: function() {
@@ -151,5 +152,19 @@ Page({
 
   onShow: function(options) {
     this.getItemData(this.data.currentTab)
-  }
+  },
+
+  getDetail: function (e) {
+    this.setData({
+      modalSubmitOrderHidden: false,
+      checkOrder: this.data.order[e.currentTarget.dataset.index]
+    })
+  },
+
+  actionCloseModal: function (e) {
+    this.setData({
+      modalSubmitOrderHidden: true,
+      checkOrder: ''
+    })
+  },
 })
