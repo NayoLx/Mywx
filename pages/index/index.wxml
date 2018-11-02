@@ -9,7 +9,7 @@
   <view class='item-modal-btn' bindtap='onCheckName'>实名验证</view>
   <view class='item-modal-btn' bindtap='ondetail'>个人信息</view>
   <view class='item-modal-btn'>我的订单</view>
-  <view class='item-modal-btn'>联系客服</view>
+  <view class='item-modal-btn' bindtap='jumpOnScgedular'>我的课表</view>
 </view>
 
 <modal title="绑定信息" confirm-text="确定" hidden="{{modalChooseStuNumHidden}}" bindconfirm="bingStuDetail" bindcancel="actionCancel" >

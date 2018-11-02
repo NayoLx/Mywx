@@ -327,5 +327,10 @@ Page({
     })
   },
 
+  jumpOnScgedular: function(e) {
+    wx.navigateTo({
+      url: '../scgedular/scgedular',
+    })
 
+  }
 })

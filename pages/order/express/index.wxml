@@ -1,0 +1,14 @@
+<!--pages/order/express/index.wxml-->
+<view class='container'>
+    <view class='itemView'>
+     <text class='text'>快递公司</text>
+    <input type='text' class='input' placeholder='输入快递名字' bindinput='expressNameInput'></input>
+    </view>
+    <view class='itemView'>
+     <text class='text'>快递单号</text>
+    <input type='text' class='input' placeholder='输入快递单号'  bindinput='expressIdInput'></input>
+    </view>
+  <view style="margin: 0 auto">
+    <button class="submit"  bindtap='getExpressDetail'>查询</button>
+  </view>
+</view>

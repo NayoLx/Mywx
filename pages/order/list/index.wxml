@@ -40,7 +40,7 @@
 </view>
 
 <!--确认提示框-->
-<modal title="确认" confirm-text="接受" hidden="{{modalSubmitOrderHidden1}}" bindcancel="actionCloseModal" bindconfirm='actionSubmit' >
+<!-- <modal title="确认" confirm-text="接受" hidden="{{modalSubmitOrderHidden1}}" bindcancel="actionCloseModal" bindconfirm='actionSubmit' >
 <view class="confirm-modal-text-line">
     <text class="confirm-modal-text-head">类型：</text>
     <text class="confirm-modal-text-content">{{checkOrder.order_type}}</text>
@@ -77,4 +77,46 @@
   <view class="confirm-modal-text-line">
     <text class="confirm-modal-text">3. 还有啥要点，之后再想</text>
   </view>
-</modal>
+</modal> -->
+
+<view class='mask' wx:if='{{modalSubmitOrderHidden}}' bindtap='actionCloseModal'>
+  <form class='form' bindsubmit="submitForm" report-submit>
+    <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text-head">类型：</text>
+      <text class="confirm-modal-text-content">{{checkOrder.order_type}}</text>
+    </view>
+    <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text-head">发起人：</text>
+      <text class="confirm-modal-text-content">{{checkOrder.user_name}}</text>
+    </view>
+    <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text-head">需要性别：</text>
+      <text class="confirm-modal-text-content">{{checkOrder.sex}}    <text class="confirm-modal-text-content" wx:if='{{checkOrder.contact_building}}'>宿舍：{{checkOrder.contact_building}}</text></text>
+    </view>
+    <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text-head">需求时间：</text>
+      <text class="confirm-modal-text-content">{{checkOrder.express_detail_starttime}}-{{checkOrder.express_detail_endtime}}</text>
+    </view>
+    <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text-head">简要：</text>
+      <text class="confirm-modal-text-content">{{checkOrder.express_detail_text}}</text>
+    </view>
+    <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text-head">发起时间：</text>
+      <text class="confirm-modal-text-content">{{checkOrder.status_wait_time}}</text>
+    </view>
+    <view class="confirm-modal-text-line">
+      <text class="close">{{express_detail_photo}}</text>
+    </view>
+    <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text">1. 没有显示具体楼层，表示接受送到楼下</text>
+    </view>
+    <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text">2. 接单后，将会出现发起人的联系方式</text>
+    </view>
+    <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text">3. 还有啥要点，之后再想</text>
+    </view>
+     <button form-type="submit">确认参加</button>
+  </form>
+</view>

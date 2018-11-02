@@ -149,61 +149,32 @@ Page({
     })
   },
 
-  testSubmit: function(e) {
+  submitForm: function(e) {
     var self = this;
     self.getAccesstoken()
     var access_token = self.data.access_token;
-    var url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' + access_token;
-
-    var _jsonData = {
-      'touser': self.data.openid,
-      'template_id': 'JSedyUDHIudKMBcQPVvormr28xGDYrmJ3MwjS9ma8qo',
-      'form_id': e.detail.formId,
-      'data': {
-        "keyword1": {
-          "value": "测试数据一",
-          "color": "#173177"
-        },
-        "keyword2": {
-          "value": "测试数据二",
-          "color": "#173177"
-        },
-        "keyword3": {
-          "value": "测试数据三",
-          "color": "#173177"
-        },
-        "keyword4": {
-          "value": "测试数据四",
-          "color": "#173177"
-        },
-        "keyword5": {
-          "value": "测试数据一",
-          "color": "#173177"
-        },
-        "keyword6": {
-          "value": "测试数据二",
-          "color": "#173177"
-        },
-        "keyword7": {
-          "value": "测试数据三",
-          "color": "#173177"
-        },
-        "keyword8": {
-          "value": "测试数据四",
-          "color": "#173177"
-        },
-      }
-    }
-
-    console.log(_jsonData)
-
+    
     wx.request({
-      url: url,
+      url: Da.dataUrl + '?r=order/getwxapi',
       data: {
-        access_token: access_token,
-        value: _jsonData
-        },
+        access_token: self.data.access_token,
+        touser: self.data.openid,
+        template_id: 'JSedyUDHIudKMBcQPVvormr28xGDYrmJ3MwjS9ma8qo',
+        form_id: e.detail.formId,
+        keyword1: '1',
+        keyword2: '2',
+        keyword3: '3',
+        keyword4: '4',
+        keyword5: '5',
+        keyword6: '6',
+        keyword7: '7',
+        keyword8: '8',
+      },
       method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+        // 'Content-Type': 'application/json'
+      },
       success: function(res) {
         console.log(res)
       },

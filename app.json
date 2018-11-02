@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/order/express/index",
     "pages/scgedular/scgedular",
     "pages/login/login",
     "pages/index/index",
@@ -21,10 +22,10 @@
   "tabBar": {
     "list": [
       {
-        "pagePath": "pages/scgedular/scgedular",
+        "pagePath": "pages/order/express/index",
         "iconPath": "img/icon/wx_app_local_files.png",
         "selectedIconPath": "img/icon/wx_app_local_files@HL.png",
-        "text": "课表"
+        "text": "查询"
       },
       {
         "pagePath": "pages/order/list/index",
