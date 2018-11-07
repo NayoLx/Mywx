@@ -1,14 +1,29 @@
 <!--pages/order/express/index.wxml-->
-<view class='container'>
-    <view class='itemView'>
-     <text class='text'>快递公司</text>
-    <input type='text' class='input' placeholder='输入快递名字' bindinput='expressNameInput'></input>
-    </view>
-    <view class='itemView'>
-     <text class='text'>快递单号</text>
-    <input type='text' class='input' placeholder='输入快递单号'  bindinput='expressIdInput'></input>
-    </view>
+
+<view class="{{traces ? 'container' : 'container2'}}" wx:if="{{!loadingHide}}">
+  <view class='itemView'>
+    <text class='text'>快递公司</text>
+    <picker mode="multiSelector" bindchange="bindChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{index}}" range="{{comarray}}" range-key="name">
+      <input type='text' class='input' style='width: 100%;' placeholder='输入快递名字' bindinput='expressNameInput' value='{{comarray[1][index].name}}'></input>
+    </picker>
+  </view>
+  <view class='itemView'>
+    <text class='text'>快递单号</text>
+    <input type='text' class='input' placeholder='输入快递单号' bindinput='expressIdInput'></input>
+  </view>
   <view style="margin: 0 auto">
-    <button class="submit"  bindtap='getExpressDetail'>查询</button>
+    <button class="submit" bindtap='getExpressDetail'>查询</button>
+  </view>
+
+  <view class='cell-all' style='height: 600rpx;margin-bottom: 10rpx;' wx:if='{{traces}}'>
+    <block wx:for="{{traces}}">
+      <view class='cell-list'>
+        <view class='cell-time'>{{item.AcceptTime}}</view>
+        <view class='cell-circle'></view>
+        <view class='cell-line'>
+          <view class='cell-event'>{{item.AcceptStation}}</view>
+        </view>
+      </view>
+    </block>
   </view>
 </view>
