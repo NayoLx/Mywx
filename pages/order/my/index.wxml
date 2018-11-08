@@ -6,13 +6,12 @@
     <view class="swiper-tab-list {{currentTab == 2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">我的接单</view>
   </view>
 
-  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{winHeight - 50}}px' bindchange='bindChange'>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{winHeight - 40}}px; background-color:#F2F2F2;' bindchange='bindChange'>
     <swiper-item catchtouchmove="stopTouchMove" wx:if='{{loadingHide}}'>
       <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight - 105}}px'>
         <view class="item-wrapper">
           <view class="item-list" wx:for="{{order}}" wx:for-item="item" wx:for-index="index" wx:key="that">
             <view class="item-info" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchMove" bindtouchend="touchEnd" style="left:{{item.left + 'rpx'}}"  bindtap='getDetail'>
-              <image class="info-img" src="{{item.img}}"></image>
               <view class="info-wrapper">
                 <view class="info-desc">
                   <view class="name" wx:if="{{item.type == 'T'}}">接代拿</view>
@@ -36,7 +35,6 @@
         <view class="item-wrapper">
           <view class="item-list" wx:for="{{order}}" wx:for-item="item" wx:for-index="index" wx:key="that">
             <view class="item-info" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchMove" bindtouchend="touchEnd" style="left:{{item.left + 'rpx'}}" bindtap='getDetail'>
-              <image class="info-img" src="{{item.img}}"></image>
               <view class="info-wrapper">
                 <view class="info-desc">
                   <view class="name" wx:if="{{item.type == 'T'}}">接代拿</view>
@@ -60,7 +58,6 @@
         <view class="item-wrapper">
           <view class="item-list" wx:for="{{order}}" wx:for-item="item" wx:for-index="index" wx:key="that">
             <view class="item-info" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchMove" bindtouchend="touchEnd" style="left:{{item.left + 'rpx'}}"  bindtap='getDetail'>
-              <image class="info-img" src="{{item.img}}"></image>
               <view class="info-wrapper">
                 <view class="info-desc">
                   <view class="name" wx:if="{{item.type == 'T'}}">接代拿</view>
@@ -87,7 +84,7 @@
 </view>
 
 <!--确认提示框-->
-<modal title="确认" confirm-text="接受" hidden="{{modalSubmitOrderHidden}}" bindcancel="actionCloseModal" >
+<!-- <modal title="确认" confirm-text="接受" hidden="{{modalSubmitOrderHidden}}" bindcancel="actionCloseModal" >
 <view class="confirm-modal-text-line">
     <text class="confirm-modal-text-head">类型：</text>
     <text class="confirm-modal-text-content">{{checkOrder.order_type}}</text>
@@ -124,4 +121,21 @@
   <view class="confirm-modal-text-line">
     <text class="confirm-modal-text">3. 还有啥要点，之后再想</text>
   </view>
-</modal>
+</modal> -->
+
+<view class="mask" bindtap='closeAgreement' wx:if='{{hasNewUserAgreementVersion}}'></view>
+  <view class="modalDlg" wx:if='{{hasNewUserAgreementVersion}}'>
+    <view class='head'>
+      <text></text>
+      <image class='bg' src='../../../img/ic_Agreement_bg.png'></image>
+      <image class='rocket' src='../../../img/ic_Agreement_pic.png'></image>
+      <!-- <image class='close' src='../../../img/ic_Agreement_close.png' bindtap='closeAgreement'></image> -->
+    </view>
+    <view class='content'>
+      
+    </view>
+    <view class='btn'>
+      <button bindtap='agreeAgreement'>确认</button>
+    </view>
+    
+  </view>

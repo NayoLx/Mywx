@@ -99,6 +99,7 @@ Page({
       index: id,
       value: that.data.comarray[1][id].value
     })
+
   },
 
   /**
@@ -119,6 +120,7 @@ Page({
     if (e.detail.column == 0) {
       data.comarray = that.data.com[key[id].name]
       data.index = key
+
       var datas = [data.index, data.comarray]
 
       that.setData({
@@ -186,7 +188,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    
   },
 
   /**

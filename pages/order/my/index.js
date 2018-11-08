@@ -15,6 +15,7 @@ Page({
     itemData: [],
     order: [],
     modalSubmitOrderHidden: true,
+    hasNewUserAgreementVersion: false,
   },
 
   stopTouchMove: function() {
@@ -157,6 +158,7 @@ Page({
   getDetail: function (e) {
     this.setData({
       modalSubmitOrderHidden: false,
+      hasNewUserAgreementVersion: true,
       checkOrder: this.data.order[e.currentTarget.dataset.index]
     })
   },
@@ -167,4 +169,10 @@ Page({
       checkOrder: ''
     })
   },
+  closeAgreement: function () {
+    this.setData({
+      hasNewUserAgreementVersion: false,
+      checkOrder: ''
+    })
+  }
 })

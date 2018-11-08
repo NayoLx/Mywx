@@ -60,7 +60,9 @@ Page({
         });
       }
     });
+
     that.getOrder()
+    setInterval(that.getOrder, 500)
     
   },
 
@@ -82,7 +84,6 @@ Page({
           order: res.data,
           loadingHide: true,
         })
-        console.log(that.data.order)
 
         // 隐藏加载提示
         toast.hideLoading()

@@ -1,5 +1,15 @@
+page{
+  background-image: url('http://img.ugainian.com/267/59aa8aa176a3d.jpg');
+}
+
 .item-con {
-  width: 100%;
+  
+  margin-top: 10rpx;
+  width: 94%;
+  height: 250rpx;
+  padding: 15rpx 0;
+  margin-left: 3%;
+   box-shadow: 0px 0rpx 30rpx 0px rgba(165, 165, 165, 0.39);
 }
 
 .item-icon {
@@ -7,6 +17,7 @@
   height: 120rpx;
   border-radius: 88rpx;
   margin: 0 auto;
+   box-shadow: 0px 15rpx 30rpx 0px rgba(165, 165, 165, 0.39);
   display: block;
 }
 
@@ -15,14 +26,17 @@
   align-items: center;
   justify-content: center;
   padding: 10rpx;
+  box-shadow: 0px 15rpx 30rpx 0px rgba(165, 165, 165, 0.39);
 }
 
 .item-btn {
   width: 200rpx;
   height: 60rpx;
+  margin-top: 10rpx;
   border-radius: 88rpx;
   border: 1rpx solid #b5b5b5;
   background-color: #fff;
+  box-shadow: 0px 15rpx 30rpx 0px rgba(165, 165, 165, 0.39);
   font-size: 30rpx;
   line-height: 56rpx;
 }
@@ -32,8 +46,13 @@ button::after {
 }
 
 .item-modal {
-  width: 100%;
+
+  width: 94%;
+  margin-left: 3%;
+  padding: 10rpx 0;
   margin-top: 30rpx;
+  background-color: #fff;
+   box-shadow: 0px 10rpx 30rpx 0px rgba(165, 165, 165, 0.39);
 }
 
 .item-modal-btn {
@@ -41,6 +60,7 @@ button::after {
   height: 70rpx;
   padding: 10rpx 20rpx;
   margin-left: 30rpx;
+  line-height: 70rpx;
 }
 
 .modalInput {

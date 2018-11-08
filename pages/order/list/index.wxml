@@ -1,20 +1,23 @@
 <!--pages/order/list/index.wxml-->
 <view wx:if="{{!swiper}}">
   <view class="swiper-tab">
-    <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">附近</view>
-    <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">附近</view>
+   <view class="swiper-tab-list" data-current="0" bindtap="swichNav">
+      <view class="{{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav" style='width:30%;margin-left:35%;'>附近</view>
+    </view>
+    <view class="swiper-tab-list" data-current="1" bindtap="swichNav">
+      <view class="{{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav" style='width:40%; margin-left:30%;'>附近</view>
+    </view>
   </view>
 
-  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{winHeight - 40}}px'>
+  <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{winHeight - 40}}px;  background-color:#F2F2F2;'>
 
     <swiper-item catchtouchmove="stopTouchMove">
       <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight - 105}}px'>
         <view class="item-wrapper">
           <view class="item-list" wx:for="{{order}}" wx:for-item="item" wx:for-index="index" wx:key="that">
             <view class="item-info" data-index="{{index}}" style="left:{{item.left + 'rpx'}}" bindtap='getDetail'>
-              <image class="info-img" src="{{item.img}}"></image>
               <view class="info-wrapper">
-                <view class="info-desc">
+                <view class="info-desc" style=''>
                   <view class="name" wx:if="{{item.type == 'T'}}">接代拿</view>
                   <view class="name" wx:elif="{{item.type == 'O'}}">接其他</view>
                   <view class="name" wx:else="{{item.type == 'N'}}">需代拿</view>
