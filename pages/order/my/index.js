@@ -47,7 +47,7 @@ Page({
       that.setData({
         currentTab: e.target.dataset.current
       })
-      that.getItemData(e.target.dataset.current)
+      that.getItemData()
     }
   },
   /**
@@ -69,8 +69,8 @@ Page({
         });
       }
     });
-
-    that.getItemData(0)
+    that.getItemData()
+    
   },
 
   onJumpOrder: function() {
@@ -108,30 +108,31 @@ Page({
       content: '是否删除该订单，会自动取消订单',
       success(res) {
         if (res.confirm) {
+          var setInter = setInterval(that.getItemData, 500)
           let order = toast.deleteItem(e, that.data.order)  
-
           // 显示正在加载...
           toast.showLoading() 
-
           order && that.setData({
             order
           })
+
+          clearInterval(setInter)
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
       }
     })
-    that.onShow()
+   
   },
 
-  getItemData: function(id) {
+  getItemData: function() {
     var openid = wx.getStorageSync('openid')
     var that = this 
     wx.request({
       url: Da.dataUrl + '?r=order/getallorder',
       data: {
         openid: openid,
-        status: id,
+        status: that.data.currentTab,
       },
       method: 'POST',
       header: {
@@ -153,6 +154,13 @@ Page({
 
   onShow: function(options) {
     this.getItemData(this.data.currentTab)
+    var setinter = setInterval(this.getItemData, 10000)
+    this.setData({
+      setinter: setinter
+    })
+  },
+  onHide: function (options) {
+    clearInterval(this.data.setinter)
   },
 
   getDetail: function (e) {

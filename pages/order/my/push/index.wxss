@@ -9,17 +9,51 @@
 }
 
 .item-picker {
-  width: 100%;
-  margin: 0rpx 40rpx 15rpx 30rpx;
+  margin: 0 20rpx 0 30rpx;
   font-size: 32rpx;
+  float: left;
+}
+
+.picker_label {
+  font-size: 28rpx;
+  width: 180rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid #f2f2f2;
+  padding: 5rpx;
+  text-align: center;
+  background-color: #f5f5fa;
+  box-shadow: 0px 5rpx 10px 0px rgba(165, 165, 165, 0.39);
 }
 
 button {
   display: none;
 }
 
+.picker_label-sex {
+  font-size: 28rpx;
+  width: 130rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid #f2f2f2;
+  padding: 5rpx;
+  text-align: center;
+  background-color: #f5f5fa;
+  box-shadow: 0px 5rpx 10px 0px rgba(165, 165, 165, 0.39);
+}
+
+.item-picker-sex {
+  font-size: 32rpx;
+  float: left;
+}
+.pick-text{
+  font-size: 28rpx;
+  float: right;
+  opacity: 0.5;
+  margin-right: 20rpx;
+  margin-top: 10rpx;
+}
+
 .item_sex_input {
-  border-bottom: 1rpx solid #b5b5b5;
+  /* border-bottom: 1rpx solid #b5b5b5; */
   width: 90%;
   margin: 20rpx;
 }
@@ -37,8 +71,14 @@ button {
 }
 
 .item-detail textarea {
-  border: 1rpx solid #b5b5b5;
+  background-color: #f5f5fa;
+  border: 1rpx solid #f2f2f2;
   height: 300rpx;
+  border-radius: 25rpx;
+  padding: 10rpx;
+  font-size: 33rpx;
+  color: #333;
+  box-shadow: 0px 5rpx 10px 0px rgba(165, 165, 165, 0.39);
 }
 
 .tag-item {
@@ -132,10 +172,11 @@ button {
 
 .uploadImage .imag {
   margin: 15rpx 15rpx 15rpx 0;
-  width: 110rpx;
-  height: 110rpx;
-  margin-top: 30rpx;
+  width: 130rpx;
+  height: 130rpx;
+  margin-top: 10rpx;
   float: left;
+  box-shadow: 0px 5rpx 10px 0px rgba(165, 165, 165, 0.39);
 }
 
 .close {
@@ -144,36 +185,39 @@ button {
   float: left;
   position: relative;
   right: 35rpx;
-  top: 15rpx;
+  top: 0rpx;
 }
 
 .item-time {
   width: 100%;
   height: 100rpx;
-  margin: 20rpx;
+  margin: 10rpx 20rpx;
 }
 
 .item-time-tet {
   margin: 20rpx 10rpx;
   float: left;
-  font-size: 32rpx;
+  font-size: 30rpx;
 }
 
 .confirm-modal-text-line {
   display: flex;
   flex-direction: row;
 }
+
 .confirm-modal-text-head {
   font-size: 30rpx;
   color: #333;
   font-weight: bold;
   width: 28%;
 }
+
 .confirm-modal-text-content {
   font-size: 30rpx;
   color: #333;
   width: 72%;
 }
+
 .confirm-modal-text {
   font-size: 30rpx;
   color: #333;

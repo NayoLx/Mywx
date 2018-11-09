@@ -2,25 +2,24 @@
 <view class="page">
   <scroll-view scroll-y="true" class="scroll-main" style='height: {{winHeight}}px'>
 
-    <!-- 类型 -->
-    <view style='padding: 20rpx 0 0 0;'>
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" class='item-picker'>
-        <view class="picker">
-          选择类型：{{array[index]}}
-        </view>
-      </picker>
-    </view>
-
-    <!-- 性别地址 -->
-    <view class='item-sex'>
-      <button class="{{is_button_male ? 'tag-item-highlight' : 'tag-item'}}" bindtap='onChecksex' data-id='1' style=' float:left'>男</button>
-      <button class="{{is_button_female ? 'tag-item-highlight' : 'tag-item'}}" bindtap='onChecksex' data-id='2' style=' float:left'>女</button>
-      <input class='item_sex_input' placeholder='详细地址' placeholder-style='font-size: 25rpx;' style=' width: 50%; float:left' bindinput='onCheckadress'></input>
-    </view>
-
-    <!-- 简要要求 -->
+  <!-- 简要要求 -->
     <view class='item-detail'>
       <textarea placeholder='简要语言' class='item_sex_input' placeholder-style='font-size: 30rpx;' bindinput='onCheckdetail'></textarea>
+    </view>
+
+    <!-- 标签 -->
+    <view style='padding: 30rpx 0 0 0;height: 70rpx'>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" class='item-picker'>
+        <view class="picker_label">
+          <text style='color:red; font-weight:700'>· </text>{{array[index]}}
+        </view>
+      </picker>
+      <picker bindchange="bindPickerChange_sex" value="{{sex_index}}" range="{{sex}}" class='item-picker-sex'>
+        <view class="picker_label-sex">
+          <text style='color:red; font-weight:700'>· </text>{{sex[sex_index]}}
+        </view>
+      </picker>
+      <text class='pick-text'>← 点击即可切换标签</text>
     </view>
 
     <!-- 时间 -->
@@ -41,7 +40,6 @@
 
     <!-- 上传地址 -->
     <view class='uploadImage'>
-      <text>上传图片<text class='tet'>(限4张)</text></text>
       <block wx:if='{{src}}'>
         <block wx:for='{{src}}' wx:for-index="idx">
           <view>
@@ -76,10 +74,6 @@
   <view class="confirm-modal-text-line">
     <text class="confirm-modal-text-head">{{head5}}</text>
     <text class="confirm-modal-text-content">{{contact_timestart}} - {{contact_timeend}}</text>
-  </view>
-  <view class="confirm-modal-text-line">
-    <text class="confirm-modal-text-head">{{head4}}</text>
-    <text class="confirm-modal-text-content">{{contact_address}}</text>
   </view>
   <view class="confirm-modal-text-line">
       <text class="confirm-modal-text">{{contact_text}}</text>

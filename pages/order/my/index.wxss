@@ -70,18 +70,10 @@ button::after {
   position: relative;
   width: 94%;
   margin-left: 3%;
-  height: 180rpx;
   margin-bottom: 20rpx;
-  
-}
+  min-height: 220rpx;
+  height: auto;
 
-.item-info, .item-oper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
 }
 
 .item-info {
@@ -101,17 +93,6 @@ button::after {
 .item-oper {
   display: flex;
   justify-content: flex-end;
-}
-
-.oper-delete {
-  border-radius: 0 21rpx 21rpx 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 150rpx;
-  z-index: 1;
-  color: white;
-  background: red;
 }
 
 .info-img {
@@ -152,10 +133,13 @@ button::after {
 
 .info-content {
   font-size: 28rpx;
-  color: #999;
-  margin-top: 10rpx;
-    margin-left: 50rpx;
+  color: #333;
+  margin-top: 4rpx;
+  margin-left: 30rpx;
+  margin-bottom: 15rpx;
 }
+
+/*弹窗*/
 .mask {
   width: 100%;
   height: 100%;
@@ -246,4 +230,30 @@ button::after {
   height: 90rpx;
   line-height: 90rpx;
   font-size: 33rpx;
+}
+/*picker标签*/
+.picker_label {
+  font-size: 28rpx;
+  margin: 10rpx;
+  width: 180rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid #f2f2f2;
+  padding: 5rpx;
+  text-align: center;
+  background-color: #f5f5fa;
+  box-shadow: 0px 5rpx 10px 0px rgba(165, 165, 165, 0.39);
+  float: right;
+}
+
+.picker_label_sex {
+  float: right;
+  margin: 10rpx;
+  font-size: 28rpx;
+  width: 130rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid #f2f2f2;
+  padding: 5rpx;
+  text-align: center;
+  background-color: #f5f5fa;
+  box-shadow: 0px 5rpx 10px 0px rgba(165, 165, 165, 0.39);
 }

@@ -27,6 +27,32 @@
   background-color: white;
 }
 
+.picker_label {
+  font-size: 28rpx;
+  margin: 10rpx;
+  width: 180rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid #f2f2f2;
+  padding: 5rpx;
+  text-align: center;
+  background-color: #f5f5fa;
+  box-shadow: 0px 5rpx 10px 0px rgba(165, 165, 165, 0.39);
+  float: right;
+}
+
+.picker_label_sex {
+  float: right;
+  margin: 10rpx;
+  font-size: 28rpx;
+  width: 130rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid #f2f2f2;
+  padding: 5rpx;
+  text-align: center;
+  background-color: #f5f5fa;
+  box-shadow: 0px 5rpx 10px 0px rgba(165, 165, 165, 0.39);
+}
+
 page {
   height: 100%;
 }
@@ -50,21 +76,14 @@ page {
 }
 
 .item-list {
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 94%;
   margin-left: 3%;
-  height: 180rpx;
+  min-height: 220rpx;
+  height: auto;
   margin-bottom: 20rpx;
-  
-}
-
-.item-info, .item-oper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
 }
 
 .item-info {
@@ -74,7 +93,7 @@ page {
   z-index: 2;
   background: white;
   transition: left 0.2s ease-in-out;
-   box-shadow: 3px 10rpx 20rpx 0px rgba(165, 165, 165, 0.39);
+  box-shadow: 3px 10rpx 20rpx 0px rgba(165, 165, 165, 0.39);
 }
 
 .item-list:first-child {
@@ -104,7 +123,7 @@ page {
   background-color: rgb(255, 255, 255, 0);
 }
 
-.info-labal{
+.info-labal {
   width: 50rpx;
   height: 100rpx;
   position: relative;
@@ -142,9 +161,10 @@ page {
 
 .info-content {
   font-size: 28rpx;
-  color: #999;
+  color: #333;
   margin-top: 4rpx;
-  margin-left: 50rpx;
+  margin-left: 30rpx;
+  margin-bottom: 15rpx;
 }
 
 .close {
@@ -186,6 +206,8 @@ page {
   font-weight: bold;
 }
 
+/* 弹窗 */
+
 .mask {
   width: 100%;
   height: 100%;
@@ -197,16 +219,110 @@ page {
   opacity: 0.7;
 }
 
-.form {
+.modalDlg {
   width: 550rpx;
-  height: 520rpx;
+  min-height: 730rpx;
+  height: auto;
   position: fixed;
-  top: 22%;
+  top: 15%;
   z-index: 9999;
   margin: 0rpx 100rpx 185rpx 100rpx;
   background-color: #fff;
-  border-radius: 36rpx;
+  border-radius: 25rpx;
   display: flex;
+  display: -webkit-flex;
   flex-direction: column;
   align-items: center;
+}
+
+.head {
+  width: 100%;
+  height: 200rpx;
+}
+
+.head .bg {
+  width: 100%;
+  height: 150rpx;
+  border-radius: 25rpx;
+}
+
+.head .rocket {
+  width: 160rpx;
+  height: 150rpx;
+  position: absolute;
+  top: -15rpx;
+  right: -10rpx;
+}
+
+.head .close {
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  top: -90rpx;
+  right: 0;
+}
+
+.head text {
+  position: absolute;
+  width: 61%;
+  text-align: center;
+  top: 34rpx;
+  left: 19%;
+  font-size: 34rpx;
+}
+
+.content {
+  width: 88%;
+  top: 10rpx;
+  left: 10rpx;
+}
+
+.content text {
+  color: #4f4f50;
+  font-size: 31rpx;
+}
+
+.modalDlg .btn {
+  position: absolute;
+  left: 30%;
+  bottom: 30rpx;
+  width: 40%;
+}
+
+button::after {
+  border: none;
+}
+
+.modalDlg .btn button {
+  border-radius: 90rpx;
+  background: linear-gradient(90deg, lightblue, rgb(133, 203, 226));
+  box-shadow: 0px 14rpx 42rpx 0px rgba(165, 165, 165, 0.39);
+  font-family: MicrosoftYaHei;
+  font-weight: 400;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 33rpx;
+}
+
+/* heart */
+.heart {
+  width: 100px;
+  height: 100px;
+  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  transition: background-position 1s steps(28);
+  transition-duration: 0s;
+}
+
+.is-active {
+  transition-duration: 1s;
+  background-position: -2800px 0;
+}
+
+.placement {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

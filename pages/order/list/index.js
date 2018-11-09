@@ -14,8 +14,10 @@ Page({
     winHeight: 0,
     itemData: [],
     order: [],
+    click: false,
     modalSubmitOrderHidden: false,
     modalSubmitOrderHidden1: true,
+    hasNewUserAgreementVersion: false,
   },
 
   bindChange: function(e) {
@@ -62,7 +64,6 @@ Page({
     });
 
     that.getOrder()
-    setInterval(that.getOrder, 500)
     
   },
 
@@ -84,6 +85,7 @@ Page({
           order: res.data,
           loadingHide: true,
         })
+        console.log('========res.data=========')
 
         // 隐藏加载提示
         toast.hideLoading()
@@ -94,7 +96,7 @@ Page({
   getDetail: function(e) {
     this.setData({
       modalSubmitOrderHidden: true,
-      modalSubmitOrderHidden1: false,
+      hasNewUserAgreementVersion: true,
       checkOrder: this.data.order[e.currentTarget.dataset.index]
     })
   },
@@ -102,7 +104,13 @@ Page({
   actionCloseModal: function(e) {
     this.setData({
       modalSubmitOrderHidden: false,
-      modalSubmitOrderHidden1: true,
+      checkOrder: ''
+    })
+  },
+
+  closeAgreement: function () {
+    this.setData({
+      hasNewUserAgreementVersion: false,
       checkOrder: ''
     })
   },
@@ -186,5 +194,29 @@ Page({
         console.log("request completed!");
       }
     })
-  }
+  },
+
+  onHide: function (options) {
+    clearInterval(this.data.setInter)
+  },
+
+  onShow: function (options) {
+    var setInter = setInterval(this.getOrder, 5000)
+    this.setData({
+      setInter: setInter
+    })
+  },
+
+  click: function () {
+    if (this.data.click == true) {
+      this.setData({
+        click: false
+      })
+    }
+    else {
+      this.setData({
+        click: true
+      })
+    }
+  }  
 })

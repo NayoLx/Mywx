@@ -10,9 +10,11 @@ Page({
   data: {
     toView: 'device-info',
     index: 0,
+    sex_index: 0,
     winWidth: 0,
     winHeight: 0,
     array: ['帮忙代拿', '需要代拿', '帮忙其他', '其他'],
+    sex: ['男', '女'],
     is_button_male: false,
     is_button_female: false,
     time_start: '8:00',
@@ -27,6 +29,12 @@ Page({
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index: e.detail.value
+    })
+  },
+  bindPickerChange_sex: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      sex_index: e.detail.value
     })
   },
   /**
@@ -110,24 +118,6 @@ Page({
 
   },
 
-  onChecksex: function (e) {
-    var clicktagId = e.target.dataset.id;
-    if (clicktagId == 1) {
-      this.setData({
-        is_button_male: true,
-        is_button_female: false,
-        is_sex: '男'
-      })
-    }
-    else {
-      this.setData({
-        is_button_male: false,
-        is_button_female: true,
-        is_sex: '女'
-      })
-    }
-  },
-
   onCheckadress: function (e) {
     this.setData({
       address: e.detail.value
@@ -153,24 +143,20 @@ Page({
   onSumbitOrder: function () {
     var that = this
     if (that.data.detail == '') {
- 
-    } else if (that.data.is_sex == '') {
-
+      toast.show('无法发送空白噢')
     } else {
       that.setData({
         modalSubmitOrderHidden: false,
         head1: '发布类型： ',
         contact_type: that.data.array[that.data.index],
         head2: '需求性别： ',
-        contact_sex: that.data.is_sex,
+        contact_sex: that.data.sex[that.data.sex_index],
         head3: '想说的话： ',
         contact_detail: that.data.detail,
-        head4: '具体地址： ',
-        contact_address: that.data.address,
         head5: '时间段： ',
         contact_timestart: that.data.time_start,
         contact_timeend: that.data.time_end ,
-        contact_text: '\n\n如果不填详细地址的话，表示只送楼下哦!',
+        contact_text: '\n要点之后再补充，就这样先',
       })
     }
   },
