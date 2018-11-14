@@ -77,12 +77,6 @@ Page({
     }
   },
 
-  ondetail: function() {
-    wx.navigateTo({
-      url: 'mydetail/index',
-    })
-  },
-
   onGotUserInfo: function(res) {
     if (res.detail.errMsg == "getUserInfo:ok") {
       this.setData({

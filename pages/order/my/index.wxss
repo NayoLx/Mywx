@@ -61,6 +61,7 @@ button::after {
   line-height: 90rpx;
   font-size: 33rpx;
 }
+
 .item-wrapper {
   width: 100%;
   overflow: hidden;
@@ -73,7 +74,6 @@ button::after {
   margin-bottom: 20rpx;
   min-height: 220rpx;
   height: auto;
-
 }
 
 .item-info {
@@ -83,7 +83,7 @@ button::after {
   z-index: 2;
   background: white;
   transition: left 0.2s ease-in-out;
-   box-shadow: 3px 10rpx 20rpx 0px rgba(165, 165, 165, 0.39);
+  box-shadow: 3px 10rpx 20rpx 0px rgba(165, 165, 165, 0.39);
 }
 
 .item-list:first-child {
@@ -100,7 +100,7 @@ button::after {
   height: 125rpx;
   margin-top: -10rpx;
   margin-right: -10rpx;
-  background-color: rgb(255, 255, 255, 0)
+  background-color: rgb(255, 255, 255, 0);
 }
 
 .info-wrapper {
@@ -123,7 +123,7 @@ button::after {
   font-size: 32rpx;
   color: black;
   font-weight: 600;
-    margin-left: 50rpx;
+  margin-left: 50rpx;
 }
 
 .info-desc .time {
@@ -139,7 +139,47 @@ button::after {
   margin-bottom: 15rpx;
 }
 
+.close {
+  width: 30rpx;
+  height: 30rpx;
+  float: left;
+  position: relative;
+  right: 35rpx;
+  top: 15rpx;
+}
+
+.confirm-modal-text-line {
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: row;
+}
+
+.confirm-modal-text-head {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bold;
+  width: 28%;
+}
+
+.confirm-modal-text-content {
+  font-size: 30rpx;
+  color: #333;
+  width: 72%;
+}
+
+.confirm-modal-text {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.confirm-modal-bold-text {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: bold;
+}
+
 /*弹窗*/
+
 .mask {
   width: 100%;
   height: 100%;
@@ -166,6 +206,7 @@ button::after {
   flex-direction: column;
   align-items: center;
 }
+
 .head {
   width: 100%;
   height: 200rpx;
@@ -201,15 +242,17 @@ button::after {
   left: 19%;
   font-size: 34rpx;
 }
+
 .content {
-  width: 88%;
-  top: 10rpx;
-  left: 10rpx;
+  width: 92%;
+  margin-left: 4%;
 }
+
 .content text {
-  color: #4F4F50;
-  font-size: 31rpx;
+  color: #4f4f50;
+  font-size: 29rpx;
 }
+
 .modalDlg .btn {
   position: absolute;
   left: 30%;
@@ -231,7 +274,9 @@ button::after {
   line-height: 90rpx;
   font-size: 33rpx;
 }
+
 /*picker标签*/
+
 .picker_label {
   font-size: 28rpx;
   margin: 10rpx;
@@ -256,4 +301,20 @@ button::after {
   text-align: center;
   background-color: #f5f5fa;
   box-shadow: 0px 5rpx 10px 0px rgba(165, 165, 165, 0.39);
+}
+
+.pushtime {
+  font-size: 25rpx;
+  clear: both;
+  float: right;
+  margin: 10rpx 20rpx 0 0;
+  color: #999;
+}
+
+.img_label {
+  height: 45rpx;
+  width: 15rpx;
+  position: absolute;
+  top: -5rpx;
+  left: 40rpx;
 }

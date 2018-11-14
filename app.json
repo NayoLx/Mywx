@@ -7,7 +7,8 @@
     "pages/index/mydetail/index",
     "pages/order/my/index",
     "pages/order/my/push/index",
-    "pages/order/my/mydetail/index",
+    "pages/order/my/text_detail/index",
+    "pages/order/my/text_detail/detail/index",
     "pages/order/list/index",
     "pages/order/list/listdetail/index",
     "pages/map/map"
@@ -23,26 +24,32 @@
     "list": [
       {
         "pagePath": "pages/order/express/index",
-        "iconPath": "img/icon/wx_app_local_files.png",
-        "selectedIconPath": "img/icon/wx_app_local_files@HL.png",
-        "text": "查询"
+        "iconPath": "img/icon/ic_cha.png",
+        "selectedIconPath": "img/icon/ic_cha_HL.png",
+        "text": "查个询"
       },
       {
         "pagePath": "pages/order/list/index",
-        "iconPath": "img/icon_component.png",
-        "selectedIconPath": "img/icon_component_HL.png",
-        "text": "资讯"
+        "iconPath": "img/icon/ic-search.png",
+        "selectedIconPath": "img/icon/ic-search-HL.png",
+        "text": "搜个单"
+      },
+      {
+        "pagePath": "pages/order/my/text_detail/index",
+        "iconPath": "img/icon/ic-add.png",
+        "selectedIconPath": "img/icon/ic-add.png",
+        "text": "留个言"
       },
       {
         "pagePath": "pages/order/my/index",
-        "iconPath": "img/icon_component.png",
-        "selectedIconPath": "img/icon_component_HL.png",
-        "text": "订单"
+        "iconPath": "img/icon/ic-misson.png",
+        "selectedIconPath": "img/icon/ic-misson-HL.png",
+        "text": "订个单"
       },
       {
         "pagePath": "pages/index/index",
-        "iconPath": "img/view.png",
-        "selectedIconPath": "img/view@HL.png",
+        "iconPath": "img/icon/ic-me.png",
+        "selectedIconPath": "img/icon/ic-me-HL.png",
         "text": "我的"
       }
     ]

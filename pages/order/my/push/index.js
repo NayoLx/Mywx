@@ -169,7 +169,7 @@ Page({
       data:{
         openid: openid,
         order_type: this.data.contact_type,
-        sex: this.data.is_sex,
+        sex: this.data.sex[this.data.sex_index],
         detail_text: this.data.contact_detail,
         address: this.data.contact_address,
         start_time: this.data.contact_timestart,

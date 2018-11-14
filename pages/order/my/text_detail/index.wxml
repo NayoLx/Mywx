@@ -1,0 +1,9 @@
+<!--pages/order/my/text_detail/index.wxml-->
+<view class='tar'>
+  <view class='tar-text'>文章</view>
+</view>
+
+<view class='swiper' data-id = "notive" bindtap='onJumpToTalk'>
+  <text class='swiper-title' >有啥需求的就进来嗦嗦吧{{title}}</text>
+  <!-- <image src='../../../../img/ic-bg.jpg' class='swiper-img'></image> -->
+</view>

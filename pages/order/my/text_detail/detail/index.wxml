@@ -1,0 +1,42 @@
+<!--pages/order/my/text_detail/detail/index.wxml-->
+
+<!-- title -->
+<view class='detail-title'>
+<image src="../../../../../img/ic_header.png" class='img_label'></image>
+  <text>{{textdetail.title}}</text>
+</view>
+
+<!-- head -->
+<view class='detail-head'>
+  <image src='{{textdetail.avater}}' class='detail-head-icon'></image>
+  <view class='penson'>
+    <view>{{textdetail.author}}</view>
+    <view class='penson-time'>{{textdetail.data}}</view>
+  </view>
+  <view class="heart {{click ? 'is-active' : ''}}" bindtap='click'></view>
+</view>
+
+<!-- content -->
+<view class='detail-content'>
+  <view style='width:50%;border-bottom: 1rpx solid #f2f2f2;margin: 0 auto; margin-top: 20rpx'></view>
+  <view>{{textdetail.content}}</view>
+  <view style='width:50%;border-bottom: 1rpx solid #f2f2f2;margin: 0 auto; margin-top: 20rpx'></view>
+  <image src='{{textdetail.postimg}}' class='content_img' mode='widthFix'></image>
+</view>
+
+<!-- comment -->
+<view class='detail-comment'>
+  <view style='width:50%;border-bottom: 1rpx solid #f2f2f2;margin: 0 auto; margin-top: 20rpx'></view>
+</view>
+
+<!-- bottom -->
+<view class='detail-bottom'>
+  <input placeholder='说点啥' placeholder-style='font-size: 30rpx; margin-left: 10rpx; ' focus='{{focus}}' bindtap='changeFocus' class="{{focus ? 'focusinput': 'focusinput2'}}"></input>
+  <view wx:if="{{!focus}}">
+    <image class='detail-icon' src='../../../../../img/icon/ic_talk.png'></image>
+    <text class="item-before-text-second" wx:if='{{textdetail.effect_coupon_num > 0}}'>{{textdetail.effect_coupon_num <= 999 ? textdetail.effect_coupon_num : '····'}}</text>
+  </view>
+  <view wx:else>
+    <button class='bottom-btn'>发射上去</button>
+  </view>
+</view>

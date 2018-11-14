@@ -1,0 +1,30 @@
+/* pages/order/my/text_detail/index.wxss */
+
+.swiper {
+  width: 94%;
+  margin-left: 3%;
+  height: 300rpx;
+  background-image: url(http://li.bytodream.cn/images/img/banner_3.jpg); 
+  margin-top: 15rpx;
+  background-size: 100% 400rpx;
+  border-radius: 20rpx;
+   box-shadow: 0px 15rpx 40rpx 0px rgba(165, 165, 165, 0.39);
+}
+
+
+.swiper-title {
+  padding-top: 250rpx;
+  text-align: center;
+  display: block;
+  color: white;
+  font-size: 33rpx;
+}
+
+.tar {
+  margin: 5rpx;
+}
+
+.tar-text {
+  margin: 0 20rpx;
+  font-size: 33rpx;
+}
