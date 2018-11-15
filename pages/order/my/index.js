@@ -40,7 +40,7 @@ Page({
     that.setData({
       loadingHide: false,
     })
-    
+
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
@@ -70,7 +70,7 @@ Page({
       }
     });
     that.getItemData()
-    
+
   },
 
   onJumpOrder: function() {
@@ -85,7 +85,7 @@ Page({
       startX
     })
   },
-  
+
   touchMove: function(e) { // touchmove
     let order = toast.touchMove(e, this.data.order, this.data.startX)
     order && this.setData({
@@ -103,31 +103,35 @@ Page({
 
   itemDelete: function(e) { // itemDelete
     var that = this
+    
     wx.showModal({
-      title: '确认删除？',
-      content: '是否删除该订单，会自动取消订单',
+      title: '确认取消？',
+      content: '是否取消该订单',
       success(res) {
         if (res.confirm) {
-          var setInter = setInterval(that.getItemData, 500)
-          let order = toast.deleteItem(e, that.data.order)  
           // 显示正在加载...
-          toast.showLoading() 
-          order && that.setData({
-            order
-          })
+          toast.showLoading()
+          var setInter = setInterval(that.getItemData, 500)
 
+          let order = toast.deleteItem(e, that.data.order)
+          order && that.setData({
+            order,
+            hasNewUserAgreementVersion: false,
+          })
           clearInterval(setInter)
         } else if (res.cancel) {
           console.log('用户点击取消')
         }
       }
+      //
     })
-   
+    
+
   },
 
   getItemData: function() {
     var openid = wx.getStorageSync('openid')
-    var that = this 
+    var that = this
     wx.request({
       url: Da.dataUrl + '?r=order/getallorder',
       data: {
@@ -140,30 +144,29 @@ Page({
         // 'Content-Type': 'application/json'
       },
       success: function(res) {
-        // 隐藏加载提示
-        toast.hideLoading()
-
         that.setData({
           order: res.data,
           loadingHide: true,
         })
-        console.log(that.data.order)
+        console.log('getData:5秒轮询,获取数据')
+        // 隐藏加载提示
+        toast.hideLoading()
       }
     })
   },
 
   onShow: function(options) {
     this.getItemData(this.data.currentTab)
-    var setinter = setInterval(this.getItemData, 10000)
+    var setinter = setInterval(this.getItemData, 5000)
     this.setData({
       setinter: setinter
     })
   },
-  onHide: function (options) {
+  onHide: function(options) {
     clearInterval(this.data.setinter)
   },
 
-  getDetail: function (e) {
+  getDetail: function(e) {
     this.setData({
       modalSubmitOrderHidden: false,
       hasNewUserAgreementVersion: true,
@@ -171,16 +174,47 @@ Page({
     })
   },
 
-  actionCloseModal: function (e) {
+  actionCloseModal: function(e) {
     this.setData({
       modalSubmitOrderHidden: true,
+      hasNewUserAgreementVersion: false,
       checkOrder: ''
     })
   },
-  closeAgreement: function () {
+  closeAgreement: function() {
     this.setData({
       hasNewUserAgreementVersion: false,
       checkOrder: ''
     })
-  }
+  },
+
+  /**
+   * 更改订单状态
+   */
+  actionSubmit: function(e) {
+    var status = e.target.dataset.status
+    var that = this
+
+    // 显示正在加载...
+    toast.showLoading()
+
+    wx.request({
+      url: Da.dataUrl + '?r=order/changeorder',
+      data: {
+        openid: that.data.openid,
+        status: status,
+        order_no: that.data.checkOrder.order_no
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+        // 'Content-Type': 'application/json'
+      },
+      success: function(res) {
+        console.log(res)
+        that.actionCloseModal()
+        that.getItemData()
+      }
+    })
+  },
 })

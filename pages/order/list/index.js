@@ -64,7 +64,7 @@ Page({
     });
 
     that.getOrder()
-    
+    that.getAccesstoken()
   },
 
   getOrder: function() {
@@ -103,12 +103,12 @@ Page({
 
   actionCloseModal: function(e) {
     this.setData({
-      modalSubmitOrderHidden: false,
+      hasNewUserAgreementVersion: false,
       checkOrder: ''
     })
   },
 
-  closeAgreement: function () {
+  closeAgreement: function() {
     this.setData({
       hasNewUserAgreementVersion: false,
       checkOrder: ''
@@ -160,9 +160,9 @@ Page({
 
   submitForm: function(e) {
     var self = this;
-    self.getAccesstoken()
-    var access_token = self.data.access_token;
-    
+
+    console.log(e)
+
     wx.request({
       url: Da.dataUrl + '?r=order/getwxapi',
       data: {
@@ -181,42 +181,44 @@ Page({
       },
       method: 'POST',
       header: {
-        "Content-Type": "application/x-www-form-urlencoded"
+        "Content-Type": "application/x-ndjson"
         // 'Content-Type': 'application/json'
       },
       success: function(res) {
         console.log(res)
+          self.setData({
+            hasNewUserAgreementVersion: false,
+          })
       },
       fail: function(err) {
         console.log('request fail ', err);
       },
-      complete: function(res) {
-        console.log("request completed!");
-      }
+
     })
   },
 
-  onHide: function (options) {
+  onHide: function(options) {
     clearInterval(this.data.setInter)
   },
 
-  onShow: function (options) {
+  onShow: function(options) {
     var setInter = setInterval(this.getOrder, 5000)
+    var access_token = setInterval(this.getAccesstoken,7200000)
     this.setData({
-      setInter: setInter
+      setInter: setInter,
+      access_token: access_token
     })
   },
 
-  click: function () {
+  click: function() {
     if (this.data.click == true) {
       this.setData({
         click: false
       })
-    }
-    else {
+    } else {
       this.setData({
         click: true
       })
     }
-  }  
+  }
 })

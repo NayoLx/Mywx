@@ -47,6 +47,13 @@
   width: 40%;
 }
 
+.btn_take {
+  position: fixed;
+  bottom: 210rpx;
+  left: 15%;
+  width: 80%;
+}
+
 button::after {
   border: none;
 }
@@ -60,6 +67,19 @@ button::after {
   height: 90rpx;
   line-height: 90rpx;
   font-size: 33rpx;
+}
+
+.btn_take button {
+  border-radius: 90rpx;
+  background: linear-gradient(90deg, lightblue, rgb(133, 203, 226));
+  box-shadow: 0px 14rpx 42rpx 0px rgba(165, 165, 165, 0.39);
+  font-family: MicrosoftYaHei;
+  font-weight: 400;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 33rpx;
+  float: left;
+  width: 250rpx;
 }
 
 .item-wrapper {

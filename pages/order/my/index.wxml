@@ -134,43 +134,52 @@
     <image class='rocket' src='../../../img/ic_Agreement_pic.png'></image>
     <!-- <image class='close' src='../../../img/ic_Agreement_close.png' bindtap='closeAgreement'></image> -->
   </view>
-  <view class='content'>
-    <view class="confirm-modal-text-line">
-      <text class="confirm-modal-text-head">类型：</text>
-      <text class="confirm-modal-text-content">{{checkOrder.order_type}}</text>
+  <scroll-view scroll-y='true' style='height: 400rpx;'>
+    <view class='content'>
+      <view class="confirm-modal-text-line">
+        <text class="confirm-modal-text-head">类型：</text>
+        <text class="confirm-modal-text-content">{{checkOrder.order_type}}</text>
+      </view>
+      <view class="confirm-modal-text-line">
+        <text class="confirm-modal-text-head">发起人：</text>
+        <text class="confirm-modal-text-content">{{checkOrder.user_name}}</text>
+      </view>
+      <view class="confirm-modal-text-line">
+        <text class="confirm-modal-text-head">需要性别：</text>
+        <text class="confirm-modal-text-content">{{checkOrder.sex}}    <text class="confirm-modal-text-content" wx:if='{{checkOrder.contact_building}}'>宿舍：{{checkOrder.contact_building}}</text></text>
+      </view>
+      <view class="confirm-modal-text-line">
+        <text class="confirm-modal-text-head">需求时间：</text>
+        <text class="confirm-modal-text-content">{{checkOrder.express_detail_starttime}}-{{checkOrder.express_detail_endtime}}</text>
+      </view>
+      <view class="confirm-modal-text-line">
+        <text class="confirm-modal-text-head">简要：</text>
+        <text class="confirm-modal-text-content">{{checkOrder.express_detail_text}}</text>
+      </view>
+      <view class="confirm-modal-text-line">
+        <text class="confirm-modal-text-head">发起时间：</text>
+        <text class="confirm-modal-text-content">{{checkOrder.status_wait_time}}</text>
+      </view>
+      <view class="confirm-modal-text-line">
+        <text class="close">{{express_detail_photo}}</text>
+      </view>
+      <view class="confirm-modal-text-line">
+        <text class="confirm-modal-text">1. 接单后，将会出现发起人的联系方式</text>
+      </view>
+      <view class="confirm-modal-text-line">
+        <text class="confirm-modal-text">2. 还有啥要点，之后再想</text>
+      </view>
     </view>
-    <view class="confirm-modal-text-line">
-      <text class="confirm-modal-text-head">发起人：</text>
-      <text class="confirm-modal-text-content">{{checkOrder.user_name}}</text>
-    </view>
-    <view class="confirm-modal-text-line">
-      <text class="confirm-modal-text-head">需要性别：</text>
-      <text class="confirm-modal-text-content">{{checkOrder.sex}}    <text class="confirm-modal-text-content" wx:if='{{checkOrder.contact_building}}'>宿舍：{{checkOrder.contact_building}}</text></text>
-    </view>
-    <view class="confirm-modal-text-line">
-      <text class="confirm-modal-text-head">需求时间：</text>
-      <text class="confirm-modal-text-content">{{checkOrder.express_detail_starttime}}-{{checkOrder.express_detail_endtime}}</text>
-    </view>
-    <view class="confirm-modal-text-line">
-      <text class="confirm-modal-text-head">简要：</text>
-      <text class="confirm-modal-text-content">{{checkOrder.express_detail_text}}</text>
-    </view>
-    <view class="confirm-modal-text-line">
-      <text class="confirm-modal-text-head">发起时间：</text>
-      <text class="confirm-modal-text-content">{{checkOrder.status_wait_time}}</text>
-    </view>
-    <view class="confirm-modal-text-line">
-      <text class="close">{{express_detail_photo}}</text>
-    </view>
-    <view class="confirm-modal-text-line">
-      <text class="confirm-modal-text">1. 接单后，将会出现发起人的联系方式</text>
-    </view>
-    <view class="confirm-modal-text-line">
-      <text class="confirm-modal-text">2. 还有啥要点，之后再想</text>
-    </view>
+  </scroll-view>
+  <view class='btn' wx:if="{{checkOrder.is_bind_take == 'false' && checkOrder.is_bind_done == 'false'}}">
+    <button bindtap='itemDelete' data-id='{{checkOrder.order_no}}'>取消订单</button>
   </view>
-  <view class='btn'>
-    <button wx:if='' bindtap='agreeAgreement'>确认</button>
+  <view wx:elif="{{checkOrder.is_bind_take == 'true' && checkOrder.is_bind_done == 'false'}}" class='btn_take'>
+    <button bindtap='itemDelete' style='margin-right:20rpx' data-id='{{checkOrder.order_no}}'>取消订单</button>
+    <button bindtap='actionSubmit' data-status='3'>处理中</button>
   </view>
-
+  <view wx:elif="{{checkOrder.is_bind_done == 'true'}}" class='btn_take'>
+    <button bindtap='itemDelete' style='margin-right:20rpx' data-id='{{checkOrder.order_no}}'>取消订单</button>
+    <button bindtap='actionSubmit' data-status='4'>已完成</button>
+  </view>
 </view>
