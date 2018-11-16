@@ -5,7 +5,7 @@
 </view>
 
 <view class='item-modal'>
-  <view class='item-modal-btn' bindtap='modalChoose'>绑定学号</view>
+  <button class='item-modal-btn1' bindtap='modalChoose' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">绑定学号</button>
   <view class='item-modal-btn' bindtap='onCheckName'>实名验证</view>
 </view>
 <view class='item-modal'>

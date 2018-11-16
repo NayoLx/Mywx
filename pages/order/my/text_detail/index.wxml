@@ -4,6 +4,6 @@
 </view>
 
 <view class='swiper' data-id = "notive" bindtap='onJumpToTalk'>
-  <text class='swiper-title' >有啥需求的就进来嗦嗦吧{{title}}</text>
+  <text class='swiper-title' >有啥需求的就来嗦嗦吧{{title}}</text>
   <!-- <image src='../../../../img/ic-bg.jpg' class='swiper-img'></image> -->
 </view>

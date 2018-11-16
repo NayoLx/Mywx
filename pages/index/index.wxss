@@ -76,3 +76,15 @@ button::after {
   margin-top: -20rpx;
   border: 1rpx solid #b5b5b5;
 }
+
+button::after{
+ border: none;
+}
+.item-modal-btn1 {
+  height: 70rpx;
+  line-height: 70rpx;
+  background-color: #fff;
+  text-align: left;
+  margin-left: 15rpx;
+  font-size: 39rpx;
+}

@@ -37,7 +37,7 @@ App({
                           'country': res.userInfo.country,
                           'city': res.userInfo.city,
                         })
-                        console.log('登陆成功')
+                        console.log('onlogin:登陆成功')
                         that.oncheck(res.userInfo, openIdRes.data.openid)
                       }
                     })
