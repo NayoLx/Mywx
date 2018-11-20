@@ -1,46 +1,57 @@
 <!--pages/order/my/text_detail/detail/index.wxml-->
-<view>
-  <!-- title -->
-  <view class='detail-title'>
-    <image src="../../../../../img/ic_header.png" class='img_label'></image>
-    <text>{{textdetail.title}}</text>
-  </view>
-
-  <!-- head -->
-  <view class='detail-head'>
-    <image src='{{textdetail.avater}}' class='detail-head-icon'></image>
-    <view class='penson'>
-      <view>{{textdetail.author}}</view>
-      <view class='penson-time'>{{textdetail.data}}</view>
+<view bindtap='closeFocus'>
+  <scroll-view scroll-into-view="{{toView}}" scroll-y="true" scroll-with-animation="true" style='height: {{winHeight}}px' bindscrolltolower = 'scrolltolower'>
+    <!-- title -->
+    <view class='detail-title'>
+      <image src="../../../../../img/ic_header.png" class='img_label'></image>
+      <text>{{textdetail.title}}</text>
     </view>
-    <view class="heart {{click ? 'is-active' : ''}}" bindtap='click'></view>
-  </view>
 
-  <!-- content -->
-  <view class='detail-content'>
-    <view style='width:50%;border-bottom: 1rpx solid #f2f2f2;margin: 0 auto; margin-top: 20rpx'></view>
-    <view>{{textdetail.content}}</view>
-    <view style='width:50%;border-bottom: 1rpx solid #f2f2f2;margin: 0 auto; margin-top: 20rpx'></view>
-    <image src='{{textdetail.postimg}}' class='content_img' mode='widthFix'></image>
-  </view>
+    <!-- head -->
+    <view class='detail-head'>
+      <image src='{{textdetail.avater}}' class='detail-head-icon'></image>
+      <view class='penson'>
+        <view>{{textdetail.author}}</view>
+        <view class='penson-time'>{{textdetail.data}}</view>
+      </view>
+      <view class="heart {{click ? 'is-active' : ''}}" bindtap='click'></view>
+    </view>
 
-  <!-- comment -->
-  <view class='detail-comment'>
-    <view style='width:50%;border-bottom: 1rpx solid #f2f2f2;margin: 0 auto; margin-top: 20rpx'></view>
-    <view>
-      
+    <!-- content -->
+    <view class='detail-content'>
+      <view class='line'></view>
+      <view>{{textdetail.content}}</view>
+      <view class='line'></view>
+      <image src='{{textdetail.postimg}}' class='content_img' mode='widthFix'></image>
     </view>
-  </view>
 
-  <!-- bottom -->
-  <view class='detail-bottom'>
-    <input placeholder='说点啥呗' placeholder-style='font-size: 30rpx; margin-left: 10rpx; ' focus='{{focus}}' bindtap='changeFocus' class="{{focus ? 'focusinput': 'focusinput2'}}"></input>
-    <view wx:if="{{!focus}}">
-      <image class='detail-icon' src='../../../../../img/icon/ic_talk.png'></image>
-      <text class="item-before-text-second" wx:if='{{textdetail.effect_coupon_num > 0}}'>{{textdetail.effect_coupon_num <= 999 ? textdetail.effect_coupon_num : '····'}}</text>
+    <!-- comment -->
+    <view class='detail-comment' id='comment'>
+      <view class='line'></view>
+      <block wx:for='{{talk}}'>
+        <view class='rate-list' wx:if="{{index < limit}}">
+        <image src='{{item.comment_avatar}}' class='rate-list-img'></image>
+          <view class='rate-con'>
+            <view class='rate-list-head'>{{item.comment_name}}</view>
+            <view class='rate-list-comment'>{{item.comment}}</view>
+          </view>
+          <view class='rate-list-time'>{{item.time}}</view>
+        </view>
+      </block>
     </view>
-    <view wx:else>
-      <button class='bottom-btn'>发射上去</button>
-    </view>
+
+    
+  </scroll-view>
+</view>
+
+<!-- bottom -->
+<view class='detail-bottom'>
+  <input placeholder='说点啥呗' placeholder-style='font-size: 30rpx; margin-left: 10rpx; ' focus='{{focus}}'  bindinput='onDetail' bindtap='changeFocus' class="{{focus ? 'focusinput': 'focusinput2'}}" value='{{value}}'></input>
+  <view wx:if="{{!focus}}" bindtap='onJumpComment'>
+    <image class='detail-icon' src='../../../../../img/icon/ic_talk.png'></image>
+    <text class="item-before-text-second" wx:if='{{talk.length > 0}}'>{{talk.length <= 999 ? talk.length : '····'}}</text>
+  </view>
+  <view wx:else>
+    <button class='bottom-btn' bindtap='pushComment'>发射上去</button>
   </view>
 </view>
