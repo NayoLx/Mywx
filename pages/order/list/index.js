@@ -18,6 +18,7 @@ Page({
     modalSubmitOrderHidden: false,
     modalSubmitOrderHidden1: true,
     hasNewUserAgreementVersion: false,
+    limit: 10,
   },
 
   bindChange: function(e) {
@@ -160,18 +161,15 @@ Page({
 
   submitForm: function(e) {
     var self = this;
-
-    console.log(e)
-
     wx.request({
       url: Da.dataUrl + '?r=order/getwxapi',
       data: {
         access_token: self.data.access_token,
         touser: self.data.openid,
         template_id: 'JSedyUDHIudKMBcQPVvormr28xGDYrmJ3MwjS9ma8qo',
-        form_id: e.detail.formId,
-        keyword1: '1',
-        keyword2: '2',
+        // form_id: e.detail.formId,
+        keyword1: 1,
+        keyword2: 2,
         keyword3: '3',
         keyword4: '4',
         keyword5: '5',
@@ -199,11 +197,12 @@ Page({
 
   onHide: function(options) {
     clearInterval(this.data.setInter)
+    console.log('~~~~清除轮询~~~~')
   },
 
   onShow: function(options) {
     var setInter = setInterval(this.getOrder, 5000)
-    var access_token = setInterval(this.getAccesstoken,7200000)
+    var access_token = setInterval(this.getAccesstoken, 7200000)
     this.setData({
       setInter: setInter,
       access_token: access_token
@@ -220,5 +219,20 @@ Page({
         click: true
       })
     }
-  }
+  },
+
+  //下拉刷新事件
+  scrolltolower: function () {
+    if (this.data.limit < this.data.order.length) {
+      this.loadMoreDetail()
+      console.log('下拉事件触发')
+    }
+  },
+
+  loadMoreDetail: function () {
+    var limit = this.data.limit
+    this.setData({
+      limit: limit + 10,
+    })
+  },
 })

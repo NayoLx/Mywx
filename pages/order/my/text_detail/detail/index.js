@@ -17,7 +17,7 @@ Page({
     limit: 10,
   },
 
-  getDetail: function() {
+  getDetailData: function() {
     var that = this
     var data = {
       'postimg': 'http://li.bytodream.cn/images/img/banner_3.jpg',
@@ -30,6 +30,13 @@ Page({
       'effect_coupon_num': '10',
     }
 
+    that.setData({
+      textdetail: data,
+    })
+  },
+
+  getDetail: function() {
+    var that = this
     wx.request({
       url: Da.dataUrl + '?r=comment/getcomment',
       data: {
@@ -42,9 +49,9 @@ Page({
       },
       success: function(res) {
         if (res.data.success) {
+          console.log('====页面轮询开始====')
           var talk = res.data.detail
           that.setData({
-            textdetail: data,
             talk: talk
           })
         }
@@ -137,7 +144,6 @@ Page({
    */
   onLoad: function(options) {
     var that = this
-    this.getDetail()
     wx.getSystemInfo({
       success: function(res) {
         that.setData({
@@ -145,6 +151,8 @@ Page({
         })
       },
     })
+    that.getDetail()
+    that.getDetailData()
   },
 
   //下拉刷新事件
@@ -166,22 +174,26 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
+    
+  },
 
+  onUnload: function (options) {
+    var that = this;
+    console.log('~~~~清除轮询~~~~')
+    clearInterval(that.data.setinter)
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function (options) {
     var setinter = setInterval(this.getDetail, 10000)
+    this.setData({
+      setinter: setinter
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
+ 
 
 
 })

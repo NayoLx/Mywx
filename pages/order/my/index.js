@@ -16,6 +16,7 @@ Page({
     order: [],
     modalSubmitOrderHidden: true,
     hasNewUserAgreementVersion: false,
+    limit: 10,
   },
 
   stopTouchMove: function() {
@@ -215,6 +216,21 @@ Page({
         that.actionCloseModal()
         that.getItemData()
       }
+    })
+  },
+
+  //下拉刷新事件
+  scrolltolower: function () {
+    if (this.data.limit < this.data.order.length) {
+      this.loadMoreDetail()
+      console.log('下拉事件触发')
+    }
+  },
+
+  loadMoreDetail: function () {
+    var limit = this.data.limit
+    this.setData({
+      limit: limit + 10,
     })
   },
 })

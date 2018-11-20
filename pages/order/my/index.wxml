@@ -8,10 +8,10 @@
 
   <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{winHeight - 40}}px;' bindchange='bindChange'>
     <swiper-item catchtouchmove="stopTouchMove" wx:if='{{loadingHide}}'>
-      <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight - 105}}px'>
+      <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight - 105}}px' bindscrolltolower = 'scrolltolower'>
         <view class="item-wrapper">
           <view class="item-list" wx:for="{{order}}" wx:for-item="item" wx:for-index="index" wx:key="that">
-            <view class="item-info" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchMove" bindtouchend="touchEnd" style="left:{{item.left + 'rpx'}}" bindtap='getDetail'>
+            <view class="item-info" wx:if="{{index < limit}}" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchMove" bindtouchend="touchEnd" style="left:{{item.left + 'rpx'}}" bindtap='getDetail'>
               <view class="info-wrapper">
                 <view class="info-desc">
                   <image src="{{item.status == 1 ? '../../../img/ic_header.png' : '../../../img/ic_header_blue.png'}}" class='img_label'></image>
@@ -32,10 +32,10 @@
     </swiper-item>
 
     <swiper-item catchtouchmove="stopTouchMove" wx:if='{{loadingHide}}'>
-      <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight - 105}}px'>
+      <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight - 105}}px' bindscrolltolower = 'scrolltolower'>
         <view class="item-wrapper">
           <view class="item-list" wx:for="{{order}}" wx:for-item="item" wx:for-index="index" wx:key="that">
-            <view class="item-info" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchMove" bindtouchend="touchEnd" style="left:{{item.left + 'rpx'}}" bindtap='getDetail'>
+            <view class="item-info" wx:if="{{index < limit}}" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchMove" bindtouchend="touchEnd" style="left:{{item.left + 'rpx'}}" bindtap='getDetail'>
               <view class="info-wrapper">
                 <view class="info-desc">
                   <image src="{{item.status == 1 ? '../../../img/ic_header.png' : '../../../img/ic_header_blue.png'}}" class='img_label'></image>
@@ -56,10 +56,10 @@
     </swiper-item>
 
     <swiper-item catchtouchmove="stopTouchMove" wx:if='{{loadingHide}}'>
-      <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight - 105}}px'>
+      <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight - 105}}px' bindscrolltolower = 'scrolltolower'>
         <view class="item-wrapper">
           <view class="item-list" wx:for="{{order}}" wx:for-item="item" wx:for-index="index" wx:key="that">
-            <view class="item-info" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchMove" bindtouchend="touchEnd" style="left:{{item.left + 'rpx'}}" bindtap='getDetail'>
+            <view class="item-info" wx:if="{{index < limit}}" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchMove" bindtouchend="touchEnd" style="left:{{item.left + 'rpx'}}" bindtap='getDetail'>
               <view class="info-wrapper">
                 <view class="info-desc">
                   <image src="{{item.status == 1 ? '../../../img/ic_header.png' : '../../../img/ic_header_blue.png'}}" class='img_label'></image>

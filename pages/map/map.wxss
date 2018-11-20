@@ -58,7 +58,7 @@ button::after {
   left: 0;
   background: #000;
   z-index: 9000;
-  opacity: 0.7;
+  opacity: 0.3;
 }
 
 .modalDlg {

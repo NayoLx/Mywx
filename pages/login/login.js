@@ -76,14 +76,14 @@ Page({
         console.log(res.data)
         if (res.data.state) {
           that.setStor()
-          wx.switchTab({
-            url: '../scgedular/scgedular',
+          wx.navigateBack({
+            delta: 1,
             success: function (e) {
               var page = getCurrentPages().pop();
               if (page == undefined || page == null) return;
               page.onLoad();
             } 
-          }) 
+          })
         }
         else {
           Public.show("登录失败，账号或密码错误！");
