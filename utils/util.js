@@ -111,6 +111,22 @@ function deleteItem(e, dataList) { // 删除功能
   return dataList
 }
 
+function show(text) {
+  wx.showToast({
+    title: text,
+    icon: 'none',
+    duration: 2000
+  })
+}
+
+function timeShow(text, time) {
+  wx.showToast({
+    title: text,
+    icon: 'none',
+    duration: time
+  })
+}
+
 
 module.exports = {
   formatTime: formatTime,
@@ -123,4 +139,6 @@ module.exports = {
   touchMove: touchMove,
   touchEnd: touchEnd,
   deleteItem: deleteItem,
+  show: show,
+  timeShow: timeShow,
 }

@@ -139,9 +139,14 @@ Page({
         // 'Content-Type': 'application/json'
       },
       success: function(res) {
-        console.log(res)
-        that.actionCloseModal()
-        that.getOrder()
+        console.log(res.data.success)
+        if (res.data.success != true) {
+          toast.show('接单失败')
+        } else {
+          that.actionCloseModal()
+          that.getOrder()
+          toast.show('已接单')
+        }
       }
     })
   },
@@ -167,26 +172,28 @@ Page({
         access_token: self.data.access_token,
         touser: self.data.openid,
         template_id: 'JSedyUDHIudKMBcQPVvormr28xGDYrmJ3MwjS9ma8qo',
-        // form_id: e.detail.formId,
-        keyword1: 1,
-        keyword2: 2,
-        keyword3: '3',
-        keyword4: '4',
-        keyword5: '5',
-        keyword6: '6',
-        keyword7: '7',
-        keyword8: '8',
+        page: 'pages/order/my/index',
+        form_id: e.detail.formId,
+        keyword1: self.data.checkOrder.order_no,
+        keyword6: self.data.checkOrder.status_wait_time,
+        keyword7: self.data.checkOrder.user_name,
+        user_stunum: self.data.checkOrder.user_stunum,
       },
       method: 'POST',
       header: {
-        "Content-Type": "application/x-ndjson"
+        "Content-Type": "application/x-www-form-urlencoded"
         // 'Content-Type': 'application/json'
       },
       success: function(res) {
         console.log(res)
-          self.setData({
-            hasNewUserAgreementVersion: false,
-          })
+        if (res.data.msg.errmsg != 'ok') {
+          self.getAccesstoken()
+          toast.show('Accesstoken失效，现已重新获取，麻烦再点击一次')
+        }
+        self.actionSubmit()
+        self.setData({
+          hasNewUserAgreementVersion: false,
+        })
       },
       fail: function(err) {
         console.log('request fail ', err);
@@ -197,15 +204,14 @@ Page({
 
   onHide: function(options) {
     clearInterval(this.data.setInter)
+    clearInterval(this.data.access_token)
     console.log('~~~~清除轮询~~~~')
   },
 
   onShow: function(options) {
     var setInter = setInterval(this.getOrder, 5000)
-    var access_token = setInterval(this.getAccesstoken, 7200000)
     this.setData({
       setInter: setInter,
-      access_token: access_token
     })
   },
 
@@ -222,14 +228,14 @@ Page({
   },
 
   //下拉刷新事件
-  scrolltolower: function () {
+  scrolltolower: function() {
     if (this.data.limit < this.data.order.length) {
       this.loadMoreDetail()
       console.log('下拉事件触发')
     }
   },
 
-  loadMoreDetail: function () {
+  loadMoreDetail: function() {
     var limit = this.data.limit
     this.setData({
       limit: limit + 10,
