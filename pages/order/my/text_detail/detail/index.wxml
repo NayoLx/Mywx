@@ -1,6 +1,6 @@
 <!--pages/order/my/text_detail/detail/index.wxml-->
 <view bindtap='closeFocus'>
-  <scroll-view scroll-into-view="{{toView}}" scroll-y="true" scroll-with-animation="true" style='height: {{winHeight}}px' bindscrolltolower = 'scrolltolower'>
+  <scroll-view scroll-into-view="{{toView}}" scroll-y="true" scroll-with-animation="true" style='height: {{winHeight}}px' bindscrolltolower='scrolltolower'>
     <!-- title -->
     <view class='detail-title'>
       <image src="../../../../../img/ic_header.png" class='img_label'></image>
@@ -14,7 +14,9 @@
         <view>{{textdetail.author}}</view>
         <view class='penson-time'>{{textdetail.data}}</view>
       </view>
-      <view class="heart {{click ? 'is-active' : ''}}" bindtap='click'></view>
+      <form class='content' bindsubmit="submitForm" report-submit="true">
+        <button formType="submit" class='btnfrom' bindtap='click'><view class="heart {{click ? 'is-active' : ''}}" ></view></button>
+      </form> 
     </view>
 
     <!-- content -->
@@ -30,7 +32,7 @@
       <view class='line'></view>
       <block wx:for='{{talk}}'>
         <view class='rate-list' wx:if="{{index < limit}}">
-        <image src='{{item.comment_avatar}}' class='rate-list-img'></image>
+          <image src='{{item.comment_avatar}}' class='rate-list-img'></image>
           <view class='rate-con'>
             <view class='rate-list-head'>{{item.comment_name}}</view>
             <view class='rate-list-comment'>{{item.comment}}</view>
@@ -40,13 +42,13 @@
       </block>
     </view>
 
-    
+
   </scroll-view>
 </view>
 
 <!-- bottom -->
 <view class='detail-bottom'>
-  <input placeholder='说点啥呗' placeholder-style='font-size: 30rpx; margin-left: 10rpx; ' focus='{{focus}}'  bindinput='onDetail' bindtap='changeFocus' class="{{focus ? 'focusinput': 'focusinput2'}}" value='{{value}}'></input>
+  <input placeholder='说点啥呗' placeholder-style='font-size: 30rpx; margin-left: 10rpx; ' focus='{{focus}}' bindinput='onDetail' bindtap='changeFocus' class="{{focus ? 'focusinput': 'focusinput2'}}" value='{{value}}'></input>
   <view wx:if="{{!focus}}" bindtap='onJumpComment'>
     <image class='detail-icon' src='../../../../../img/icon/ic_talk.png'></image>
     <text class="item-before-text-second" wx:if='{{talk.length > 0}}'>{{talk.length <= 999 ? talk.length : '····'}}</text>

@@ -153,6 +153,7 @@ Page({
     })
     that.getDetail()
     that.getDetailData()
+    that.getAccesstoken()
   },
 
   //下拉刷新事件
@@ -192,8 +193,56 @@ Page({
       setinter: setinter
     })
   },
+  
+  submitForm: function (e) {
+    var self = this;
+    var openid = wx.getStorageSync('openid')
+    
+    wx.request({
+      url: Da.dataUrl + '?r=comment/getcommentapi',
+      data: {
+        access_token: self.data.access_token,
+        touser: openid,
+        template_id: 'MLdiehnX6fiwopIBMe7SLkNoGEFm5OiMsao76dB2_tU',
+        page: 'pages/order/my/text_detail/detail/index',
+        form_id: e.detail.formId,
+        keyword1: '您的文章被点赞了',
+        keyword4: '点击进入小程序查看',
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+        // 'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        console.log(res)
+        if (res.data.msg.errmsg != 'ok') {
+          self.getAccesstoken()
+          toast.show('Accesstoken失效，现已重新获取，麻烦再点击一次')
+        }
+        self.setData({
+          hasNewUserAgreementVersion: false,
+        })
+      },
+      fail: function (err) {
+        console.log('request fail ', err);
+      },
 
- 
+    })
+  },
+
+  getAccesstoken: function () {
+    var that = this
+    wx.request({
+      url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx1e5e51581c102b66&secret=b1cef0526d4c19b2261a0e33fee62e41',
+      success: function (res) {
+        that.setData({
+          access_token: res.data.access_token
+        })
+        console.log(res.data)
+      }
+    })
+  },
 
 
 })

@@ -185,7 +185,7 @@ Page({
         // 'Content-Type': 'application/json'
       },
       success: function(res) {
-        console.log(res)
+        console.log(res.data.msg.errmsg)
         if (res.data.msg.errmsg != 'ok') {
           self.getAccesstoken()
           toast.show('Accesstoken失效，现已重新获取，麻烦再点击一次')

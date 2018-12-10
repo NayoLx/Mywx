@@ -136,7 +136,19 @@
   transition-duration: 0s;
   float: right;
   margin-top: -60rpx;
-  margin-right: 10rpx;
+  margin-left: 10rpx;
+}
+
+.btnfrom {
+  width: 180rpx;
+  height: 100rpx;
+  background-color: #fff;
+  margin-right:-40rpx;
+
+}
+
+.btnfrom::after{
+  border: none;
 }
 
 .is-active {
