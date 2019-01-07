@@ -197,7 +197,7 @@ Page({
   submitForm: function (e) {
     var self = this;
     var openid = wx.getStorageSync('openid')
-    
+
     wx.request({
       url: Da.dataUrl + '?r=comment/getcommentapi',
       data: {
@@ -220,9 +220,6 @@ Page({
           self.getAccesstoken()
           toast.show('Accesstoken失效，现已重新获取，麻烦再点击一次')
         }
-        self.setData({
-          hasNewUserAgreementVersion: false,
-        })
       },
       fail: function (err) {
         console.log('request fail ', err);

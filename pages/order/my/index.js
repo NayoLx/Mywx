@@ -133,6 +133,11 @@ Page({
   getItemData: function() {
     var openid = wx.getStorageSync('openid')
     var that = this
+    if (openid == '' || openid == undefined) {
+      toast.show('登陆失败，请重新登陆')
+      return;
+    }
+    
     wx.request({
       url: Da.dataUrl + '?r=order/getallorder',
       data: {

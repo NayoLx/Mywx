@@ -46,7 +46,6 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
-    var openid = wx.getStorageSync('openid')
 
     // 显示正在加载...
     toast.showLoading()
@@ -57,7 +56,6 @@ Page({
     wx.getSystemInfo({
       success: function(res) {
         that.setData({
-          openid: openid,
           winWidth: res.windowWidth,
           winHeight: res.windowHeight
         });
@@ -69,11 +67,18 @@ Page({
   },
 
   getOrder: function() {
+    var openid = wx.getStorageSync('openid')
     var that = this
+
+    if (openid == '' || openid == undefined) {
+      toast.show('登陆失败，请重新登陆')
+      return;
+    }
+
     wx.request({
       url: Da.dataUrl + '?r=order/getallorder',
       data: {
-        openid: that.data.openid,
+        openid: openid,
         status: 10,
       },
       method: 'POST',

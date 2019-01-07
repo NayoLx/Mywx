@@ -112,16 +112,16 @@
 }
 
 .detail-content {
-  width: 94%;
   font-size: 31rpx;
-  margin: 40rpx 0 0 3%;
   line-height: 60rpx;
   margin-bottom: 50rpx;
+  padding: 0 40rpx;
 }
 
 .content_img {
-  width: 95%;
-  margin: 30rpx 0 0 2.5%;
+  width: 100%;
+  margin-top: 30rpx;
+  border-radius: 30rpx;
 }
 
 /* heart */
