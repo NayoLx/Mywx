@@ -1,0 +1,24 @@
+<!--pages/chat/websocket/index.wxml-->
+<view>
+  <scroll-view scroll-y style='height:{{winHeight-45}}px' scroll-top="{{scrollTop}}">
+  <view class='show-area'>
+    <block wx:for='{{chatmsg}}' wx:key='{{index}}'>
+      <view class='left-area' wx:if="{{item.name != home.nickName}}">
+        <image class='head_area' src='{{item.avatarUrl}}'></image>
+        <view class='name-area'>{{item.name}}</view>
+        <view class='box u-tri'>{{item.message}}</view>
+      </view>
+      <view class='right-area' wx:if="{{item.name == home.nickName}}">
+        <image class='r-head_area' src='{{home.avatarUrl}}'></image>
+        <view class='name-area'>{{item.name}}</view>
+        <view class='r-box r-u-tri' >{{item.message}}</view>
+      </view>
+    </block>
+  </view>
+  </scroll-view>
+  
+</view>
+<view class='detail-bottom'>
+    <input placeholder='说点啥呗' bindinput='bindinputvalue' class="focusinput" value='{{value}}'></input>
+    <button class='bottom-btn' bindtap='sendMessage'> 发 送 </button>
+  </view>
