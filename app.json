@@ -12,7 +12,7 @@
     "pages/order/list/index",
     "pages/order/list/listdetail/index",
     "pages/map/map",
-    "pages/chat/websocket/index"
+    "pages/chat/socketio/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

@@ -101,7 +101,6 @@ Page({
       home: res
     })
     if (this.data.home != '') {
-      wx.removeStorageSync('home')
       wx.removeStorageSync('check')
     }
   },
@@ -169,10 +168,16 @@ Page({
 
   onCheckCard:function() {
     var that = this
+    if (this.data.home.openid){
+      var openid = this.data.home.openid
+    }
+    else {
+      var openid = wx.getStorageSync('openid')
+    }
     wx.request({
       url: 'http://localhost:8080/basic/web/index.php?r=my/isidcard',
       data: {
-        openid: this.data.home.openid,
+        openid: openid,
         idcard: this.data.idcard,
         name: this.data.name
       },
@@ -264,7 +269,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    wx.removeStorageSync('home')
   },
   /**
    * 随机数生成

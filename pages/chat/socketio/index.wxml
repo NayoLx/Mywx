@@ -1,4 +1,5 @@
-<!--pages/chat/websocket/index.wxml-->
+<!--pages/chat/socketio/index.wxml-->
+
 <view>
   <scroll-view scroll-y style='height:{{winHeight-45}}px' scroll-top="{{scrollTop}}">
   <view class='show-area'>
@@ -19,6 +20,6 @@
   
 </view>
 <view class='detail-bottom'>
-    <input placeholder='说点啥呗' bindinput='bindinputvalue' class="focusinput" value='{{value}}'></input>
+    <input placeholder='说点啥呗' bindinput='getMessage' class="focusinput" value='{{sendmsg}}'></input>
     <button class='bottom-btn' bindtap='sendMessage'> 发 送 </button>
   </view>

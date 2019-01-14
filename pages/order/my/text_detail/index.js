@@ -15,6 +15,18 @@ Page({
     })
   },
 
+  onJumpToChatroom:function(e) {
+    wx.navigateTo({
+      url: '../../../chat/websocket/index',
+    })
+  },
+
+  onJumpToSocketIo: function (e) {
+    wx.navigateTo({
+      url: '../../../chat/socketio/index',
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
