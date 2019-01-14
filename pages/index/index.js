@@ -231,21 +231,21 @@ Page({
       // 隐藏正在加载...
       toast.hideLoading()
       Public.show('账号密码输入错误')
-    } else if (utils.isEmpty(this.data.phone)) {
+    } else if (utils.isEmpty(that.data.phone)) {
       Public.show('请输入号码')
-    } else if (this.data.code != this.data.codenum) {
+    } else if (that.data.code != that.data.codenum) {
       Public.show('请输入正确的验证码')
-    } else if (!utils.isMobile(this.data.phone)) {
+    } else if (!utils.isMobile(that.data.phone)) {
       Public.show('请输入正确的手机号码')
     } else {
       wx.request({
         url: 'http://localhost:8080/basic/web/index.php?r=my/savebinddetail',
         data: {
-          openid: this.data.home.openid,
-          usernumber: this.data.usernumber,
-          password: this.data.password,
-          phone: this.data.phone,
-          is_bind: this.data.checkText,
+          openid: that.data.home.openid,
+          usernumber: that.data.usernumber,
+          password: that.data.password,
+          phone: that.data.phone,
+          is_bind: that.data.checkText,
         },
         header: {
           "Content-Type": "application/x-www-form-urlencoded"

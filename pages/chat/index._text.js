@@ -2,6 +2,9 @@
 var wsurl = 'ws://192.168.43.167:2345';
 var i = 0;
 var socketOpen = false;
+import { Cache } from '../../js/Cache.js';
+import { WechatApi } from '../../js/WechatApi.js';
+var Public = require("../../js/Public.js");
 
 Page({
 
@@ -28,6 +31,10 @@ Page({
       key: keyv
     });
     
+    new WechatApi().getUserInfo(function(res){
+      Public.Logs(res);
+      that.setData({ userInfo: res});
+    })
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -41,43 +48,45 @@ Page({
   StartSocket(object){
     var that = object;
     var socketMsgQueue = []
-
-    if (!socketOpen) {}
     //创建连接
     wx.connectSocket({
       url: wsurl,
       success: function (res) {
-        console.log("连接成功");
+        Public.Log("连接成功");
+        Public.Logs(res);
       },
       fail: function (res) {
-        console.log("连接失败");
+        Public.Log("连接失败");
+        Public.Logs(res);
       }
     });
     //打开连接
     wx.onSocketOpen(function (res) {
-      console.log("连接成功")
-
+      Public.Log("连接成功")
+      Public.Logs(res)
       socketOpen = true
       for (let i = 0; i < socketMsgQueue.length; i++) {
         sendSocketMessage(socketMsgQueue[i])
       }
       socketMsgQueue = []
     });
-
     //连接失败
     wx.onSocketError(function (res) {
-      console.log("连接失败");
+      Public.Log("连接失败");
+      Public.Logs(res);
       socketOpen = false;
     });
     //连接关闭
     wx.onSocketClose(function (res) {
-      console.log("连接关闭");
+      Public.Log("连接关闭");
+      Public.Logs(res);
       socketOpen = false;
     })
     //接收消息
     wx.onSocketMessage(function (res) {
       var data = JSON.parse(res.data);
-      console.log("收到服务器内容");
+      Public.Log("收到服务器内容");
+      Public.Logs(res);
 
       if (data.type != 'system' && data.name != null) {
         var newdata = new Array();
@@ -94,13 +103,19 @@ Page({
             scrollTop: (that.data.winHeight - 50) * (that.data.chatmsg.length+1)
           })
         }
-        console.log(that.data.chatmsg)
+        Public.Log(that.data.chatmsg)
+        new Cache("chat", that.data.chatmsg);
       }
     })
   },
   onShow(){
     var that = this;
-    
+    var chatC = new Cache().get("chat").data.chat;
+    if (chatC != undefined) {
+      that.setData({
+        chatmsg: chatC
+      });
+    }
     that.StartSocket(that);
   },
   //获取文本框值
@@ -127,7 +142,8 @@ Page({
         wx.sendSocketMessage({
           data: JSON.stringify(msg),
         })
-        console.log("发送消息");
+        Public.Log("发送消息");
+        Public.Logs(msg);
         that.cleanMessage()
       }
     }

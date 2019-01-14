@@ -21,7 +21,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this;
     var keyv = Math.round(Math.random() * 0xFFFFFF).toString();
 
@@ -31,7 +31,7 @@ Page({
     });
 
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         that.setData({
           winWidth: res.windowWidth,
           winHeight: res.windowHeight
@@ -44,59 +44,61 @@ Page({
     var that = object;
     var socketMsgQueue = []
     //创建连接
-    wx.connectSocket({
-      url: wsurl,
-      success: function (res) {
-        console.log("连接成功");
-      },
-      fail: function (res) {
-        console.log("连接失败");
-      }
-    });
-    //打开连接
-    wx.onSocketOpen(function (res) {
-      console.log("连接成功")
-
-      socketOpen = true
-      for (let i = 0; i < socketMsgQueue.length; i++) {
-        sendSocketMessage(socketMsgQueue[i])
-      }
-      socketMsgQueue = []
-    });
-
-    //连接失败
-    wx.onSocketError(function (res) {
-      console.log("连接失败");
-      socketOpen = false;
-    });
-    //连接关闭
-    wx.onSocketClose(function (res) {
-      console.log("连接关闭");
-      socketOpen = false;
-    })
-    //接收消息
-    wx.onSocketMessage(function (res) {
-      var data = JSON.parse(res.data);
-      console.log("收到服务器内容");
-
-      if (data.type != 'system' && data.name != null) {
-        var newdata = new Array();
-        if (that.data.chatmsg.length == 0) {
-          newdata.push(data);
-          var len = that.data.chatmsg.length
-          that.setData({
-            chatmsg: newdata,
-            scrollTop: (that.data.winHeight - 50) * len
-          })
-        } else {
-          that.setData({
-            chatmsg: that.data.chatmsg.concat(data),
-            scrollTop: (that.data.winHeight - 50) * (that.data.chatmsg.length + 1)
-          })
+    // if (!socketOpen) {
+      wx.connectSocket({
+        url: wsurl,
+        success: function(res) {
+          console.log("onconnect => 连接成功");
+        },
+        fail: function(res) {
+          console.log("onconnect => 连接失败");
         }
-        console.log(that.data.chatmsg)
-      }
-    })
+      });
+      //打开连接
+      wx.onSocketOpen(function(res) {
+        console.log("onopen => 连接成功")
+
+        socketOpen = true
+        for (let i = 0; i < socketMsgQueue.length; i++) {
+          sendSocketMessage(socketMsgQueue[i])
+        }
+        socketMsgQueue = []
+      });
+
+      //连接失败
+      wx.onSocketError(function(res) {
+        console.log("onError => 连接失败");
+        socketOpen = false;
+      });
+      //连接关闭
+      wx.onSocketClose(function(res) {
+        console.log("onclose => 连接关闭");
+        socketOpen = false;
+      })
+      //接收消息
+      wx.onSocketMessage(function(res) {
+        var data = JSON.parse(res.data);
+        console.log("onMessage => 收到服务器内容");
+
+        if (data.type != 'system' && data.name != null) {
+          var newdata = new Array();
+          if (that.data.chatmsg.length == 0) {
+            newdata.push(data);
+            var len = that.data.chatmsg.length
+            that.setData({
+              chatmsg: newdata,
+              scrollTop: (that.data.winHeight - 50) * len
+            })
+          } else {
+            that.setData({
+              chatmsg: that.data.chatmsg.concat(data),
+              scrollTop: (that.data.winHeight - 50) * (that.data.chatmsg.length + 1)
+            })
+          }
+          console.log(that.data.chatmsg)
+        }
+      })
+    // }
   },
   onShow() {
     var that = this;
@@ -104,12 +106,12 @@ Page({
     that.StartSocket(that);
   },
   //获取文本框值
-  getMessage: function (e) {
+  getMessage: function(e) {
     this.setData({
       sendmsg: e.detail.value,
     })
   },
-  cleanMessage: function () {
+  cleanMessage: function() {
     this.setData({
       sendmsg: "",
     })
@@ -132,5 +134,13 @@ Page({
         that.cleanMessage()
       }
     }
+  },
+  onUnload: function() {
+    // if (socketOpen) {
+    //   wx.closeSocket(function(res) {
+    //     console.log("close => 关闭连接");
+    //     socketOpen = false
+    //   })
+    // }
   }
 })
