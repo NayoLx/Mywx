@@ -30,7 +30,7 @@
     <!-- comment -->
     <view class='detail-comment' id='comment'>
       <view class='line'></view>
-      <block wx:for='{{talk}}'>
+      <block wx:for='{{talk}}' wx:key='index'>
         <view class='rate-list' wx:if="{{index < limit}}">
           <image src='{{item.comment_avatar}}' class='rate-list-img'></image>
           <view class='rate-con'>

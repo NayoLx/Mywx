@@ -1,6 +1,7 @@
 // pages/order/my/push/index.js
 var toast = require('../../../../utils/pubic.js');
 var Da = require("../../../../utils/fun.js");
+var openid = '';
 
 Page({
 
@@ -42,6 +43,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    openid = wx.getStorageSync('openid')
+    
     wx.getSystemInfo({
       success: function (res) {
         console.log(res)
@@ -162,7 +165,7 @@ Page({
   },
 
   actionSubmit: function () {
-    var openid = wx.getStorageSync('openid')
+    
     var that = this
     wx.request({
       url: Da.dataUrl + '?r=order/saveorderdetail',

@@ -48,10 +48,10 @@ Page({
       wx.connectSocket({
         url: wsurl,
         success: function(res) {
-          console.log("onconnect => 连接成功");
+          console.log("onconnect => 连接成功" + res);
         },
         fail: function(res) {
-          console.log("onconnect => 连接失败");
+          console.log("onconnect => 连接失败" + res);
         }
       });
       //打开连接
@@ -67,18 +67,18 @@ Page({
 
       //连接失败
       wx.onSocketError(function(res) {
-        console.log("onError => 连接失败");
+        console.log("onError => 连接失败" + res);
         socketOpen = false;
       });
       //连接关闭
       wx.onSocketClose(function(res) {
-        console.log("onclose => 连接关闭");
+        console.log("onclose => 连接关闭" + res);
         socketOpen = false;
       })
       //接收消息
       wx.onSocketMessage(function(res) {
         var data = JSON.parse(res.data);
-        console.log("onMessage => 收到服务器内容");
+        console.log("onMessage => 收到服务器内容" + JSON.stringify(res));
 
         if (data.type != 'system' && data.name != null) {
           var newdata = new Array();

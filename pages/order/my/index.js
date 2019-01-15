@@ -243,7 +243,7 @@ Page({
     wx.request({
       url: Da.dataUrl + '?r=order/changeorder',
       data: {
-        openid: that.data.openid,
+        openid: openid,
         status: status,
         order_no: that.data.checkOrder.order_no
       },

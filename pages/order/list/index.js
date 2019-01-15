@@ -168,7 +168,7 @@ Page({
     wx.request({
       url: Da.dataUrl + '?r=order/changeorder',
       data: {
-        openid: that.data.openid,
+        openid: openid,
         status: status,
         order_no: that.data.checkOrder.order_no
       },
@@ -209,7 +209,7 @@ Page({
       url: Da.dataUrl + '?r=order/getwxapi',
       data: {
         access_token: self.data.access_token,
-        touser: self.data.openid,
+        touser: openid,
         template_id: 'JSedyUDHIudKMBcQPVvormr28xGDYrmJ3MwjS9ma8qo',
         page: 'pages/order/my/index',
         form_id: e.detail.formId,
