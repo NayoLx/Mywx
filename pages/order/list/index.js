@@ -1,6 +1,7 @@
 // pages/order/list/index.js
 var toast = require('../../../utils/util.js');
 var Da = require("../../../utils/fun.js");
+var openid = '';
 
 Page({
 
@@ -46,10 +47,13 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
-
+    if (wx.getStorageSync('openid')) {
+      openid = wx.getStorageSync('openid')
+      that.getBind()
+    }
     // 显示正在加载...
     toast.showLoading()
-
+    
     /**
      * 获取系统信息
      */
@@ -61,20 +65,50 @@ Page({
         });
       }
     });
+    setTimeout(function(){
+      that.getOrder()
+      that.getAccesstoken()
+    }, 1200)
+  },
 
-    that.getOrder()
-    that.getAccesstoken()
+  getBind: function() {
+    var that = this
+    wx.request({
+      url: 'http://localhost:8080/basic/web/index.php?r=my/homecheck',
+      data: {
+        openid: openid,
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+        // 'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      success: function(res) {
+        console.log(res)
+        if (res.data.success) {
+          that.setData({
+            is_bind: res.data.is_bind,
+            is_idcard_check: res.data.is_idcard_check
+          })
+        } else {
+          console.log('获取绑定有误')
+        }
+      },
+      fail: function(res) {
+        console.log('error')
+      },
+    })
   },
 
   getOrder: function() {
-    var openid = wx.getStorageSync('openid')
     var that = this
-
-    if (openid == '' || openid == undefined) {
-      toast.show('登陆失败，请重新登陆')
+    if (!that.data.is_bind) {
+      toast.show('未绑定学号')
+      return;
+    } else if (!that.data.is_idcard_check) {
+      toast.show('未绑定身份证')
       return;
     }
-
     wx.request({
       url: Da.dataUrl + '?r=order/getallorder',
       data: {

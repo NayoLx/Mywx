@@ -188,7 +188,6 @@ Page({
 
   onCheckCard: function() {
     var that = this
-
     wx.request({
       url: 'http://localhost:8080/basic/web/index.php?r=my/isidcard',
       data: {
@@ -243,7 +242,6 @@ Page({
     toast.showLoading()
 
     if (this.data.checkText == 'false') {
-
       // 隐藏正在加载...
       toast.hideLoading()
       Public.show('账号密码输入错误')
@@ -261,7 +259,7 @@ Page({
           usernumber: that.data.usernumber,
           password: that.data.password,
           phone: that.data.phone,
-          is_bind: that.data.checkText,
+          is_bind: true,
         },
         header: {
           "Content-Type": "application/x-www-form-urlencoded"
@@ -269,13 +267,14 @@ Page({
         },
         method: 'POST',
         success: function(res) {
-          console.log(res.statusCode)
-          Public.show('绑定成功')
-          that.setData({
-            is_bind: true
-          })
-          wx.setStorageSync('id', [that.data.usernumber, that.data.password])
-          that.actionCancel()
+          if (res.data.success) {
+            Public.show('绑定成功')
+            that.setData({
+              is_bind: true
+            })
+            wx.setStorageSync('id', [that.data.usernumber, that.data.password])
+            that.actionCancel()
+          }
         },
         fail: function(res) {
           console.log('error')

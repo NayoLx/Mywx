@@ -1,6 +1,7 @@
 // pages/order/my/index.js
 var toast = require('../../../utils/util.js');
 var Da = require("../../../utils/fun.js");
+var openid = '';
 
 Page({
 
@@ -57,8 +58,12 @@ Page({
   onLoad: function(options) {
     // 显示正在加载...
     toast.showLoading()
-
     var that = this;
+    if (wx.getStorageSync('openid')) {
+      openid = wx.getStorageSync('openid')
+      that.getBind()
+    }
+    
     /**
      * 获取系统信息
      */
@@ -70,8 +75,39 @@ Page({
         });
       }
     });
-    that.getItemData()
 
+    setTimeout(function(){
+      that.getItemData()
+    }, 1200)
+  },
+
+  getBind: function(){
+    var that = this
+    wx.request({
+      url: 'http://localhost:8080/basic/web/index.php?r=my/homecheck',
+      data: {
+        openid: openid,
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+        // 'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res)
+        if (res.data.success) {
+          that.setData({
+            is_bind: res.data.is_bind,
+            is_idcard_check: res.data.is_idcard_check
+          })
+        } else {
+          console.log('获取绑定有误')
+        }
+      },
+      fail: function (res) {
+        console.log('error')
+      },
+    })
   },
 
   onJumpOrder: function() {
