@@ -36,6 +36,9 @@ App({
                           'avatarUrl': res.userInfo.avatarUrl,
                           'country': res.userInfo.country,
                           'city': res.userInfo.city,
+                          'gender': res.userInfo.gender,
+                          'province': res.userInfo.province,
+                          'language': res.userInfo.language
                         })
                         console.log('onlogin:登陆成功')
                         that.oncheck(res.userInfo, openIdRes.data.openid)

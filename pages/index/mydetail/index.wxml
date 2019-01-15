@@ -14,7 +14,7 @@
     <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{winHeight - 60}}px' bindchange="bindChange">
       <!-- pensonal -->
       <swiper-item>
-      <block wx:for='{{person}}'>
+      <block wx:for='{{person}}' wx:key='index'>
         <view class='table' style='height:{{winHeight - 90}}px'>
           <view class='tr'>
             <view class='th'>学号</view>
@@ -67,12 +67,12 @@
       <!-- course -->
       <swiper-item>
         <view class='cell-all' style='height:{{winHeight - 90}}px'>
-          <block wx:for="{{obligatory}}">
+          <block wx:for="{{obligatory}}" wx:key='index'>
             <view class='cell-list'>
               <view class='cell-time'>{{index}}</view>
               <view class='cell-circle'></view>
               <view class='cell-line'>
-                <block wx:for="{{item}}">
+                <block wx:for="{{item}}" wx:key='index'>
                   <view class='cell-event'>{{item}}</view>
                 </block>
               </view>

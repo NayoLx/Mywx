@@ -2,6 +2,7 @@ var Public = require("../../utils/pubic.js");
 var check = require("../../utils/fun.js");
 var utils = require("../../utils/utils.js");
 var toast = require("../../utils/util.js");
+var openid = '';
 
 Page({
   /**
@@ -12,7 +13,6 @@ Page({
     hasAuthUserInfo: false, // 是否授权用户信息权限
     modalChooseStuNumHidden: true,
     modalChooseIdcardHidden: true,
-    is_bind: '',
     checkText: '',
     codenum: '获取验证码',
     usernumber: '',
@@ -78,40 +78,63 @@ Page({
   },
 
   onGotUserInfo: function(res) {
+    var that = this
     if (res.detail.errMsg == "getUserInfo:ok") {
-      this.setData({
-        home: res.detail.userInfo
+      if (openid == '') {
+        openid = wx.getStorageSync('openid')
+      }
+      that.setData({
+        home: res.detail.userInfo,
+        'home.openid': openid
       })
-      Public.timeShow('已更新', 1000)
-    }
     
+      Public.timeShow('已更新', 1000)
+      wx.setStorageSync('home', that.data.home)
+      that.onInputCheck()
+    }
+
+  },
+
+  onGotUserInfoto:function(res) {
+    var that = this
+    if (res.detail.errMsg == "getUserInfo:ok") {
+      if (openid == '') {
+        openid = wx.getStorageSync('openid')
+      }
+      that.setData({
+        home: res.detail.userInfo,
+        'home.openid': openid,
+      })
+
+      Public.timeShow('已更新', 1000)
+      wx.setStorageSync('home', that.data.home)
+      setTimeout(function() {
+        that.setData({
+          modalChooseStuNumHidden: false
+        })
+      }, 1200)
+      that.onInputCheck()
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var res = wx.getStorageSync('home')
-
-    if (wx.getStorageSync('openid') == '') {
-      wx.setStorageSync('openid', res.openid)
-    }
-    
-    this.setData({
-      home: res
-    })
-    if (this.data.home != '') {
-      wx.removeStorageSync('check')
-    }
-  },
-
-  // 绑定学号modal
-  modalChoose: function() {
     var that = this
+    if (wx.getStorageSync('openid') != '') {
+      openid = wx.getStorageSync('openid')
+    }
+    if (wx.getStorageSync('home') != '') {
+      that.setData({
+        home: wx.getStorageSync('home')
+      })
+      that.onInputCheck()
+    }
     wx.request({
-      url: 'http://localhost:8080/basic/web/index.php?r=my/checkstuname',
+      url: 'http://localhost:8080/basic/web/index.php?r=my/homecheck',
       data: {
-        openid: this.data.home.openid,
+        openid: openid,
       },
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -119,12 +142,14 @@ Page({
       },
       method: 'POST',
       success: function(res) {
-        if (res.data.state == true) {
-          Public.show('此账号已绑定')
-        } else {
+        console.log(res)
+        if (res.data.success) {
           that.setData({
-            modalChooseStuNumHidden: false
+            is_bind: res.data.is_bind,
+            is_idcard_check: res.data.is_idcard_check
           })
+        } else {
+          console.log('错啦')
         }
       },
       fail: function(res) {
@@ -132,7 +157,19 @@ Page({
       },
       complete: function(res) {},
     })
+  },
 
+  // 绑定学号modal
+  modalChoose: function() {
+    var that = this
+
+    if (that.data.is_bind) {
+      Public.show('此账号已绑定')
+    } else {
+      that.setData({
+        modalChooseStuNumHidden: false
+      })
+    }
   },
 
   /**
@@ -140,40 +177,18 @@ Page({
    */
   onCheckName: function() {
     var that = this
-    wx.request({
-      url: 'http://localhost:8080/basic/web/index.php?r=my/checkidcard',
-      data: {
-        openid: this.data.home.openid,
-      },
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-        // 'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      success: function (res) {
-        if (res.data.state == true) {
-          Public.show('此账号已验证')
-        } else {
-          that.setData({
-            modalChooseIdcardHidden: false
-          })
-        }
-      },
-      fail: function (res) {
-        console.log('error')
-      },
-      complete: function (res) { },
-    })
+    if (that.data.is_idcard_check) {
+      Public.show('此账号已验证')
+    } else {
+      that.setData({
+        modalChooseIdcardHidden: false
+      })
+    }
   },
 
-  onCheckCard:function() {
+  onCheckCard: function() {
     var that = this
-    if (this.data.home.openid){
-      var openid = this.data.home.openid
-    }
-    else {
-      var openid = wx.getStorageSync('openid')
-    }
+
     wx.request({
       url: 'http://localhost:8080/basic/web/index.php?r=my/isidcard',
       data: {
@@ -186,21 +201,22 @@ Page({
         // 'Content-Type': 'application/json'
       },
       method: 'POST',
-      success: function (res) {
+      success: function(res) {
         console.log(res.statusCode)
-        if (res.data == true)
-        {
+        if (res.data == true) {
           Public.show('绑定成功')
+          that.setData({
+            is_idcard_check: true
+          })
           that.actionCancel()
-        }
-        else {
+        } else {
           Public.show('绑定失败，请检查身份证')
         }
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log('error')
       },
-      complete: function (res) { },
+      complete: function(res) {},
     })
   },
 
@@ -241,7 +257,7 @@ Page({
       wx.request({
         url: 'http://localhost:8080/basic/web/index.php?r=my/savebinddetail',
         data: {
-          openid: that.data.home.openid,
+          openid: openid,
           usernumber: that.data.usernumber,
           password: that.data.password,
           phone: that.data.phone,
@@ -255,6 +271,10 @@ Page({
         success: function(res) {
           console.log(res.statusCode)
           Public.show('绑定成功')
+          that.setData({
+            is_bind: true
+          })
+          wx.setStorageSync('id', [that.data.usernumber, that.data.password])
           that.actionCancel()
         },
         fail: function(res) {
@@ -268,8 +288,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-  },
+  onShow: function() {},
   /**
    * 随机数生成
    */
@@ -293,7 +312,6 @@ Page({
   oncheck: function() {
     var that = this;
     wx.request({
-      // url: 'http://localhost:8080/login2.3/newphp/login.php',
       url: 'http://localhost:8080/basic/web/index.php?r=my/loginpost',
       data: {
         username: this.data.usernumber,
@@ -357,6 +375,36 @@ Page({
   ondetail: function() {
     wx.navigateTo({
       url: 'mydetail/index',
+    })
+  },
+
+  onInputCheck:function(){
+    var that = this;
+    var home = that.data.home
+    var dataUrl = "http://192.168.0.145:8080/basic/web/index.php";
+    wx.request({
+      url: dataUrl + '?r=my/savedetail',
+      data: {
+        nickName: home.nickName,
+        gender: home.gender,
+        country: home.country,
+        city: home.city,
+        avatarUrl: home.avatarUrl,
+        province: home.province,
+        openid: home.openid,
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+        // 'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      success: function (res) {
+        console.log(res.statusCode)
+      },
+      fail: function (res) {
+        console.log('error')
+      },
+      complete: function (res) { },
     })
   }
 })

@@ -52,7 +52,7 @@ Page({
     var user = this.data.userName
     var pass = this.data.Password
     var data = Array(user, pass)
-    Public.put('id', data, 5)
+    Public.put('id', data)
   },
 
   /**
