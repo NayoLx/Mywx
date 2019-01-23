@@ -3,8 +3,8 @@
 <view class="{{traces ? 'container' : 'container2'}}" wx:if="{{!loadingHide}}">
   <view class='itemView'>
     <text class='text'>快递公司</text>
-    <picker mode="multiSelector" bindchange="bindChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{index}}" range="{{comarray}}" range-key="name">
-      <input type='text' class='input' style='width: 100%;' placeholder='输入快递名字' bindinput='expressNameInput' value='{{comarray[1][index].name}}'></input>
+    <picker mode="multiSelector" bindchange="bindChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{index}}" range="{{comarray}}" range-key="k_name">
+      <input type='text' class='input' style='width: 100%;' placeholder='输入快递名字' bindinput='expressNameInput' value='{{comarray[1][index].k_name}}'></input>
     </picker>
   </view>
   <view class='itemView'>

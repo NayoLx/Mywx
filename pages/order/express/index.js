@@ -72,7 +72,7 @@ Page({
       url: Da.dataUrl + '?r=express/getkuaidi',
       success: function(res) {
 
-        var comarray = [key, res.data[key[0].name]]
+        var comarray = [key, res.data[key[0].k_name]]
 
         that.setData({
           com: res.data,
@@ -118,7 +118,7 @@ Page({
     data.index = e.detail.value;
 
     if (e.detail.column == 0) {
-      data.comarray = that.data.com[key[id].name]
+      data.comarray = that.data.com[key[id].k_name]
       data.index = key
 
       var datas = [data.index, data.comarray]
@@ -131,53 +131,53 @@ Page({
 
   setKey: function() {
     var key = [{
-      'name': 'of'
+      'k_name': 'of'
     }, {
-      'name': 'A'
+      'k_name': 'A'
     }, {
-      'name': 'B'
+      'k_name': 'B'
     }, {
-      'name': 'C'
+      'k_name': 'C'
     }, {
-      'name': 'D'
+      'k_name': 'D'
     }, {
-      'name': 'E'
+      'k_name': 'E'
     }, {
-      'name': 'F'
+      'k_name': 'F'
     }, {
-      'name': 'G'
+      'k_name': 'G'
     }, {
-      'name': 'H'
+      'k_name': 'H'
     }, {
-      'name': 'J'
+      'k_name': 'J'
     }, {
-      'name': 'K'
+      'k_name': 'K'
     }, {
-      'name': 'L'
+      'k_name': 'L'
     }, {
-      'name': 'M'
+      'k_name': 'M'
     }, {
-      'name': 'N'
+      'k_name': 'N'
     }, {
-      'name': 'P'
+      'k_name': 'P'
     }, {
-      'name': 'Q'
+      'k_name': 'Q'
     }, {
-      'name': 'R'
+      'k_name': 'R'
     }, {
-      'name': 'S'
+      'k_name': 'S'
     }, {
-      'name': 'T'
+      'k_name': 'T'
     }, {
-      'name': 'U'
+      'k_name': 'U'
     }, {
-      'name': 'W'
+      'k_name': 'W'
     }, {
-      'name': 'X'
+      'k_name': 'X'
     }, {
-      'name': 'Y'
+      'k_name': 'Y'
     }, {
-      'name': 'Z'
+      'k_name': 'Z'
     }]
     this.setData({
       key: key
