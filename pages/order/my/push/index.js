@@ -185,13 +185,13 @@ Page({
       method: 'POST',
       success: function(res) {
         console.log(res.data)
-        if (res.data == true) {
+        if (res.data.success == true) {
           wx.switchTab({
             url: '../index',
           })
         }
         else {
-          toast.show('您还有未处理的订单，请先处理该订单')
+          toast.show(res.data.error)
         }
       }
     })
