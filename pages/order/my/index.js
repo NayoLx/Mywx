@@ -186,13 +186,24 @@ Page({
         // 'Content-Type': 'application/json'
       },
       success: function(res) {
-        that.setData({
-          order: res.data,
-          loadingHide: true,
-        })
-        console.log('getData:5秒轮询,获取数据')
-        // 隐藏加载提示
-        toast.hideLoading()
+        if (res.data.success) {
+          that.setData({
+            order: res.data.order,
+            loadingHide: true,
+          })
+          console.log('getData:5秒轮询,获取数据')
+          // 隐藏加载提示
+          toast.hideLoading()
+        }
+        else {
+          toast.hideLoading()
+          toast.show(res.data.error)
+          that.setData({
+            order: '',
+            loadingHide: true,
+          })
+          clearInterval(that.data.setinter)
+        }
       }
     })
   },

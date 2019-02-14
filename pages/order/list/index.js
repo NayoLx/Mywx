@@ -66,7 +66,6 @@ Page({
       }
     });
     setTimeout(function(){
-      that.getOrder()
       that.getAccesstoken()
     }, 1200)
   },
@@ -90,6 +89,7 @@ Page({
             is_bind: res.data.is_bind,
             is_idcard_check: res.data.is_idcard_check
           })
+          that.getOrder()
         } else {
           console.log('获取绑定有误')
         }
@@ -122,7 +122,7 @@ Page({
       },
       success: function(res) {
         that.setData({
-          order: res.data,
+          order: res.data.order,
           loadingHide: true,
         })
         console.log('========res.data=========')
@@ -180,7 +180,7 @@ Page({
       success: function(res) {
         console.log(res.data.success)
         if (res.data.success != true) {
-          toast.show('接单失败')
+          toast.show(res.data.error)
         } else {
           that.actionCloseModal()
           that.getOrder()
