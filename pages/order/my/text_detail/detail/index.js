@@ -15,23 +15,36 @@ Page({
     toView: '',
     detail: '',
     limit: 10,
+    loadingHide: false,
   },
 
   getDetailData: function() {
     var that = this
-    var data = {
-      'postimg': 'http://li.bytodream.cn/images/img/banner_3.jpg',
-      'title': '更新目录',
-      'data': '2018-11-14 14:13',
-      'avater': 'https://wx.qlogo.cn/mmopen/vi_32/nfMPoEP0ibtzpJxMqUPGiaojVvCRicATEyNhWvAvPeAibV11IVL8EODcTMZ2whYjGy2RKibJxv4D0p5uULXq94hypibw/132',
-      'content': '为了体现产品的人性化，他把对用户的称呼“您”变成“你”，“这个写进我们的产品条约里面去了。后来再也没有人敢在产品中对用户过于尊敬，因为我们一旦对用户过于尊敬，那说明我们可能怀有目的，可能需要骗一点什么东西过来。” 为了保护用户隐私，他坚持微信的系统设计不保留用户的聊天记录，并且坚决不侵犯用户隐私。“我们从来不会给用户发任何的骚扰信息。大家可以回顾一下，在微信里面有没有收到过任何一条系统下发的营销信息，应该是没有的。”',
-      'author': 'li',
-      'postid': '0',
-      'effect_coupon_num': '10',
-    }
+    wx.request({
+      url: Da.dataUrl + '?r=comment/comentdetail',
+      data: {
+        id: that.data.id,
+      },
+      method: 'POST',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function(res) {
+        var detail = res.data.detail;
+        var data = {
+          'postimg': 'http://li.bytodream.cn/images/img/banner_3.jpg',
+          'title': detail.title,
+          'data': detail.data,
+          'avater': detail.avater,
+          'content': detail.detail,
+          'author': detail.author,
+        }
 
-    that.setData({
-      textdetail: data,
+        that.setData({
+          textdetail: data,
+          loadingHide: true,
+        })
+      }
     })
   },
 
@@ -40,7 +53,7 @@ Page({
     wx.request({
       url: Da.dataUrl + '?r=comment/getcomment',
       data: {
-        postid: 0,
+        postid: that.data.id,
       },
       method: 'POST',
       header: {
@@ -50,6 +63,11 @@ Page({
       success: function(res) {
         if (res.data.success) {
           console.log('====页面轮询开始====')
+          if(res.data.error) {
+            toast.show(res.data.error); 
+            clearInterval(that.data.setinter)
+            return ;
+          }
           var talk = res.data.detail
           that.setData({
             talk: talk
@@ -115,7 +133,7 @@ Page({
         data: {
           openid: openid,
           comment: that.data.detail,
-          postid: that.data.textdetail.postid,
+          postid: that.data.id,
         },
         method: 'POST',
         header: {
@@ -147,7 +165,8 @@ Page({
     wx.getSystemInfo({
       success: function(res) {
         that.setData({
-          winHeight: res.windowHeight
+          winHeight: res.windowHeight,
+          id: options.id
         })
       },
     })
@@ -175,10 +194,10 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    
+
   },
 
-  onUnload: function (options) {
+  onUnload: function(options) {
     var that = this;
     console.log('~~~~清除轮询~~~~')
     clearInterval(that.data.setinter)
@@ -187,14 +206,14 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function (options) {
+  onShow: function(options) {
     var setinter = setInterval(this.getDetail, 10000)
     this.setData({
       setinter: setinter
     })
   },
-  
-  submitForm: function (e) {
+
+  submitForm: function(e) {
     var self = this;
     var openid = wx.getStorageSync('openid')
 
@@ -214,25 +233,25 @@ Page({
         "Content-Type": "application/x-www-form-urlencoded"
         // 'Content-Type': 'application/json'
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res)
         if (res.data.msg.errmsg != 'ok') {
           self.getAccesstoken()
           toast.show('Accesstoken失效，现已重新获取，麻烦再点击一次')
         }
       },
-      fail: function (err) {
+      fail: function(err) {
         console.log('request fail ', err);
       },
 
     })
   },
 
-  getAccesstoken: function () {
+  getAccesstoken: function() {
     var that = this
     wx.request({
       url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx1e5e51581c102b66&secret=b1cef0526d4c19b2261a0e33fee62e41',
-      success: function (res) {
+      success: function(res) {
         that.setData({
           access_token: res.data.access_token
         })
@@ -240,6 +259,5 @@ Page({
       }
     })
   },
-
 
 })

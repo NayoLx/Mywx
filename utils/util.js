@@ -1,7 +1,7 @@
 var Da = require("/fun.js");
 
 /**
- * versionCode: "（V 1.1.0 ）bulid 10" // 版本号
+ * versionCode: "（V 1.1.0 ）bulid 11" // 版本号
  *
  */
 const formatTime = date => {

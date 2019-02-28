@@ -1,5 +1,5 @@
 <!--pages/order/my/text_detail/detail/index.wxml-->
-<view bindtap='closeFocus'>
+<view bindtap='closeFocus' wx:if="{{loadingHide}}">
   <scroll-view scroll-into-view="{{toView}}" scroll-y="true" scroll-with-animation="true" style='height: {{winHeight}}px' bindscrolltolower='scrolltolower'>
     <!-- title -->
     <view class='detail-title'>

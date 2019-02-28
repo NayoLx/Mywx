@@ -4,7 +4,7 @@
   width: 94%;
   margin-left: 3%;
   height: 300rpx;
-  background-image: url(http://li.bytodream.cn/images/img/banner_3.jpg); 
+  background-image: url(http://li.bytodream.cn/images/img/banner_1.jpg); 
   margin-top: 15rpx;
   background-size: 100% 400rpx;
   border-radius: 20rpx;
