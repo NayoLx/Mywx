@@ -64,7 +64,7 @@ Page({
         if (res.data.success) {
           console.log('====页面轮询开始====')
           if(res.data.error) {
-            toast.show(res.data.error); 
+            console.log(res.data.error); 
             clearInterval(that.data.setinter)
             return ;
           }
@@ -146,6 +146,13 @@ Page({
               value: ''
             })
             that.getDetail()
+            // 隐藏加载提示
+            toast.hideLoading()
+          } else {
+            toast.show(res.data.error)
+            that.setData({
+              value: ''
+            })
             // 隐藏加载提示
             toast.hideLoading()
           }
