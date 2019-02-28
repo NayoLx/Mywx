@@ -11,7 +11,7 @@
   <!-- background-color:#F2F2F2; -->
   <!-- <swiper current="{{currentTab}}" class="swiper-box" duration="300" style='height:{{winHeight - 40}}px;'>
     <swiper-item> -->
-      <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight - 105}}px' bindscrolltolower = 'scrolltolower'>
+      <scroll-view scroll-y="true" class='scroll-views' style='height:{{winHeight}}px' bindscrolltolower = 'scrolltolower'>
         <view class="item-wrapper">
           <view class="item-list" wx:for="{{order}}" wx:for-item="item" wx:for-index="index" wx:key="that">
             <view class="item-info" wx:if="{{index < limit}}" data-index="{{index}}" style="left:{{item.left + 'rpx'}}" bindtap='getDetail'>

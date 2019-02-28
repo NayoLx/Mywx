@@ -1,7 +1,7 @@
 var Da = require("/fun.js");
 
 /**
- * versionCode: "（V 1.1.0 ）bulid 8" // 版本号
+ * versionCode: "（V 1.1.0 ）bulid 10" // 版本号
  *
  */
 const formatTime = date => {
@@ -110,6 +110,11 @@ function deleteItem(e, dataList) { // 删除功能
     },
     success: function(res) {
       console.log(res.data)
+      if (res.data.success) {
+        that.show('取消成功')
+      } else {
+        that.show(res.data.error);
+      }
     }
   })
   return dataList

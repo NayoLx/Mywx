@@ -1,15 +1,15 @@
 page{
-  background-image: url('http://img.ugainian.com/267/59aa8aa176a3d.jpg');
+  background-image: url('http://li.bytodream.cn/images/img/banner_3.jpg');
 }
 
 .item-con {
-  
   margin-top: 10rpx;
   width: 94%;
   height: 250rpx;
   padding: 15rpx 0;
   margin-left: 3%;
-   box-shadow: 0px 0rpx 30rpx 0px rgba(165, 165, 165, 0.39);
+  box-shadow: 0px 0rpx 30rpx 0px rgba(165, 165, 165, 0.39);
+  background-color: #fff;
 }
 
 .item-icon {

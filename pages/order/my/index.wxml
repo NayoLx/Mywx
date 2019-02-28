@@ -38,7 +38,7 @@
             <view class="item-info" wx:if="{{index < limit}}" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchMove" bindtouchend="touchEnd" style="left:{{item.left + 'rpx'}}" bindtap='getDetail'>
               <view class="info-wrapper">
                 <view class="info-desc">
-                  <image src="{{item.status == 1 ? '../../../img/ic_header.png' : '../../../img/ic_header_blue.png'}}" class='img_label'></image>
+                  <image src="../../../img/ic_header.png" class='img_label'></image>
                   <view class="name"> </view>
                   <view class="time">{{item.status_labal}}</view>
                 </view>
@@ -62,7 +62,7 @@
             <view class="item-info" wx:if="{{index < limit}}" data-index="{{index}}" bindtouchstart="touchS" bindtouchmove="touchMove" bindtouchend="touchEnd" style="left:{{item.left + 'rpx'}}" bindtap='getDetail'>
               <view class="info-wrapper">
                 <view class="info-desc">
-                  <image src="{{item.status == 1 ? '../../../img/ic_header.png' : '../../../img/ic_header_blue.png'}}" class='img_label'></image>
+                  <image src="../../../img/ic_header_blue.png" class='img_label'></image>
                   <view class="name"> </view>
                   <view class="time">{{item.status_labal}}</view>
                 </view>
