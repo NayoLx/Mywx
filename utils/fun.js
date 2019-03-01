@@ -1,7 +1,8 @@
 var Public = require("pubic.js");
 
 module.exports = {
-  dataUrl: "http://192.168.0.145:8080/basic/web/index.php",
+  // dataUrl: "http://localhost:8080/basic/web/index.php",
+  dataUrl: "https://bytodream.cn/basic/web/index.php",
   getscgedular: getscgedular,
   oncheck: oncheck 
 }
@@ -13,7 +14,7 @@ function getscgedular(schoolyear, semester) {
   var that = this
   wx.request({
     // url: 'http://localhost:8080/login2.3/newphp/new.php',
-    url: 'http://192.168.0.145:8080/basic/web/index.php?r=my/acgedular',
+    url: 'https://bytodream.cn/basic/web/index.php?r=my/acgedular',
     data: {
       schoolyear: schoolyear,
       semester: semester
@@ -40,7 +41,7 @@ function oncheck(userName, Password, callback) {
   var that = this;
   wx.request({
     // url: 'http://localhost:8080/login2.3/newphp/login.php',
-    url: 'http://192.168.0.145:8080/basic/web/index.php?r=my/loginpost',
+    url: 'https://bytodream.cn/basic/web/index.php?r=my/loginpost',
     data: {
       username: userName,
       password: Password

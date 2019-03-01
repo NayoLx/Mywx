@@ -254,17 +254,17 @@ Page({
     })
   },
 
-  getAccesstoken: function() {
-    var that = this
-    wx.request({
-      url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx1e5e51581c102b66&secret=b1cef0526d4c19b2261a0e33fee62e41',
-      success: function(res) {
-        that.setData({
-          access_token: res.data.access_token
-        })
-        console.log(res.data)
-      }
-    })
-  },
+  // getAccesstoken: function() {
+  //   var that = this
+  //   wx.request({
+  //     url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx1e5e51581c102b66&secret=b1cef0526d4c19b2261a0e33fee62e41',
+  //     success: function(res) {
+  //       that.setData({
+  //         access_token: res.data.access_token
+  //       })
+  //       console.log(res.data)
+  //     }
+  //   })
+  // },
 
 })

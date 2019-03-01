@@ -73,7 +73,7 @@ Page({
   getBind: function() {
     var that = this
     wx.request({
-      url: 'http://localhost:8080/basic/web/index.php?r=my/homecheck',
+      url: Da.dataUrl +'?r=my/homecheck',
       data: {
         openid: openid,
       },

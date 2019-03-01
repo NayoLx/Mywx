@@ -2,6 +2,7 @@ var Public = require("../../utils/pubic.js");
 var check = require("../../utils/fun.js");
 var utils = require("../../utils/utils.js");
 var toast = require("../../utils/util.js");
+var Da = require("../../utils/fun.js");
 var openid = '';
 
 Page({
@@ -132,7 +133,7 @@ Page({
       that.onInputCheck()
     }
     wx.request({
-      url: 'http://localhost:8080/basic/web/index.php?r=my/homecheck',
+      url: Da.dataUrl +'?r=my/homecheck',
       data: {
         openid: openid,
       },
@@ -189,7 +190,7 @@ Page({
   onCheckCard: function() {
     var that = this
     wx.request({
-      url: 'http://localhost:8080/basic/web/index.php?r=my/isidcard',
+      url: Da.dataUrl +'?r=my/isidcard',
       data: {
         openid: openid,
         idcard: this.data.idcard,
@@ -253,7 +254,7 @@ Page({
       Public.show('请输入正确的手机号码')
     } else {
       wx.request({
-        url: 'http://localhost:8080/basic/web/index.php?r=my/savebinddetail',
+        url: Da.dataUrl +'?r=my/savebinddetail',
         data: {
           openid: openid,
           usernumber: that.data.usernumber,
@@ -311,7 +312,7 @@ Page({
   oncheck: function() {
     var that = this;
     wx.request({
-      url: 'http://localhost:8080/basic/web/index.php?r=my/loginpost',
+      url: Da.dataUrl +'?r=my/loginpost',
       data: {
         username: this.data.usernumber,
         password: this.data.password
@@ -380,9 +381,8 @@ Page({
   onInputCheck:function(){
     var that = this;
     var home = that.data.home
-    var dataUrl = "http://192.168.0.145:8080/basic/web/index.php";
     wx.request({
-      url: dataUrl + '?r=my/savedetail',
+      url: Da.dataUrl + '?r=my/savedetail',
       data: {
         nickName: home.nickName,
         gender: home.gender,
