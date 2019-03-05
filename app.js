@@ -12,12 +12,17 @@ App({
       success: res => {
         var that = this
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        wx.setStorageSync('res.code', res.code)
         if (res.code) {
           wx.request({
-            url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wx1e5e51581c102b66&secret=b1cef0526d4c19b2261a0e33fee62e41&js_code=' + res.code + '&grant_type=authorization_code',
-            method: 'GET',
+            url: 'https://li.bytodream.cn/basic/web/index.php?r=my/getwxopenid',
+            method: 'post',
+            data: {
+              code: res.code
+            },
             header: {
-              'content-type': 'application/json'
+              "Content-Type": "application/x-www-form-urlencoded"
+              // 'content-type': 'application/json'
             },
             success: function(openIdRes) {
               console.info("获取用户openId成功");

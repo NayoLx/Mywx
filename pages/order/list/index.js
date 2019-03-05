@@ -193,7 +193,8 @@ Page({
   getAccesstoken: function() {
     var that = this
     wx.request({
-      url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx1e5e51581c102b66&secret=b1cef0526d4c19b2261a0e33fee62e41',
+      // url: Da.dataUrl + '?r=my/getwxtoken',
+      url: 'https://li.bytodream.cn/basic/web/index.php?r=my/getwxtoken',
       success: function(res) {
         that.setData({
           access_token: res.data.access_token

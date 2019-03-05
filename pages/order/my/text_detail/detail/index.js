@@ -32,7 +32,7 @@ Page({
       success: function(res) {
         var detail = res.data.detail;
         var data = {
-          'postimg': 'http://li.bytodream.cn/images/img/banner_3.jpg',
+          'postimg': 'https://li.bytodream.cn/images/img/banner_3.jpg',
           'title': detail.title,
           'data': detail.data,
           'avater': detail.avater,
@@ -254,17 +254,18 @@ Page({
     })
   },
 
-  // getAccesstoken: function() {
-  //   var that = this
-  //   wx.request({
-  //     url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx1e5e51581c102b66&secret=b1cef0526d4c19b2261a0e33fee62e41',
-  //     success: function(res) {
-  //       that.setData({
-  //         access_token: res.data.access_token
-  //       })
-  //       console.log(res.data)
-  //     }
-  //   })
-  // },
+  getAccesstoken: function () {
+    var that = this
+    wx.request({
+      // url: Da.dataUrl + '?r=my/getwxtoken',
+      url: 'http://localhost:8080/basic/web/index.php?r=my/getwxtoken',
+      success: function (res) {
+        that.setData({
+          access_token: res.data.access_token
+        })
+        console.log(res.data)
+      }
+    })
+  },
 
 })
