@@ -15,7 +15,7 @@ App({
         wx.setStorageSync('res.code', res.code)
         if (res.code) {
           wx.request({
-            url: 'https://li.bytodream.cn/basic/web/index.php?r=my/getwxopenid',
+            url: 'https://bytodream.cn/basic/web/index.php?r=my/getwxopenid',
             method: 'post',
             data: {
               code: res.code

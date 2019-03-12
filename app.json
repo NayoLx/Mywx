@@ -10,7 +10,6 @@
     "pages/order/my/text_detail/index",
     "pages/order/my/text_detail/detail/index",
     "pages/order/list/index",
-    "pages/order/list/listdetail/index",
     "pages/map/map",
     "pages/chat/socketio/index"
   ],

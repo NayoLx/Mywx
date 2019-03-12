@@ -1,5 +1,5 @@
 page{
-  background-image: url('http://li.bytodream.cn/images/img/banner_3.jpg');
+  background-image: url(https://tapi.jiwork.com/i/ic-bg.jpg);
 }
 
 .item-con {
