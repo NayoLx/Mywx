@@ -32,7 +32,7 @@ Page({
       success: function(res) {
         var detail = res.data.detail;
         var data = {
-          'postimg': 'https://li.bytodream.cn/images/img/banner_3.jpg',
+          'postimg': 'https://tapi.jiwork.com/i/ic-bg.jpg',
           'title': detail.title,
           'data': detail.data,
           'avater': detail.avater,
@@ -258,7 +258,7 @@ Page({
     var that = this
     wx.request({
       // url: Da.dataUrl + '?r=my/getwxtoken',
-      url: 'http://localhost:8080/basic/web/index.php?r=my/getwxtoken',
+      url: 'https://bytodream.cn/basic/web/index.php?r=my/getwxtoken',
       success: function (res) {
         that.setData({
           access_token: res.data.access_token

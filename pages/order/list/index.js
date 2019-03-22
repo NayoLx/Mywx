@@ -194,7 +194,7 @@ Page({
     var that = this
     wx.request({
       // url: Da.dataUrl + '?r=my/getwxtoken',
-      url: 'https://li.bytodream.cn/basic/web/index.php?r=my/getwxtoken',
+      url: 'https://bytodream.cn/basic/web/index.php?r=my/getwxtoken',
       success: function(res) {
         that.setData({
           access_token: res.data.access_token
