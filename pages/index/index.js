@@ -14,6 +14,7 @@ Page({
     hasAuthUserInfo: false, // 是否授权用户信息权限
     modalChooseStuNumHidden: true,
     modalChooseIdcardHidden: true,
+    modalTextIdHidden: true,
     checkText: '',
     codenum: '获取验证码',
     usernumber: '',
@@ -24,6 +25,7 @@ Page({
     idcard: '',
     name: ''
   },
+
   /***
    * 获取输入框的值
    */
@@ -37,26 +39,43 @@ Page({
       password: e.detail.value
     })
   },
+
   phoneInput: function(e) {
     this.setData({
       phone: e.detail.value
     })
   },
+
   codeInput: function(e) {
     this.setData({
       code: e.detail.value
     })
   },
+
   idCardInput: function(e) {
     this.setData({
       idcard: e.detail.value
     })
   },
+
   nameInput: function(e) {
     this.setData({
       name: e.detail.value
     })
   },
+
+  idTInput: function (e) {
+    this.setData({
+      id_text: e.detail.value
+    })
+  },
+
+  passwordTInput: function (e) {
+    this.setData({
+      password_text: e.detail.value
+    })
+  },
+  
   /**
    * 检查是否已获得用户授权
    */
@@ -220,10 +239,51 @@ Page({
     })
   },
 
+  ontext: function() {
+    this.setData({
+      modalTextIdHidden: false,
+    })
+  },
+
+  onLoginText: function () {
+    var that = this
+    console.log(that.data.id_text);
+    if (that.data.id_text != 'root') {
+      toast.show('无效测试账号');
+      return;
+    } 
+    wx.request({
+      url: Da.dataUrl + '?r=my/bindtextid',
+      data: {
+        openid: openid,
+        id_text: that.data.id_text,
+        password_text: that.data.password_text
+      },
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+        // 'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      success: function (res) {
+        if (res.success) {
+          Public.show(res.msg);
+          that.actionCancel();
+          return;
+        } 
+        Public.show(res.msg);
+      },
+      fail: function (res) {
+        console.log('error')
+      },
+      complete: function (res) { },
+    })
+  },
+
   actionCancel: function() {
     this.setData({
       modalChooseStuNumHidden: true,
-      modalChooseIdcardHidden: true,
+      modalChooseIdcardHidden: true, 
+      modalTextIdHidden: true,
       usernumber: '',
       password: '',
       nullInput: '',
