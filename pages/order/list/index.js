@@ -210,6 +210,7 @@ Page({
       url: Da.dataUrl + '?r=order/getwxapi',
       data: {
         access_token: self.data.access_token,
+        order_id: self.data.checkOrder.id,
         touser: openid,
         template_id: 'JSedyUDHIudKMBcQPVvormr28xGDYrmJ3MwjS9ma8qo',
         page: 'pages/order/my/index',

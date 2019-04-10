@@ -265,12 +265,13 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-        if (res.success) {
-          Public.show(res.msg);
+        console.log(res);
+        if (res.data.success) {
+          Public.show(res.data.msg);
           that.actionCancel();
           return;
-        } 
-        Public.show(res.msg);
+        }
+        Public.show(res.data.msg);
       },
       fail: function (res) {
         console.log('error')

@@ -159,18 +159,18 @@ Page({
         head5: '时间段： ',
         contact_timestart: that.data.time_start,
         contact_timeend: that.data.time_end ,
-        contact_text: '\n要点之后再补充，就这样先',
+        contact_text: '\n1.一个人只能发起/接受两个订单，不允许发起或接受过多订单。\n2.由于账号的特殊性，只有本校学生才能使用该小程序，这也保证了一定地安全性。\n3.请确认信息无误。\n ',
       })
     }
   },
 
-  actionSubmit: function () {
-    
+  actionSubmit: function (e) {
     var that = this
     wx.request({
       url: Da.dataUrl + '?r=order/saveorderdetail',
       data:{
         openid: openid,
+        formId: e.detail.formId,
         order_type: this.data.contact_type,
         sex: this.data.sex[this.data.sex_index],
         detail_text: this.data.contact_detail,

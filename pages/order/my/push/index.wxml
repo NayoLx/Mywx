@@ -2,7 +2,7 @@
 <view class="page">
   <scroll-view scroll-y="true" class="scroll-main" style='height: {{winHeight}}px'>
 
-  <!-- 简要要求 -->
+    <!-- 简要要求 -->
     <view class='item-detail'>
       <textarea placeholder='简要语言' class='item_sex_input' placeholder-style='font-size: 30rpx;' bindinput='onCheckdetail'></textarea>
     </view>
@@ -53,12 +53,13 @@
     </view>
 
     <view class="submit-btn-section">
-        <view class="submit-btn" bindtap='onSumbitOrder'>提交</view>
+      <view class="submit-btn" bindtap='onSumbitOrder'>提交</view>
     </view>
   </scroll-view>
 </view>
 
-<modal title="确认信息" confirm-text="确定" hidden="{{modalSubmitOrderHidden}}" bindconfirm="actionSubmit" bindcancel="actionCloseModal">
+
+<!-- <modal title="确认信息" confirm-text="确定" hidden="{{modalSubmitOrderHidden}}" bindconfirm="actionSubmit" bindcancel="actionCloseModal">
   <view class="confirm-modal-text-line">
     <text class="confirm-modal-text-head">{{head1}}</text>
     <text class="confirm-modal-text-content">{{contact_type}}</text>
@@ -78,4 +79,40 @@
   <view class="confirm-modal-text-line">
       <text class="confirm-modal-text">{{contact_text}}</text>
     </view>
-</modal>
+</modal> -->
+
+<view class="mask" bindtap='actionCloseModal' wx:if='{{!modalSubmitOrderHidden}}'></view>
+<view class="modalDlg" wx:if='{{!modalSubmitOrderHidden}}'>
+  <form class='content' bindsubmit="actionSubmit" report-submit="true">
+    <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text-title">确认信息</text>
+    </view>
+    <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text-head">{{head1}}</text>
+      <text class="confirm-modal-text-content">{{contact_type}}</text>
+    </view>
+    <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text-head">{{head2}}</text>
+      <text class="confirm-modal-text-content">{{contact_sex}}</text>
+    </view>
+    <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text-head">{{head3}}</text>
+      <text class="confirm-modal-text-content">{{contact_detail}}</text>
+    </view>
+    <view class="confirm-modal-text-line">
+      <text class="confirm-modal-text-head">{{head5}}</text>
+      <text class="confirm-modal-text-content">{{contact_timestart}} - {{contact_timeend}}</text>
+    </view>
+    <view class="confirm-modal-text-line" style='margin-bottom: 33rpx'>
+      <text class="confirm-modal-text">{{contact_text}}</text>
+    </view>
+    <view class='btn-type'>
+      <view class='btn-left'>
+        <button bindtap='actionCloseModal'>取消</button>
+      </view>
+      <view class='btn-right'>
+        <button formType="submit" style='color:#32CD32'>确认</button>
+      </view>
+    </view>
+  </form>
+</view>

@@ -160,6 +160,18 @@
         <text class="confirm-modal-text-head">发起时间：</text>
         <text class="confirm-modal-text-content">{{checkOrder.status_wait_time}}</text>
       </view>
+      <block wx:if="checkOrder.user_phone != null && checkOrder.user_phone != ''">
+      <view class="confirm-modal-text-line">
+        <text class="confirm-modal-text-head">本人手机：</text>
+        <text class="confirm-modal-text-content">{{checkOrder.user_phone}}</text>
+      </view>
+      </block>
+      <block wx:if="checkOrder.staff_phone != null && checkOrder.staff_phone != ''">
+      <view class="confirm-modal-text-line">
+        <text class="confirm-modal-text-head">接单人手机号码：</text>
+        <text class="confirm-modal-text-content">{{checkOrder.staff_phone}}</text>
+      </view>
+      </block>
       <view class="confirm-modal-text-line">
         <text class="close">{{express_detail_photo}}</text>
       </view>
