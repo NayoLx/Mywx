@@ -5,7 +5,7 @@
   margin-left: 3%;
   height: 300rpx;
   margin-top: 15rpx;
-  background-image: url(https://tapi.jiwork.com/i/ic-bg.jpg);
+  background-image: url('https://twx.jiwork.com/i/activity/invitation_default/invitation_bg_down.jpg');
   background-size: 100% 400rpx;
   border-radius: 20rpx;
    box-shadow: 0px 15rpx 40rpx 0px rgba(165, 165, 165, 0.39);

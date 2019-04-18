@@ -1,6 +1,6 @@
 /* pages/login/login.wxss */
 page {
-  background-image: url(http://li.bytodream.cn/images/img/banner_3.jpg); 
+  background-image: url(https://twx.jiwork.com/i/activity/invitation_default/invitation_bg_down.jpg); 
 }
 
 swiper{

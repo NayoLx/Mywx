@@ -124,6 +124,7 @@
   width: 100%;
   margin-top: 30rpx;
   border-radius: 30rpx;
+  height:180px;
 }
 
 /* heart */

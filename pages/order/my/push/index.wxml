@@ -39,7 +39,7 @@
     </view>
 
     <!-- 上传地址 -->
-    <view class='uploadImage'>
+    <!-- <view class='uploadImage'>
       <block wx:if='{{src}}'>
         <block wx:for='{{src}}' wx:for-index="idx">
           <view>
@@ -50,7 +50,7 @@
       </block>
       <image wx:if='{{src == null || src.length<4}}' src="/img/addpic@2x.png" bindtap='upLoadImg' class="imag"></image>
       <image wx:else src="/img/addpic@2x.png" bindtap='upLoadImg' style='display:none' class="imag"></image>
-    </view>
+    </view> -->
 
     <view class="submit-btn-section">
       <view class="submit-btn" bindtap='onSumbitOrder'>提交</view>

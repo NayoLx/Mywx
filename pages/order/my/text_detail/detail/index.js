@@ -32,7 +32,7 @@ Page({
       success: function(res) {
         var detail = res.data.detail;
         var data = {
-          'postimg': 'https://tapi.jiwork.com/i/ic-bg.jpg',
+          'postimg': 'https://twx.jiwork.com/i/activity/invitation_default/invitation_bg_down.jpg',
           'title': detail.title,
           'data': detail.data,
           'avater': detail.avater,

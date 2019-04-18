@@ -24,7 +24,7 @@
       <view class='line'></view>
       <view>{{textdetail.content}}</view>
       <view class='line'></view>
-      <image src='{{textdetail.postimg}}' class='content_img' mode='widthFix'></image>
+      <image src='{{textdetail.postimg}}' class='content_img'></image>
     </view>
 
     <!-- comment -->

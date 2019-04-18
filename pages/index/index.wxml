@@ -12,7 +12,6 @@
 </view>
 <view class='item-modal'>
   <view class='item-modal-btn' bindtap='ondetail'>个人信息</view>
-  <view class='item-modal-btn'>我的订单</view>
   <view class='item-modal-btn' bindtap='jumpOnScgedular'>我的课表</view>
 </view>
 <view class='item-modal'>
